@@ -7,21 +7,30 @@ function HomeScreen() {
 	const [weight, setWeight] = useState(0);
 
 	const handleOnPress = async () => {
-		setWeight(weight + 1);
-		var value = JSON.stringify({ weight });
-		await AsyncStorage.setItem("bodyScale_logs", value);
-	};
-
-	useEffect(async () => {
 		try {
-			const log = await AsyncStorage.getItem("bodyScale_logs");
-			let weight = JSON.parse(log).weight;
-			if (weight !== null) {
-				setWeight(weight);
-			}
+			let entry = weight + 1;
+			setWeight(entry);
+			let value = JSON.stringify({ weight: entry });
+			await AsyncStorage.setItem("bodyScale_logs", value);
 		} catch (err) {
 			console.log(err.message);
 		}
+	};
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const log = await AsyncStorage.getItem("bodyScale_logs");
+				let weight = JSON.parse(log).weight;
+				if (weight !== null) {
+					setWeight(weight);
+				}
+			} catch (err) {
+				console.log(err.message);
+			}
+		};
+
+		fetchData();
 	}, []);
 
 	return (
@@ -30,7 +39,7 @@ function HomeScreen() {
 			<TouchableOpacity onPress={handleOnPress}>
 				<Text>Click here to Log Count!!!!</Text>
 			</TouchableOpacity>
-			<Text>{weight}</Text>
+			<Text>{weight} lbs</Text>
 		</View>
 	);
 }
