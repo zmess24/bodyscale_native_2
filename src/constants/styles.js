@@ -1,3 +1,4 @@
-export default styles = {
+export default constantStyles = {
 	backgroundColor: "white",
+	flexGrow: 1,
 };
