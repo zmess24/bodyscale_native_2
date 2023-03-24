@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import moment from "moment";
 import constantStyles from "../constants/styles";
 
 function HomeScreen() {
@@ -40,6 +41,7 @@ function HomeScreen() {
 				<Text>Click here to Log Count!!!!</Text>
 			</TouchableOpacity>
 			<Text>{weight} lbs</Text>
+			<Text>Date: {moment(new Date()).format("YYYY-MM-DD")}</Text>
 		</View>
 	);
 }
