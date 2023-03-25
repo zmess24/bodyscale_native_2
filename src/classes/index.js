@@ -1,7 +1,9 @@
-import Entry from "./core/Entry";
-import Week from "./core/Week";
+import Entry from "./Entry";
+// import Week from "./Week";
+import User from "./User";
 
-export default {
+export {
+	User,
 	Entry,
-	Week,
+	// Week,
 };

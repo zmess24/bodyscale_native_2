@@ -1,8 +1,7 @@
 class Entry {
-	constructor(weight, date, timestamp) {
+	constructor(weight, date) {
 		this.weight = weight;
 		this.date = date;
-		this.timestamp = timestamp;
 	}
 }
 
