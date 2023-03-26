@@ -25,13 +25,12 @@ function HomeScreen() {
 	const [date, setDate] = useState(new Date());
 	const [showDatePicker, setShowDatePicker] = useState(false);
 
-	const handleOnPress = async () => {
+	const handleWeightChange = async () => {
 		try {
 			let selectedWeight = weight + 1;
 			let selectedDate = moment(date).format("MM-DD-YYYY");
 			let entry = new Entry(selectedWeight, selectedDate);
 			user.addEntry(entry);
-			console.log(user);
 			setUser(user);
 			setWeight(selectedWeight);
 			let data = JSON.stringify({ weight: selectedWeight });
@@ -74,26 +73,27 @@ function HomeScreen() {
 
 	return (
 		<View style={styles}>
-			<TouchableOpacity onPress={handleOnPress}>
+			<TouchableOpacity onPress={handleWeightChange}>
 				<Text>{weight} lbs</Text>
-			</TouchableOpacity>
-			<TouchableOpacity onPress={() => setShowDatePicker(true)}>
-				<Text>{moment(date).format("MM-DD-YYYY")}</Text>
-				{showDatePicker && (
-					<DateTimePicker
-						style={{
-							marginBottom: "auto",
-						}}
-						value={date}
-						mode={"date"}
-						display={"spinner"}
-						onChange={handleDateChange}
-					/>
-				)}
 			</TouchableOpacity>
 			<TouchableOpacity onPress={clearAsyncStorage}>
 				<Text>Clear Async Storage</Text>
 			</TouchableOpacity>
+			<TouchableOpacity onPress={() => setShowDatePicker(true)}>
+				<Text>{moment(date).format("MM-DD-YYYY")}</Text>
+			</TouchableOpacity>
+			{showDatePicker && (
+				<DateTimePicker
+					style={{
+						position: "absolute",
+						bottom: 0,
+					}}
+					value={date}
+					mode={"date"}
+					display={"spinner"}
+					onChange={handleDateChange}
+				/>
+			)}
 		</View>
 	);
 }
