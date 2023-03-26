@@ -30,6 +30,7 @@ function HomeScreen() {
 			let selectedWeight = weight + 1;
 			let selectedDate = moment(date).format("MM-DD-YYYY");
 			let entry = new Entry(selectedWeight, selectedDate);
+			console.log(user);
 			user.addEntry(entry);
 			setUser(user);
 			setWeight(selectedWeight);
@@ -45,10 +46,11 @@ function HomeScreen() {
 		setShowDatePicker(false);
 	};
 
-	const clearAsyncStorage = async () => {
+	const resetStorage = async () => {
 		clearAsyncStorage();
 		setWeight(0);
 		let user = new User();
+		console.log(user);
 		setUser(user);
 	};
 
@@ -76,7 +78,7 @@ function HomeScreen() {
 			<TouchableOpacity onPress={handleWeightChange}>
 				<Text>{weight} lbs</Text>
 			</TouchableOpacity>
-			<TouchableOpacity onPress={clearAsyncStorage}>
+			<TouchableOpacity onPress={resetStorage}>
 				<Text>Clear Async Storage</Text>
 			</TouchableOpacity>
 			<TouchableOpacity onPress={() => setShowDatePicker(true)}>
