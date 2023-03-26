@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment";
 import { User, Entry } from "../classes";
 import constantStyles from "../constants/styles";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { Platform } from "react-native";
 
 const clearAsyncStorage = async () => {
 	const asyncStorageKeys = await AsyncStorage.getAllKeys();
@@ -24,13 +24,14 @@ function HomeScreen() {
 	const [weight, setWeight] = useState(0);
 	const [date, setDate] = useState(new Date());
 	const [showDatePicker, setShowDatePicker] = useState(false);
+	// const [showWeightPicker, setShowWeightPicker] = useState(false);
 
 	const handleWeightChange = async () => {
 		try {
+			// setShowWeightPicker(true);
 			let selectedWeight = weight + 1;
 			let selectedDate = moment(date).format("MM-DD-YYYY");
 			let entry = new Entry(selectedWeight, selectedDate);
-			console.log(user);
 			user.addEntry(entry);
 			setUser(user);
 			setWeight(selectedWeight);
@@ -50,7 +51,6 @@ function HomeScreen() {
 		clearAsyncStorage();
 		setWeight(0);
 		let user = new User();
-		console.log(user);
 		setUser(user);
 	};
 
@@ -86,10 +86,7 @@ function HomeScreen() {
 			</TouchableOpacity>
 			{showDatePicker && (
 				<DateTimePicker
-					style={{
-						position: "absolute",
-						bottom: 0,
-					}}
+					style={constantStyles.pickerStyles}
 					value={date}
 					mode={"date"}
 					display={"spinner"}
@@ -101,10 +98,9 @@ function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-	...constantStyles,
+	...constantStyles.screenStyles,
 	alignItems: "center",
 	justifyContent: "center",
-	flexGrow: 1,
 });
 
 export default HomeScreen;
