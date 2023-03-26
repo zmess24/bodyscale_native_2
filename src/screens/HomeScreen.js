@@ -35,8 +35,8 @@ function HomeScreen() {
 			user.addEntry(entry);
 			setUser(user);
 			setWeight(selectedWeight);
-			let data = JSON.stringify({ weight: selectedWeight });
-			await AsyncStorage.setItem("bodyScale_user", data);
+			// let data = JSON.stringify({ weight: selectedWeight });
+			await AsyncStorage.setItem("bodyScale_user", user);
 		} catch (err) {
 			console.log(err.message);
 		}
