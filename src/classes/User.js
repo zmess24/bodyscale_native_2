@@ -1,6 +1,6 @@
 class User {
-	constructor() {
-		this.entries = [];
+	constructor(initProps = undefined) {
+		this.entries = initProps && initProps.entries ? initProps.entries : [];
 	}
 
 	addEntry(entry) {
@@ -17,6 +17,8 @@ class User {
 		// week.average = this.calcWeekAverage(week.entries);
 		// return week;
 	}
+
+	findEntry(date) {}
 }
 
 export default User;

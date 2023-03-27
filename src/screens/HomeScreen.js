@@ -35,8 +35,7 @@ function HomeScreen() {
 			user.addEntry(entry);
 			setUser(user);
 			setWeight(selectedWeight);
-			// let data = JSON.stringify({ weight: selectedWeight });
-			await AsyncStorage.setItem("bodyScale_user", user);
+			await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
 		} catch (err) {
 			console.log(err.message);
 		}
@@ -49,9 +48,9 @@ function HomeScreen() {
 
 	const resetStorage = async () => {
 		clearAsyncStorage();
-		setWeight(0);
 		let user = new User();
 		setUser(user);
+		setWeight(0);
 	};
 
 	useEffect(() => {
@@ -59,11 +58,16 @@ function HomeScreen() {
 			try {
 				const data = await AsyncStorage.getItem("bodyScale_user");
 				if (data !== null) {
-					let weight = JSON.parse(data).weight;
-					setWeight(weight);
+					let userData = JSON.parse(data);
+					let newUser = new User({ ...userData });
+					let entry = newUser.entries.find(
+						(e) => e.date === moment(date).format("MM-DD-YYYY")
+					);
+					if (entry) setWeight(entry.weight);
+					setUser(newUser);
 				} else {
 					let user = new User();
-					setUser = setUser(user);
+					setUser(user);
 				}
 			} catch (err) {
 				console.log(err.message);
