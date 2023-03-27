@@ -18,7 +18,10 @@ class User {
 		// return week;
 	}
 
-	findEntry(date) {}
+	findEntry(date) {
+		let entry = this.entries.find((e) => e.date === date);
+		return entry ? entry : null;
+	}
 }
 
 export default User;

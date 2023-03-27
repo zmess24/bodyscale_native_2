@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -6,6 +6,7 @@ import moment from "moment";
 import { User, Entry } from "../classes";
 import constantStyles from "../constants/styles";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import useLoadUserData from "../hooks/useLoadUserData";
 
 const clearAsyncStorage = async () => {
 	const asyncStorageKeys = await AsyncStorage.getAllKeys();
@@ -20,11 +21,10 @@ const clearAsyncStorage = async () => {
 };
 
 function HomeScreen() {
-	const [user, setUser] = useState();
-	const [weight, setWeight] = useState(0);
-	const [date, setDate] = useState(new Date());
+	const [showWeightPicker, setShowWeightPicker] = useState(false);
 	const [showDatePicker, setShowDatePicker] = useState(false);
-	// const [showWeightPicker, setShowWeightPicker] = useState(false);
+	const { user, setUser, weight, setWeight, date, setDate } =
+		useLoadUserData();
 
 	const handleWeightChange = async () => {
 		try {
@@ -52,30 +52,6 @@ function HomeScreen() {
 		setUser(user);
 		setWeight(0);
 	};
-
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const data = await AsyncStorage.getItem("bodyScale_user");
-				if (data !== null) {
-					let userData = JSON.parse(data);
-					let newUser = new User({ ...userData });
-					let entry = newUser.entries.find(
-						(e) => e.date === moment(date).format("MM-DD-YYYY")
-					);
-					if (entry) setWeight(entry.weight);
-					setUser(newUser);
-				} else {
-					let user = new User();
-					setUser(user);
-				}
-			} catch (err) {
-				console.log(err.message);
-			}
-		};
-
-		fetchData();
-	}, []);
 
 	return (
 		<View style={styles}>
