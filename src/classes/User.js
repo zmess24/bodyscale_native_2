@@ -11,6 +11,8 @@ class User {
 		} else {
 			this.entries.push(entry);
 		}
+
+		this.sortDates();
 		// let date = week.entries.find((e) => Date.parse(e.date) === entryDate);
 		// if (date) throw new Error("Date already logged.");
 		// week.entries.push(entry);
@@ -21,6 +23,12 @@ class User {
 	findEntry(date) {
 		let entry = this.entries.find((e) => e.date === date);
 		return entry ? entry : null;
+	}
+
+	sortDates() {
+		this.entries = this.entries.sort((eA, eB) => {
+			return new Date(eA.date) - new Date(eB.date);
+		});
 	}
 }
 

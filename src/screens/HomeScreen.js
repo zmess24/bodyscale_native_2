@@ -33,6 +33,7 @@ function HomeScreen() {
 			let selectedDate = moment(date).format("MM-DD-YYYY");
 			let entry = new Entry(selectedWeight, selectedDate);
 			user.addEntry(entry);
+			console.log(user);
 			setUser(user);
 			setWeight(selectedWeight);
 			await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
