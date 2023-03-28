@@ -23,14 +23,6 @@ class _Helper {
 		};
 	}
 
-	static calcWeekAverage(entries) {
-		let initialValue = 0;
-		return (
-			entries.reduce((a, c) => a + c.weight, initialValue) /
-			entries.length
-		);
-	}
-
 	static addWeek(
 		{ _id, weight, date, createdAt, updatedAt },
 		startDate = moment().startOf("isoWeek").format("YYYY-MM-DD"),
@@ -42,15 +34,6 @@ class _Helper {
 			entries: [{ _id, weight, date, createdAt, updatedAt }],
 			average: this.calcWeekAverage([{ weight }]),
 		};
-	}
-
-	static addEntry(week, entry) {
-		let entryDate = Date.parse(entry.date);
-		let date = week.entries.find((e) => Date.parse(e.date) === entryDate);
-		if (date) throw new Error("Date already logged.");
-		week.entries.push(entry);
-		week.average = this.calcWeekAverage(week.entries);
-		return week;
 	}
 
 	static searchEntryDates({ weightLog }, newDate) {

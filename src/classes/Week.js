@@ -6,9 +6,13 @@ class Week {
 		this.entries = [];
 	}
 
-	addEntry(entry) {
-		this.entries.push(entry);
+	static calcWeekAverage(entries) {
+		let initialValue = 0;
+		return (
+			entries.reduce((a, c) => a + c.weight, initialValue) /
+			entries.length
+		);
 	}
 }
 
-export default Week;
+export { Week };

@@ -21,6 +21,7 @@ class User {
 	}
 
 	findEntry(date) {
+		console.log(date);
 		let entry = this.entries.find((e) => e.date === date);
 		return entry ? entry : null;
 	}

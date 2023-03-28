@@ -33,7 +33,6 @@ function HomeScreen() {
 			let selectedDate = moment(date).format("MM-DD-YYYY");
 			let entry = new Entry(selectedWeight, selectedDate);
 			user.addEntry(entry);
-			console.log(user);
 			setUser(user);
 			setWeight(selectedWeight);
 			await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
@@ -43,6 +42,8 @@ function HomeScreen() {
 	};
 
 	const handleDateChange = (e, selectedDate) => {
+		let entry = user.findEntry(moment(selectedDate).format("MM-DD-YYYY"));
+		entry ? setWeight(entry.weight) : setWeight(0);
 		setDate(selectedDate);
 		setShowDatePicker(false);
 	};
