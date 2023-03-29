@@ -7,11 +7,8 @@ class Week {
 	}
 
 	static calcWeekAverage(entries) {
-		let initialValue = 0;
-		return (
-			entries.reduce((a, c) => a + c.weight, initialValue) /
-			entries.length
-		);
+		this.entries =
+			entries.reduce((a, c) => a + c.weight, 0) / entries.length;
 	}
 }
 

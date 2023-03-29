@@ -13,15 +13,10 @@ class User {
 		}
 
 		this.sortDates();
-		// let date = week.entries.find((e) => Date.parse(e.date) === entryDate);
-		// if (date) throw new Error("Date already logged.");
-		// week.entries.push(entry);
-		// week.average = this.calcWeekAverage(week.entries);
-		// return week;
+		this.#genISODates();
 	}
 
 	findEntry(date) {
-		console.log(date);
 		let entry = this.entries.find((e) => e.date === date);
 		return entry ? entry : null;
 	}
@@ -30,6 +25,29 @@ class User {
 		this.entries = this.entries.sort((eA, eB) => {
 			return new Date(eA.date) - new Date(eB.date);
 		});
+	}
+
+	#genISODates(entry, week, newDate) {
+		// return {
+		// 	currentDate: Date.parse(moment().format("YYYY-MM-DD")),
+		// 	newDate: Date.parse(newDate),
+		// 	entryDate: Date.parse(entry.date),
+		// 	endISODate: week
+		// 		? Date.parse(week.endDate)
+		// 		: Date.parse(
+		// 				moment(entry.date.toISOString().split("T")[0])
+		// 					.endOf("isoWeek")
+		// 					.format("YYYY-MM-DD")
+		// 		  ),
+		// 	startISODate: week
+		// 		? Date.parse(week.startDate)
+		// 		: Date.parse(
+		// 				moment(entry.date.toISOString().split("T")[0])
+		// 					.startOf("isoWeek")
+		// 					.format("YYYY-MM-DD")
+		// 		  ),
+		// };
+		console.log("TESTING PRIVATE METHOD");
 	}
 }
 
