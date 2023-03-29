@@ -1,30 +1,17 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment";
-import { User, Entry } from "../classes";
+import { User, Entry } from "../constants/classes";
 import constantStyles from "../constants/styles";
+import clearAsyncStorage from "../constants/functions/clearAsyncStorage";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import useLoadUserData from "../hooks/useLoadUserData";
-
-const clearAsyncStorage = async () => {
-	const asyncStorageKeys = await AsyncStorage.getAllKeys();
-	if (asyncStorageKeys.length > 0) {
-		if (Platform.OS === "android") {
-			await AsyncStorage.clear();
-		}
-		if (Platform.OS === "ios") {
-			await AsyncStorage.multiRemove(asyncStorageKeys);
-		}
-	}
-};
+import useLoadUserData from "../constants/hooks/useLoadUserData";
 
 function HomeScreen() {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
 	const [showDatePicker, setShowDatePicker] = useState(false);
-	const { user, setUser, weight, setWeight, date, setDate } =
-		useLoadUserData();
+	const { user, setUser, weight, setWeight, date, setDate } = useLoadUserData();
 
 	const handleWeightChange = async () => {
 		try {
@@ -32,7 +19,7 @@ function HomeScreen() {
 			let selectedWeight = weight + 1;
 			let selectedDate = moment(date).format("MM-DD-YYYY");
 			let entry = new Entry(selectedWeight, selectedDate);
-			user.addEntry(entry);
+			user.createEntry(entry);
 			setUser(user);
 			setWeight(selectedWeight);
 			await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
@@ -67,13 +54,7 @@ function HomeScreen() {
 				<Text>{moment(date).format("MM-DD-YYYY")}</Text>
 			</TouchableOpacity>
 			{showDatePicker && (
-				<DateTimePicker
-					style={constantStyles.pickerStyles}
-					value={date}
-					mode={"date"}
-					display={"spinner"}
-					onChange={handleDateChange}
-				/>
+				<DateTimePicker style={constantStyles.pickerStyles} value={date} mode={"date"} display={"spinner"} onChange={handleDateChange} />
 			)}
 		</View>
 	);

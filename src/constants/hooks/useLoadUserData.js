@@ -15,9 +15,7 @@ const useLoadUserData = () => {
 				if (data !== null) {
 					let userData = JSON.parse(data);
 					let newUser = new User({ ...userData });
-					let entry = newUser.findEntry(
-						moment(date).format("MM-DD-YYYY")
-					);
+					let entry = newUser.findEntry(moment(date).format("MM-DD-YYYY"));
 					if (entry) setWeight(entry.weight);
 					setUser(newUser);
 				} else {

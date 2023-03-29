@@ -18,9 +18,7 @@ export default function App() {
 					component={HomeScreen}
 					options={{
 						tabBarLabel: "Home",
-						tabBarIcon: () => (
-							<AntDesign name="home" size={24} color="black" />
-						),
+						tabBarIcon: () => <AntDesign name="home" size={24} color="black" />,
 					}}
 				/>
 				<Tab.Screen
@@ -28,13 +26,7 @@ export default function App() {
 					component={ChartScreen}
 					options={{
 						tabBarLabel: "Charts",
-						tabBarIcon: () => (
-							<AntDesign
-								name="areachart"
-								size={24}
-								color="black"
-							/>
-						),
+						tabBarIcon: () => <AntDesign name="areachart" size={24} color="black" />,
 					}}
 				/>
 				<Tab.Screen
@@ -42,13 +34,7 @@ export default function App() {
 					component={HistoryScreen}
 					options={{
 						tabBarLabel: "History",
-						tabBarIcon: () => (
-							<AntDesign
-								name="calendar"
-								size={24}
-								color="black"
-							/>
-						),
+						tabBarIcon: () => <AntDesign name="calendar" size={24} color="black" />,
 					}}
 				/>
 				<Tab.Screen
@@ -56,9 +42,7 @@ export default function App() {
 					component={SettingsScreen}
 					options={{
 						tabBarLabel: "Settings",
-						tabBarIcon: () => (
-							<AntDesign name="setting" size={24} color="black" />
-						),
+						tabBarIcon: () => <AntDesign name="setting" size={24} color="black" />,
 					}}
 				/>
 			</Tab.Navigator>
