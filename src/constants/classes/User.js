@@ -8,22 +8,20 @@ class User {
 
 	createEntry(entry) {
 		let week = this.entries.find((w) => Date.parse(w.startDate) <= Date.parse(entry.date) && Date.parse(entry.date) <= Date.parse(w.endDate));
+		let { startOfWeek, endOfWeek } = this.#generateDates(entry, week);
 
-		let { entryDate, startISODate, endISODate, currentDate } = this.#genISODates(entry, week);
-
-		if (weightLog.length === 0 || !week) {
-			let newWeek = this.#addWeek(entry, startISODate, endISODate);
+		if (this.entries.length === 0 || !week) {
+			let newWeek = this.#addWeek(entry, startOfWeek, endOfWeek);
 			this.entries.push(newWeek);
 		} else {
-			// Prevent users from posting past the current date.
-			if (entryDate > currentDate) throw new Error("Can't log entries past current date.");
-			if (entryDate > endISODate) weightLog.push(Util.addWeek(entry));
-			if (entryDate < startISODate) Util.searchWeeksAndAddEntry(weightLog, entry);
-			else {
-				Util.addEntry(week, entry);
-			}
+			// if (entryDate > endISODate) weightLog.push(Util.addWeek(entry));
+			// if (entryDate < startISODate) Util.searchWeeksAndAddEntry(weightLog, entry);
+			console.log("ADD TO EXISTING WEEK");
+			// else {
+			// 	Util.addEntry(week, entry);
+			// }
 		}
-		// console.log(week);
+		console.log(week);
 		let index = this.entries.findIndex((e) => e.date === entry.date);
 
 		if (index > -1) {
@@ -52,30 +50,19 @@ class User {
 		});
 	}
 
-	#addWeek(
-		{ weight, date, createdAt, updatedAt },
-		startDate = moment().startOf("isoWeek").format("YYYY-MM-DD"),
-		endDate = moment().endOf("isoWeek").format("YYYY-MM-DD")
-	) {
+	#addWeek(entry, startDate = moment().startOf("week").format("YYYY-MM-DD"), endDate = moment().endOf("week").format("YYYY-MM-DD")) {
 		return {
 			startDate,
 			endDate,
-			entries: [{ weight, date, createdAt, updatedAt }],
+			entries: [{ ...entry }],
 			// average: this.calcWeekAverage([{ weight }])
 		};
 	}
 
-	#genISODates(entry, week, newDate) {
+	#generateDates(entry, week) {
 		return {
-			currentDate: Date.parse(moment().format("YYYY-MM-DD")),
-			newDate: Date.parse(newDate),
-			entryDate: Date.parse(entry.date),
-			endISODate: week
-				? Date.parse(week.endDate)
-				: Date.parse(moment(entry.date.toISOString().split("T")[0]).endOf("isoWeek").format("YYYY-MM-DD")),
-			startISODate: week
-				? Date.parse(week.startDate)
-				: Date.parse(moment(entry.date.toISOString().split("T")[0]).startOf("isoWeek").format("YYYY-MM-DD")),
+			startOfWeek: week ? week.endDate : moment(entry.date).startOf("week").format("YYYY-MM-DD"),
+			endOfWeek: week ? week.startDate : moment(entry.date).endOf("week").format("YYYY-MM-DD"),
 		};
 	}
 }

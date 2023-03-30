@@ -17,7 +17,7 @@ function HomeScreen() {
 		try {
 			// setShowWeightPicker(true);
 			let selectedWeight = weight + 1;
-			let selectedDate = moment(date).format("MM-DD-YYYY");
+			let selectedDate = moment(date).format("YYYY-MM-DD");
 			let entry = new Entry(selectedWeight, selectedDate);
 			user.createEntry(entry);
 			setUser(user);

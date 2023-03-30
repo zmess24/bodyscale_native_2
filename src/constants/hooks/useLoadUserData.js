@@ -19,8 +19,8 @@ const useLoadUserData = () => {
 					if (entry) setWeight(entry.weight);
 					setUser(newUser);
 				} else {
-					let user = new User();
-					setUser(user);
+					let newUser = new User();
+					setUser(newUser);
 				}
 			} catch (err) {
 				console.log(err.message);
