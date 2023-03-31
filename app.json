@@ -1,30 +1,28 @@
 {
-  "expo": {
-    "name": "body_scale_native_2",
-    "slug": "body_scale_native_2",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
-  }
+	"expo": {
+		"name": "body_scale_native_2",
+		"slug": "body_scale_native_2",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "./assets/bodyscale_logo.png",
+		"userInterfaceStyle": "light",
+		"splash": {
+			"image": "./assets/bodyscale_logo.png",
+			"backgroundColor": "#000000",
+			"resizeMode": "contain"
+		},
+		"assetBundlePatterns": ["**/*"],
+		"ios": {
+			"supportsTablet": true
+		},
+		"android": {
+			"adaptiveIcon": {
+				"foregroundImage": "./assets/adaptive-icon.png",
+				"backgroundColor": "#ffffff"
+			}
+		},
+		"web": {
+			"favicon": "./assets/favicon.png"
+		}
+	}
 }

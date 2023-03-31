@@ -11,6 +11,7 @@ class User {
 		let { startOfWeek, endOfWeek } = this.#generateDates(entry, week);
 
 		if (this.entries.length === 0 || !week) {
+			console.log("CREATE NEW WEEK");
 			let newWeek = this.#addWeek(entry, startOfWeek, endOfWeek);
 			this.entries.push(newWeek);
 		} else {
@@ -21,19 +22,24 @@ class User {
 			// 	Util.addEntry(week, entry);
 			// }
 		}
-		console.log(week);
-		let index = this.entries.findIndex((e) => e.date === entry.date);
+		// console.log(week);
+		// let index = this.entries.findIndex((e) => e.date === entry.date);
 
-		if (index > -1) {
-			this.entries[index] = entry;
-		} else {
-			this.entries.push(entry);
-		}
+		// if (index > -1) {
+		// 	this.entries[index] = entry;
+		// } else {
+		// 	this.entries.push(entry);
+		// }
 
-		this.#sortDates();
+		// this.#sortDates();
 	}
 
 	findEntry(date) {
+		let week = this.entries.find((w) => Date.parse(w.startDate) <= Date.parse(date) && Date.parse(date) <= Date.parse(w.endDate));
+		if (this.entries.length === 0 || !week) {
+			return undefined;
+		} else {
+		}
 		let entry = this.entries.find((e) => e.date === date);
 		return entry ? entry : null;
 	}
@@ -54,7 +60,7 @@ class User {
 		return {
 			startDate,
 			endDate,
-			entries: [{ ...entry }],
+			days: [{ ...entry }],
 			// average: this.calcWeekAverage([{ weight }])
 		};
 	}

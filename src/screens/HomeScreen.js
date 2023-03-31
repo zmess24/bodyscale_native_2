@@ -19,17 +19,18 @@ function HomeScreen() {
 			let selectedWeight = weight + 1;
 			let selectedDate = moment(date).format("YYYY-MM-DD");
 			let entry = new Entry(selectedWeight, selectedDate);
-			user.createEntry(entry);
-			setUser(user);
-			setWeight(selectedWeight);
-			await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
+			console.log(user);
+			// user.createEntry(entry);
+			// setUser(user);
+			// setWeight(selectedWeight);
+			// await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
 		} catch (err) {
 			console.log(err.message);
 		}
 	};
 
 	const handleDateChange = (e, selectedDate) => {
-		let entry = user.findEntry(moment(selectedDate).format("MM-DD-YYYY"));
+		let entry = user.findEntry(moment(selectedDate).format("YYYY-MM-DD"));
 		entry ? setWeight(entry.weight) : setWeight(0);
 		setDate(selectedDate);
 		setShowDatePicker(false);
