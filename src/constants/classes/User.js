@@ -11,27 +11,13 @@ class User {
 		let { startOfWeek, endOfWeek } = this.#generateDates(entry, week);
 
 		if (this.entries.length === 0 || !week) {
-			console.log("CREATE NEW WEEK");
-			let newWeek = this.#addWeek(entry, startOfWeek, endOfWeek);
+			let newWeek = this.#createWeek(entry, startOfWeek, endOfWeek);
 			this.entries.push(newWeek);
 		} else {
-			// if (entryDate > endISODate) weightLog.push(Util.addWeek(entry));
-			// if (entryDate < startISODate) Util.searchWeeksAndAddEntry(weightLog, entry);
-			console.log("ADD TO EXISTING WEEK");
-			// else {
-			// 	Util.addEntry(week, entry);
-			// }
+			let dayIndex = week.days.findIndex(({ date }) => date === entry.date);
+			dayIndex > -1 ? (week.days[dayIndex].weight = entry.weight) : week.days.push(entry);
+			week.days.sort((eA, eB) => new Date(eA.date) - new Date(eB.date));
 		}
-		// console.log(week);
-		// let index = this.entries.findIndex((e) => e.date === entry.date);
-
-		// if (index > -1) {
-		// 	this.entries[index] = entry;
-		// } else {
-		// 	this.entries.push(entry);
-		// }
-
-		// this.#sortDates();
 	}
 
 	findEntry(date) {
@@ -39,9 +25,9 @@ class User {
 		if (this.entries.length === 0 || !week) {
 			return undefined;
 		} else {
+			let entry = week.days.find((e) => e.date === date);
+			return entry;
 		}
-		let entry = this.entries.find((e) => e.date === date);
-		return entry ? entry : null;
 	}
 
 	/**
@@ -50,13 +36,7 @@ class User {
     |--------------------------------------------------
     */
 
-	#sortDates() {
-		this.entries = this.entries.sort((eA, eB) => {
-			return new Date(eA.date) - new Date(eB.date);
-		});
-	}
-
-	#addWeek(entry, startDate = moment().startOf("week").format("YYYY-MM-DD"), endDate = moment().endOf("week").format("YYYY-MM-DD")) {
+	#createWeek(entry, startDate = moment().startOf("week").format("YYYY-MM-DD"), endDate = moment().endOf("week").format("YYYY-MM-DD")) {
 		return {
 			startDate,
 			endDate,
