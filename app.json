@@ -1,13 +1,13 @@
 {
 	"expo": {
-		"name": "body_scale_native_2",
-		"slug": "body_scale_native_2",
+		"name": "BodyScale",
+		"slug": "BodyScale",
 		"version": "1.0.0",
 		"orientation": "portrait",
-		"icon": "./assets/bodyscale_logo.png",
+		"icon": "./assets/bodyscale_icon.png",
 		"userInterfaceStyle": "light",
 		"splash": {
-			"image": "./assets/bodyscale_logo.png",
+			"image": "./assets/bodyscale_icon.png",
 			"backgroundColor": "#000000",
 			"resizeMode": "contain"
 		},
