@@ -12,7 +12,7 @@ function HomeScreen() {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
 	const [showDatePicker, setShowDatePicker] = useState(false);
 	const { user, setUser, weight, setWeight, date, setDate } = useLoadUserData();
-	const maxDate = new Date(moment().add(1, "days").format("YYYY-MM-DD"));
+	const tomorrow = new Date(moment().add(1, "days").format("YYYY-MM-DD"));
 
 	const handleWeightChange = async () => {
 		try {
@@ -57,7 +57,7 @@ function HomeScreen() {
 			</TouchableOpacity>
 			{showDatePicker && (
 				<DateTimePicker
-					maximumDate={maxDate}
+					maximumDate={tomorrow}
 					style={constantStyles.pickerStyles}
 					value={date}
 					mode={"date"}
