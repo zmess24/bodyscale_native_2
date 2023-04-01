@@ -13,6 +13,7 @@ class User {
 			let { startOfWeek, endOfWeek } = this.#generateDates(entry, week);
 			let newWeek = this.#createWeek(entry, startOfWeek, endOfWeek);
 			this.entries.push(newWeek);
+			this.entries.sort((a, b) => new Date(a.endDate) - new Date(b.startDate));
 		} else {
 			let dayIndex = week.days.findIndex(({ date }) => date === entry.date);
 			dayIndex > -1 ? (week.days[dayIndex].weight = entry.weight) : week.days.push(entry);
