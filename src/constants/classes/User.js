@@ -8,15 +8,16 @@ class User {
 
 	createEntry(entry) {
 		let week = this.entries.find((w) => Date.parse(w.startDate) <= Date.parse(entry.date) && Date.parse(entry.date) <= Date.parse(w.endDate));
-		let { startOfWeek, endOfWeek } = this.#generateDates(entry, week);
 
 		if (this.entries.length === 0 || !week) {
+			let { startOfWeek, endOfWeek } = this.#generateDates(entry, week);
 			let newWeek = this.#createWeek(entry, startOfWeek, endOfWeek);
 			this.entries.push(newWeek);
 		} else {
 			let dayIndex = week.days.findIndex(({ date }) => date === entry.date);
 			dayIndex > -1 ? (week.days[dayIndex].weight = entry.weight) : week.days.push(entry);
-			week.days.sort((eA, eB) => new Date(eA.date) - new Date(eB.date));
+			week.days.sort((a, b) => new Date(a.date) - new Date(b.date));
+			week.average = (week.days.reduce((a, c) => a + c.weight, 0) / week.days.length).toFixed(2);
 		}
 	}
 
@@ -41,7 +42,7 @@ class User {
 			startDate,
 			endDate,
 			days: [{ ...entry }],
-			// average: this.calcWeekAverage([{ weight }])
+			average: entry.weight.toFixed(2),
 		};
 	}
 
