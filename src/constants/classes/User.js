@@ -1,5 +1,4 @@
 import moment from "moment";
-import Week from "./Week";
 
 class User {
 	constructor(initProps = undefined) {
