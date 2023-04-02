@@ -10,14 +10,7 @@ function WeightPicker({ onValueChange, value }) {
 	const floatRange = new Array(9 - 1).fill().map((d, i) => i + 1);
 
 	const intItems = intRange.map((i, v) => {
-		return (
-			<Picker.Item
-				label={`${i}`}
-				value={i}
-				key={i}
-				style={{ borderColor: "blue", borderBottomWidth: 1, borderTopWidth: 1, borderLeftWidth: 1, borderRightWidth: 1 }}
-			/>
-		);
+		return <Picker.Item label={`${i}`} value={i} key={i} style={{ height: 10 }} />;
 	});
 
 	const floatItems = floatRange.map((i, v) => {
@@ -33,29 +26,25 @@ function WeightPicker({ onValueChange, value }) {
 				bottom: 0,
 				display: "flex",
 				flexDirection: "row",
-				justifyContent: "center",
-				alignContent: "flex-end",
 				height: 200,
 				marginLeft: 30,
 				marginRight: 30,
 			}}
 		>
 			<Picker
-				style={{ width: "50%" }}
+				style={{ width: "50%", display: "flex", flexDirection: "column", justifyContent: "center" }}
 				selectedValue={value}
 				onValueChange={onValueChange}
-				itemStyle={{
-					textAlign: "right",
-					borderColor: "blue",
-					borderBottomWidth: 1,
-					borderTopWidth: 1,
-					borderLeftWidth: 1,
-					borderRightWidth: 1,
-				}}
+				itemStyle={{ textAlign: "right", border: "green" }}
 			>
 				{intItems}
 			</Picker>
-			<Picker style={{ width: "50%" }} selectedValue={value} onValueChange={onValueChange} itemStyle={{ textAlign: "left" }}>
+			<Picker
+				style={{ width: "50%", display: "flex", flexDirection: "column", justifyContent: "center" }}
+				selectedValue={value}
+				onValueChange={onValueChange}
+				itemStyle={{ textAlign: "left" }}
+			>
 				{floatItems}
 			</Picker>
 		</View>
