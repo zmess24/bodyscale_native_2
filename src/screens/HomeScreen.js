@@ -7,6 +7,8 @@ import constantStyles from "../constants/styles";
 import clearAsyncStorage from "../constants/functions/clearAsyncStorage";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import useLoadUserData from "../constants/hooks/useLoadUserData";
+// import { Picker } from "@react-native-picker/picker";
+import WeightPicker from "../constants/components/WeightPicker";
 
 function HomeScreen() {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
@@ -14,19 +16,31 @@ function HomeScreen() {
 	const { user, setUser, weight, setWeight, date, setDate } = useLoadUserData();
 	const tomorrow = new Date(moment().add(1, "days").format("YYYY-MM-DD"));
 
-	const handleWeightChange = async () => {
+	const handleWeightChange = async (selectedWeight) => {
 		try {
-			// setShowWeightPicker(true);
-			let selectedWeight = weight + 1;
-			let selectedDate = moment(date).format("YYYY-MM-DD");
-			let entry = new Entry(selectedWeight, selectedDate);
-			user.createEntry(entry);
-			setUser(user);
+			setShowWeightPicker(false);
 			setWeight(selectedWeight);
-			await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
+			// setShowWeightPicker(true);
+			// let selectedWeight = weight + 1;
+			// let selectedDate = moment(date).format("YYYY-MM-DD");
+			// let entry = new Entry(selectedWeight, selectedDate);
+			// user.createEntry(entry);
+			// setUser(user);
+			// setWeight(selectedWeight);
+			// await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
 		} catch (err) {
 			console.log(err.message);
 		}
+	};
+
+	const toggleWeightPicker = () => {
+		setShowDatePicker(false);
+		setShowWeightPicker(true);
+	};
+
+	const toggleDatePicker = () => {
+		setShowWeightPicker(false);
+		setShowDatePicker(true);
 	};
 
 	const handleDateChange = (e, selectedDate) => {
@@ -45,13 +59,13 @@ function HomeScreen() {
 
 	return (
 		<View style={styles}>
-			<TouchableOpacity onPress={handleWeightChange}>
+			<TouchableOpacity onPress={toggleWeightPicker}>
 				<Text>{weight} lbs</Text>
 			</TouchableOpacity>
 			<TouchableOpacity onPress={resetStorage}>
 				<Text>Clear Async Storage</Text>
 			</TouchableOpacity>
-			<TouchableOpacity onPress={() => setShowDatePicker(true)}>
+			<TouchableOpacity onPress={toggleDatePicker}>
 				<Text>{moment(date).format("MM-DD-YYYY")}</Text>
 			</TouchableOpacity>
 			{showDatePicker && (
@@ -64,6 +78,7 @@ function HomeScreen() {
 					onChange={handleDateChange}
 				/>
 			)}
+			{showWeightPicker && <WeightPicker onValueChange={handleWeightChange} value={weight} />}
 		</View>
 	);
 }
