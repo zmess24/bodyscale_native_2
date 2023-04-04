@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import constantStyles from "../styles";
+import constantStyles from "../constants/styles";
 
 function WeightPicker({ handleWeightChange, weight }) {
 	const [int, setInt] = useState(weight.toString().indexOf(".") > -1 ? parseInt(weight.toString().split(".")[0]) : weight);

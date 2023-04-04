@@ -5,15 +5,14 @@ import moment from "moment";
 import { User, Entry } from "../constants/classes";
 import constantStyles from "../constants/styles";
 import clearAsyncStorage from "../constants/functions/clearAsyncStorage";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import useLoadUserData from "../constants/hooks/useLoadUserData";
-import WeightPicker from "../constants/components/WeightPicker";
+import useLoadUserData from "../hooks/useLoadUserData";
+import WeightPicker from "../components/WeightPicker";
+import DatePicker from "../components/DatePicker";
 
 function HomeScreen() {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
 	const [showDatePicker, setShowDatePicker] = useState(false);
 	const { user, setUser, weight, setWeight, date, setDate } = useLoadUserData();
-	const tomorrow = new Date(moment().add(1, "days").format("YYYY-MM-DD"));
 
 	const handleWeightChange = async (selectedWeight) => {
 		try {
@@ -64,16 +63,7 @@ function HomeScreen() {
 			<TouchableOpacity onPress={toggleDatePicker}>
 				<Text>{moment(date).format("MM-DD-YYYY")}</Text>
 			</TouchableOpacity>
-			{showDatePicker && (
-				<DateTimePicker
-					maximumDate={tomorrow}
-					style={constantStyles.pickerStyles}
-					value={date}
-					mode={"date"}
-					display={"spinner"}
-					onChange={handleDateChange}
-				/>
-			)}
+			{showDatePicker && <DatePicker date={date} handleDateChange={handleDateChange} />}
 			{showWeightPicker && <WeightPicker handleWeightChange={handleWeightChange} weight={weight} />}
 		</View>
 	);
