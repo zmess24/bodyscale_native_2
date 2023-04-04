@@ -7,7 +7,6 @@ import constantStyles from "../constants/styles";
 import clearAsyncStorage from "../constants/functions/clearAsyncStorage";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import useLoadUserData from "../constants/hooks/useLoadUserData";
-// import { Picker } from "@react-native-picker/picker";
 import WeightPicker from "../constants/components/WeightPicker";
 
 function HomeScreen() {
@@ -19,15 +18,12 @@ function HomeScreen() {
 	const handleWeightChange = async (selectedWeight) => {
 		try {
 			setShowWeightPicker(false);
+			let selectedDate = moment(date).format("YYYY-MM-DD");
+			let entry = new Entry(selectedWeight, selectedDate);
+			user.createEntry(entry);
+			setUser(user);
 			setWeight(selectedWeight);
-			// setShowWeightPicker(true);
-			// let selectedWeight = weight + 1;
-			// let selectedDate = moment(date).format("YYYY-MM-DD");
-			// let entry = new Entry(selectedWeight, selectedDate);
-			// user.createEntry(entry);
-			// setUser(user);
-			// setWeight(selectedWeight);
-			// await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
+			await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
 		} catch (err) {
 			console.log(err.message);
 		}
@@ -78,7 +74,7 @@ function HomeScreen() {
 					onChange={handleDateChange}
 				/>
 			)}
-			{showWeightPicker && <WeightPicker onValueChange={handleWeightChange} value={weight} />}
+			{showWeightPicker && <WeightPicker handleWeightChange={handleWeightChange} weight={weight} />}
 		</View>
 	);
 }
