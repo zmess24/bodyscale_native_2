@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment";
-import { User, Entry } from "../constants/classes";
-import constantStyles from "../constants/styles";
-import clearAsyncStorage from "../constants/functions/clearAsyncStorage";
-import useLoadUserData from "../hooks/useLoadUserData";
-import WeightPicker from "../components/WeightPicker";
-import DatePicker from "../components/DatePicker";
+import { User, Entry } from "../../constants/classes";
+import constantStyles from "../../constants/styles";
+import clearAsyncStorage from "../../constants/functions/clearAsyncStorage";
+import useLoadUserData from "../../hooks/useLoadUserData";
+import WeightPicker from "./components/WeightPicker";
+import DatePicker from "./components/DatePicker";
+import Header from "./components/Header";
 
 function HomeScreen() {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
@@ -54,6 +55,7 @@ function HomeScreen() {
 
 	return (
 		<View style={styles}>
+			<Header />
 			<TouchableOpacity onPress={toggleWeightPicker}>
 				<Text>{weight} lbs</Text>
 			</TouchableOpacity>
@@ -73,6 +75,7 @@ const styles = StyleSheet.create({
 	...constantStyles.screenStyles,
 	alignItems: "center",
 	justifyContent: "center",
+	padding: 20,
 });
 
 export default HomeScreen;

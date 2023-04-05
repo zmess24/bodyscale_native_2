@@ -3,6 +3,11 @@ import moment from "moment";
 class User {
 	constructor(initProps = undefined) {
 		this.entries = initProps && initProps.entries ? initProps.entries : [];
+		this.activityMultiplyer = 0;
+		this.age = 0;
+		this.gender = null;
+		this.height = 0;
+		this.bodyFat = 0;
 	}
 
 	createEntry(entry) {

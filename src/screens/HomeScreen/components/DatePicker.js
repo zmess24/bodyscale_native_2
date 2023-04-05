@@ -1,6 +1,6 @@
 import React from "react";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import constantStyles from "../constants/styles";
+import constantStyles from "../../../constants/styles";
 import moment from "moment";
 
 function DatePicker({ handleDateChange, date }) {
