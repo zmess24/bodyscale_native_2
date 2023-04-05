@@ -9,6 +9,7 @@ import useLoadUserData from "../../hooks/useLoadUserData";
 import WeightPicker from "./components/WeightPicker";
 import DatePicker from "./components/DatePicker";
 import Header from "./components/Header";
+import generateFakeDate from "../../constants/functions/generateFakeDate";
 
 function HomeScreen() {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
@@ -48,7 +49,7 @@ function HomeScreen() {
 
 	const resetStorage = async () => {
 		clearAsyncStorage();
-		let user = new User();
+		let user = generateFakeDate();
 		setUser(user);
 		setWeight(0);
 	};
