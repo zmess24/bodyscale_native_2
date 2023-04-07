@@ -3,24 +3,15 @@ import { StyleSheet, Text, View, Dimensions } from "react-native";
 import constantStyles from "../../constants/styles";
 import { VictoryArea, VictoryChart, VictoryTheme } from "victory-native";
 import Header from "./components/Tabs";
-import useLoadUserData from "../../hooks/useLoadUserData";
 import moment from "moment";
 
-function ChartScreen() {
+function ChartScreen({ userData }) {
 	const windowWidth = Dimensions.get("window").width * 0.97;
 	const windowHeight = Dimensions.get("window").height * 0.75;
-	const { user } = useLoadUserData();
-	console.log("Chart Screen", user);
-	let averages = user.entries.map((w) => {
+	let averages = userData.entries.map((w) => {
 		return { date: moment(w.startDate).format("MM-DD"), average: w.average };
 	});
 
-	const data = [
-		{ quarter: 1, earnings: 13000 },
-		{ quarter: 2, earnings: 16500 },
-		{ quarter: 3, earnings: 14250 },
-		{ quarter: 4, earnings: 19000 },
-	];
 	return (
 		<View style={styles.containter}>
 			<Header />

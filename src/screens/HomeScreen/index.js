@@ -11,10 +11,9 @@ import DatePicker from "./components/DatePicker";
 import Header from "./components/Header";
 import generateFakeDate from "../../constants/functions/generateFakeDate";
 
-function HomeScreen() {
+function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDate } }) {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
 	const [showDatePicker, setShowDatePicker] = useState(false);
-	const { user, setUser, weight, setWeight, date, setDate } = useLoadUserData();
 
 	const handleWeightChange = async (selectedWeight) => {
 		try {
