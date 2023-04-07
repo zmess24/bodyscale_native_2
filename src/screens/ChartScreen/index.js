@@ -15,14 +15,11 @@ function ChartScreen({ userData }) {
 	return (
 		<View style={styles.containter}>
 			<Header />
-			<VictoryChart width={windowWidth} height={windowHeight} theme={VictoryTheme.material}>
+			<VictoryChart width={windowWidth} height={windowHeight} theme={VictoryTheme.material} domain={{ x: 8 }}>
 				<VictoryArea
 					data={averages}
 					x="date"
-					sortKey="x"
-					sortOrder="ascending"
 					y="average"
-					tickCount={10}
 					style={styles.areaChart}
 					animate={{
 						duration: 0,
