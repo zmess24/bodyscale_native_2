@@ -6,10 +6,10 @@ import Header from "./components/Tabs";
 import moment from "moment";
 
 function ChartScreen({ userData }) {
-	const windowWidth = Dimensions.get("window").width * 0.97;
+	const windowWidth = Dimensions.get("window").width;
 	const windowHeight = Dimensions.get("window").height * 0.75;
 	let averages = userData.entries.map((w) => {
-		return { date: moment(w.startDate).format("MM-DD"), average: w.average };
+		return { date: moment(w.startDate).format("MM/DD"), average: w.average };
 	});
 
 	return (
@@ -19,10 +19,13 @@ function ChartScreen({ userData }) {
 				<VictoryArea
 					data={averages}
 					x="date"
+					sortKey="x"
+					sortOrder="ascending"
 					y="average"
+					tickCount={10}
 					style={styles.areaChart}
 					animate={{
-						duration: 500,
+						duration: 0,
 						onLoad: { duration: 500 },
 					}}
 				/>
