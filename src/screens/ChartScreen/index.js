@@ -10,6 +10,7 @@ function ChartScreen() {
 	const windowWidth = Dimensions.get("window").width * 0.97;
 	const windowHeight = Dimensions.get("window").height * 0.75;
 	const { user } = useLoadUserData();
+	console.log("Chart Screen", user);
 	let averages = user.entries.map((w) => {
 		return { date: moment(w.startDate).format("MM-DD"), average: w.average };
 	});

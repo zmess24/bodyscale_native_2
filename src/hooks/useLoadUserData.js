@@ -12,6 +12,7 @@ const useLoadUserData = () => {
 		const fetchData = async () => {
 			try {
 				const data = await AsyncStorage.getItem("bodyScale_user");
+				console.log("useLoadDataHook", data);
 				if (data !== null) {
 					let userData = JSON.parse(data);
 					let newUser = new User({ ...userData });
