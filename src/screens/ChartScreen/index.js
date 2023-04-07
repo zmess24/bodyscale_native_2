@@ -16,7 +16,16 @@ function ChartScreen({ userData }) {
 		<View style={styles.containter}>
 			<Header />
 			<VictoryChart width={windowWidth} height={windowHeight} theme={VictoryTheme.material}>
-				<VictoryArea data={averages} x="date" y="average" style={styles.areaChart} />
+				<VictoryArea
+					data={averages}
+					x="date"
+					y="average"
+					style={styles.areaChart}
+					animate={{
+						duration: 500,
+						onLoad: { duration: 500 },
+					}}
+				/>
 			</VictoryChart>
 		</View>
 	);
