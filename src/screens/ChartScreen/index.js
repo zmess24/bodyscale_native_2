@@ -1,23 +1,34 @@
 import React from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import constantStyles from "../../constants/styles";
-import { VictoryArea, VictoryChart, VictoryTheme } from "victory-native";
+import { VictoryArea, VictoryChart, VictoryTheme, VictoryZoomContainer } from "victory-native";
 import Header from "./components/Tabs";
 import moment from "moment";
 
 function ChartScreen({ userData }) {
 	const windowWidth = Dimensions.get("window").width;
 	const windowHeight = Dimensions.get("window").height * 0.75;
-	let averages = userData.entries.map((w) => {
-		return { date: moment(w.startDate).format("MM/DD"), average: w.average };
+	let yMax = 0,
+		yMin = 0;
+	let averages = userData.entries.map((w, i) => {
+		if (w.average > yMax) yMax = Math.round(w.average);
+		return { date: new Date(moment(w.startDate)), average: Math.round(w.average), key: i };
 	});
-
 	return (
 		<View style={styles.containter}>
 			<Header />
-			<VictoryChart width={windowWidth} height={windowHeight} theme={VictoryTheme.material} domain={{ x: 8 }}>
+			<VictoryChart
+				width={windowWidth}
+				height={windowHeight}
+				theme={VictoryTheme.material}
+				scale={{ x: "time" }}
+				minDomain={{ y: 150 }}
+				maxDomain={{ y: yMax + 15 }}
+				containerComponent={<VictoryZoomContainer />}
+			>
 				<VictoryArea
 					data={averages}
+					interpolation="linear"
 					x="date"
 					y="average"
 					style={styles.areaChart}
@@ -44,11 +55,11 @@ const styles = StyleSheet.create({
 			stroke: "#c43a31",
 			strokeWidth: 3,
 		},
-		labels: {
-			fontSize: 15,
-			padding: -20,
-			fill: ({ datum }) => (datum.x === 3 ? "#000000" : "#c43a31"),
-		},
+		// labels: {
+		// 	fontSize: 15,
+		// 	padding: -20,
+		// 	fill: ({ datum }) => (datum.x === 3 ? "#000000" : "#c43a31"),
+		// },
 	},
 });
 
