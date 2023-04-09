@@ -8,12 +8,7 @@ import moment from "moment";
 function ChartScreen({ userData }) {
 	const windowWidth = Dimensions.get("window").width;
 	const windowHeight = Dimensions.get("window").height * 0.75;
-	let yMax = 0,
-		yMin = 0;
-	let averages = userData.entries.map((w, i) => {
-		if (w.average > yMax) yMax = Math.round(w.average);
-		return { date: new Date(moment(w.startDate)), average: Math.round(w.average), key: i };
-	});
+
 	return (
 		<View style={styles.containter}>
 			<Header />
@@ -22,12 +17,15 @@ function ChartScreen({ userData }) {
 				height={windowHeight}
 				theme={VictoryTheme.material}
 				scale={{ x: "time" }}
-				minDomain={{ y: 150 }}
-				maxDomain={{ y: yMax + 15 }}
+				// minDomain={{ y: 200 }}
+				// maxDomain={{ y: 250 }}
+				domain={{ y: [Math.floor(average), Math.ceil(average)] }}
 				containerComponent={<VictoryZoomContainer />}
 			>
 				<VictoryArea
-					data={averages}
+					data={userData.entries.map((w, i) => {
+						return { date: new Date(moment(w.startDate)), average: Math.round(w.average), key: i };
+					})}
 					interpolation="linear"
 					x="date"
 					y="average"
