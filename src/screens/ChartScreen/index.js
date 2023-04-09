@@ -17,14 +17,14 @@ function ChartScreen({ userData }) {
 				height={windowHeight}
 				theme={VictoryTheme.material}
 				scale={{ x: "time" }}
-				// minDomain={{ y: 200 }}
-				// maxDomain={{ y: 250 }}
-				domain={{ y: [Math.floor(average), Math.ceil(average)] }}
+				minDomain={{ y: 200 }}
+				maxDomain={{ y: 250 }}
+				// domain={{ y: [Math.floor(average), Math.ceil(average)] }}
 				containerComponent={<VictoryZoomContainer />}
 			>
 				<VictoryArea
 					data={userData.entries.map((w, i) => {
-						return { date: new Date(moment(w.startDate)), average: Math.round(w.average), key: i };
+						return { date: new Date(moment(w.startDate)), average: parseFloat(w.average), key: i };
 					})}
 					interpolation="linear"
 					x="date"
