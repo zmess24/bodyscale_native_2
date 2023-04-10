@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import constantStyles from "../../constants/styles";
-import { VictoryArea, VictoryChart, VictoryTheme, VictoryZoomContainer } from "victory-native";
+import { VictoryArea, VictoryChart, VictoryTheme, VictoryZoomContainer, VictoryTooltip } from "victory-native";
 import Header from "./components/Tabs";
 import moment from "moment";
 
