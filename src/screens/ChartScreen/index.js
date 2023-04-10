@@ -8,6 +8,13 @@ import moment from "moment";
 function ChartScreen({ userData }) {
 	const windowWidth = Dimensions.get("window").width;
 	const windowHeight = Dimensions.get("window").height * 0.75;
+	let yMax = 0,
+		yMin = 1000;
+	let chartData = userData.entries.map((w, i) => {
+		if (parseFloat(w.average) < yMin) yMin = parseFloat(w.average);
+		if (parseFloat(w.average) > yMax) yMax = parseFloat(w.average);
+		return { date: new Date(moment(w.startDate)), average: parseFloat(w.average), key: i };
+	});
 
 	return (
 		<View style={styles.containter}>
@@ -16,15 +23,11 @@ function ChartScreen({ userData }) {
 				width={windowWidth}
 				height={windowHeight}
 				theme={VictoryTheme.material}
-				minDomain={{ y: 200 }}
-				maxDomain={{ y: 250 }}
-				// domain={{ y: [Math.floor(average), Math.ceil(average)] }}
+				domain={{ y: [yMin - 5, yMax + 5] }}
 				containerComponent={<VictoryZoomContainer />}
 			>
 				<VictoryArea
-					data={userData.entries.map((w, i) => {
-						return { date: new Date(moment(w.startDate)), average: parseFloat(w.average), key: i };
-					})}
+					data={chartData}
 					scale={{ x: "time", y: "linear" }}
 					interpolation="linear"
 					x="date"
