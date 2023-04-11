@@ -2,19 +2,19 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import constantStyles from "../../../constants/styles";
 
-function Header() {
+function Header({ activeTab, setActiveTimeTab }) {
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity>
+			<TouchableOpacity onPress={() => setActiveTimeTab("all")}>
 				<Text>All Time</Text>
 			</TouchableOpacity>
-			<TouchableOpacity>
+			<TouchableOpacity onPress={() => setActiveTimeTab("year")}>
 				<Text>This Year</Text>
 			</TouchableOpacity>
-			<TouchableOpacity>
+			<TouchableOpacity onPress={() => setActiveTimeTab("month")}>
 				<Text>This Month</Text>
 			</TouchableOpacity>
-			<TouchableOpacity>
+			<TouchableOpacity onPress={() => setActiveTimeTab("week")}>
 				<Text>This Week</Text>
 			</TouchableOpacity>
 		</View>
