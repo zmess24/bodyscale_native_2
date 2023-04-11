@@ -1,15 +1,22 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import constantStyles from "../../../constants/styles";
 
 function Header() {
 	return (
 		<View style={styles.container}>
-			<Text>All Time</Text>
-			<Text>This Year</Text>
-			<Text>This Month</Text>
-			<Text>This Week</Text>
-			<Text>Tab 5</Text>
+			<TouchableOpacity>
+				<Text>All Time</Text>
+			</TouchableOpacity>
+			<TouchableOpacity>
+				<Text>This Year</Text>
+			</TouchableOpacity>
+			<TouchableOpacity>
+				<Text>This Month</Text>
+			</TouchableOpacity>
+			<TouchableOpacity>
+				<Text>This Week</Text>
+			</TouchableOpacity>
 		</View>
 	);
 }
