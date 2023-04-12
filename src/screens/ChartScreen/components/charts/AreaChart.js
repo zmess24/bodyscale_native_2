@@ -1,6 +1,6 @@
 import React from "react";
 import { Dimensions } from "react-native";
-import { VictoryArea, VictoryChart, VictoryTheme, VictoryZoomContainer, VictoryTooltip } from "victory-native";
+import { VictoryArea, VictoryChart, VictoryTheme, VictoryZoomContainer, VictoryLabel } from "victory-native";
 
 function AreaChart({ chartData, yMin, yMax }) {
 	const windowWidth = Dimensions.get("window").width;
@@ -26,6 +26,19 @@ function AreaChart({ chartData, yMin, yMax }) {
 					onLoad: { duration: 500 },
 				}}
 			/>
+			{/* <VictoryLine data={chartData} scale={{ x: "time", y: "linear" }} x="date" y="average" /> */}
+			{/* <VictoryScatter
+				data={chartData}
+				size={5}
+				scale={{ x: "time", y: "linear" }}
+				x="date"
+				y="average"
+				style={{ data: { fill: "#c43a31" } }}
+				animate={{
+					duration: 0,
+					onLoad: { duration: 500 },
+				}}
+			/> */}
 		</VictoryChart>
 	);
 }
@@ -37,11 +50,11 @@ const styles = {
 		stroke: "#c43a31",
 		strokeWidth: 3,
 	},
-	// labels: {
-	// 	fontSize: 15,
-	// 	padding: -20,
-	// 	fill: ({ datum }) => (datum.x === 3 ? "#000000" : "#c43a31"),
-	// },
+	labels: {
+		fontSize: 15,
+		padding: -20,
+		fill: ({ datum }) => (datum.x === 3 ? "#000000" : "#c43a31"),
+	},
 };
 
 export default AreaChart;

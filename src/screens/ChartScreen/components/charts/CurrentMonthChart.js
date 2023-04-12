@@ -9,7 +9,7 @@ function CurrentMonthChart({ userData }) {
 	let endOfMonth = Date.parse(moment().date(1).endOf("month").format("YYYY-MM-DD"));
 
 	let chartData = userData.entries
-		.filter((w, i) => {
+		.filter((w) => {
 			if (firstOfMonth < new Date(moment(w.startDate)) && new Date(moment(w.startDate)) < endOfMonth) return w;
 		})
 		.map((w, i) => {

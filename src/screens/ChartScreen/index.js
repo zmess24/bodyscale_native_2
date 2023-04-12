@@ -3,9 +3,9 @@ import { StyleSheet, View } from "react-native";
 import constantStyles from "../../constants/styles";
 import Header from "./components/Header";
 import AllTimeChart from "./components/charts/AllTimeChart";
+import CurrentYearChart from "./components/charts/CurrentYearChart";
 import CurrentMonthChart from "./components/charts/CurrentMonthChart";
 import CurrentWeekChart from "./components/charts/CurrentWeekChart";
-import CurrentYearChart from "./components/charts/currentYearChart";
 
 function ChartScreen({ userData }) {
 	const [activeTimeTab, setActiveTimeTab] = useState("all");
