@@ -18,8 +18,6 @@ function AreaChart({ chartData, yMin, yMax }) {
 				data={chartData}
 				scale={{ x: "time", y: "linear" }}
 				interpolation="linear"
-				x="date"
-				y="average"
 				style={styles}
 				animate={{
 					duration: 0,

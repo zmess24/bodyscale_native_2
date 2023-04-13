@@ -10,7 +10,7 @@ function CurrentYearChart({ userData }) {
 	let chartData = userData.entries.map((w, i) => {
 		if (parseFloat(w.average) < yMin) yMin = parseFloat(w.average);
 		if (parseFloat(w.average) > yMax) yMax = parseFloat(w.average);
-		return { date: new Date(moment(w.startDate)), average: parseFloat(w.average), key: i };
+		return { x: new Date(moment(w.startDate)), y: parseFloat(w.average), key: i };
 	});
 
 	return <AreaChart chartData={chartData} yMax={yMax} yMin={yMin} />;
