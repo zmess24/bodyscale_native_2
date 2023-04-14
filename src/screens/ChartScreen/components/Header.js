@@ -44,20 +44,16 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		padding: 8,
-	},
-	buttonMiddle: {
 		borderWidth: 1,
 		border: 8,
 	},
 	buttonLeft: {
 		borderTopLeftRadius: 10,
 		borderBottomLeftRadius: 10,
-		borderWidth: 1,
 	},
 	buttonRight: {
 		borderTopRightRadius: 10,
 		borderBottomRightRadius: 10,
-		borderWidth: 1,
 	},
 	activeButton: {
 		backgroundColor: "black",
