@@ -3,47 +3,72 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import constantStyles from "../../../constants/styles";
 
 function Header({ activeTab, setActiveTab }) {
-	return (
-		<View style={styles.container}>
-			<TouchableOpacity onPress={() => setActiveTab("all")} style={[styles.button, activeTab === "all" ? styles.active : styles.inactive]}>
-				<Text>All Time</Text>
+	const tabsObject = [
+		{ key: "all", text: "All Time" },
+		{ key: "year", text: "This Year" },
+		{ key: "month", text: "This Month" },
+		{ key: "week", text: "This Week" },
+	];
+
+	const tabs = tabsObject.map(({ key, text }, i) => {
+		let buttonStyle;
+		if (i === 0) {
+			buttonStyle = styles.buttonLeft;
+		} else if (i === tabsObject.length - 1) {
+			buttonStyle = styles.buttonRight;
+		} else {
+			buttonStyle = styles.buttonMiddle;
+		}
+		return (
+			<TouchableOpacity
+				onPress={() => setActiveTab(key)}
+				activeOpacity={1}
+				key={i}
+				style={[styles.button, buttonStyle, activeTab === key ? styles.activeButton : styles.inactiveButton]}
+			>
+				<Text style={activeTab === key ? styles.activeText : styles.inactiveText}>{text}</Text>
 			</TouchableOpacity>
-			<TouchableOpacity onPress={() => setActiveTab("year")} style={styles.button}>
-				<Text>This Year</Text>
-			</TouchableOpacity>
-			<TouchableOpacity onPress={() => setActiveTab("month")} style={styles.button}>
-				<Text>This Month</Text>
-			</TouchableOpacity>
-			<TouchableOpacity onPress={() => setActiveTab("week")} style={styles.button}>
-				<Text>This Week</Text>
-			</TouchableOpacity>
-		</View>
-	);
+		);
+	});
+
+	return <View style={styles.container}>{tabs}</View>;
 }
 
 const styles = StyleSheet.create({
 	container: {
 		display: "flex",
 		flexDirection: "row",
-		width: "85%",
+		width: "80%",
 		justifyContent: "space-around",
-		borderColor: "#eeeee",
-		borderRadius: 10,
-		borderWidth: 1,
-		marginRight: 20,
-		marginLeft: 20,
-		backgroundColor: "white",
+		marginTop: 15,
 	},
 	button: {
 		padding: 8,
-		borderRadius: 10,
 	},
-	active: {
+	buttonMiddle: {
+		borderWidth: 1,
+		border: 8,
+	},
+	buttonLeft: {
+		borderTopLeftRadius: 10,
+		borderBottomLeftRadius: 10,
+		borderWidth: 1,
+	},
+	buttonRight: {
+		borderTopRightRadius: 10,
+		borderBottomRightRadius: 10,
+		borderWidth: 1,
+	},
+	activeButton: {
 		backgroundColor: "black",
+	},
+	inactiveButton: {
+		backgroundColor: "white",
+	},
+	activeText: {
 		color: "white",
 	},
-	inactive: {
-		backgroundColor: "white",
+	inactiveText: {
 		color: "black",
 	},
 });
