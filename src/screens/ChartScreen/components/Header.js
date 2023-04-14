@@ -27,6 +27,10 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		width: "100%",
 		justifyContent: "space-around",
+		borderColor: "#eeeee",
+		borderWidth: 1,
+		marginRight: 20,
+		marginLeft: 20,
 	},
 });
 

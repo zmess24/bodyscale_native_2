@@ -17,12 +17,12 @@ function CurrentMonthChart({ userData }) {
 
 	function findAndPushDays({ weight, date }) {
 		date = new Date(moment(date));
+		if (parseFloat(weight) < yMin) yMin = parseFloat(weight);
+		if (parseFloat(weight) > yMax) yMax = parseFloat(weight);
 		if (firstOfMonth <= date && date <= lastOfMonth) chartDataDays.push({ x: date, y: weight });
 	}
 
 	let chartDataWeeks = userData.entries.filter(findWeekRange).map((w, i) => {
-		if (parseFloat(w.average) < yMin) yMin = parseFloat(w.average);
-		if (parseFloat(w.average) > yMax) yMax = parseFloat(w.average);
 		w.days.forEach(findAndPushDays);
 		return { x: new Date(moment(w.startDate)), y: parseFloat(w.average), key: i };
 	});

@@ -1,6 +1,6 @@
 import React from "react";
 import { Dimensions } from "react-native";
-import { VictoryArea, VictoryChart, VictoryTheme, VictoryZoomContainer, VictoryLabel } from "victory-native";
+import { VictoryArea, VictoryChart, VictoryTheme, VictoryZoomContainer, VictoryScatter, VictoryLabel } from "victory-native";
 
 function AreaChart({ chartData, yMin, yMax }) {
 	const windowWidth = Dimensions.get("window").width;
@@ -24,19 +24,16 @@ function AreaChart({ chartData, yMin, yMax }) {
 					onLoad: { duration: 500 },
 				}}
 			/>
-			{/* <VictoryLine data={chartData} scale={{ x: "time", y: "linear" }} x="date" y="average" /> */}
-			{/* <VictoryScatter
+			<VictoryScatter
 				data={chartData}
 				size={5}
 				scale={{ x: "time", y: "linear" }}
-				x="date"
-				y="average"
 				style={{ data: { fill: "#c43a31" } }}
 				animate={{
 					duration: 0,
 					onLoad: { duration: 500 },
 				}}
-			/> */}
+			/>
 		</VictoryChart>
 	);
 }
