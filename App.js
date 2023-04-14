@@ -14,12 +14,14 @@ export default function App() {
 	const { user, setUser, weight, setWeight, date, setDate } = useLoadUserData();
 	return (
 		<NavigationContainer>
-			<Tab.Navigator>
+			<Tab.Navigator screenOptions={{ tabBarShowLabel: false }}>
 				<Tab.Screen
 					name="Home"
 					options={{
+						tabBarActiveTintColor: "black",
+						tabBarInactiveTintColor: "lightgrey",
 						tabBarLabel: "Home",
-						tabBarIcon: () => <AntDesign name="home" size={24} color="black" />,
+						tabBarIcon: ({ focused }) => <AntDesign name="home" size={24} color={focused ? "black" : "silver"} />,
 					}}
 				>
 					{(props) => <HomeScreen {...props} userData={{ user, setUser, weight, setWeight, date, setDate }} />}
@@ -28,7 +30,7 @@ export default function App() {
 					name="Charts"
 					options={{
 						tabBarLabel: "Charts",
-						tabBarIcon: () => <AntDesign name="areachart" size={24} color="black" />,
+						tabBarIcon: ({ focused }) => <AntDesign name="areachart" size={24} color={focused ? "black" : "silver"} />,
 					}}
 				>
 					{(props) => <ChartScreen {...props} userData={user} />}
@@ -38,7 +40,7 @@ export default function App() {
 					component={HistoryScreen}
 					options={{
 						tabBarLabel: "History",
-						tabBarIcon: () => <AntDesign name="calendar" size={24} color="black" />,
+						tabBarIcon: ({ focused }) => <AntDesign name="calendar" size={24} color={focused ? "black" : "silver"} />,
 					}}
 				/>
 				<Tab.Screen
@@ -46,7 +48,7 @@ export default function App() {
 					component={SettingsScreen}
 					options={{
 						tabBarLabel: "Settings",
-						tabBarIcon: () => <AntDesign name="setting" size={24} color="black" />,
+						tabBarIcon: ({ focused }) => <AntDesign name="setting" size={24} color={focused ? "black" : "silver"} />,
 					}}
 				/>
 			</Tab.Navigator>
