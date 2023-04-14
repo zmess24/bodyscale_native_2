@@ -55,13 +55,13 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 
 	return (
 		<View style={styles}>
-			<Header />
+			{/* <Header /> */}
 			<TouchableOpacity onPress={toggleWeightPicker}>
 				<Text>{weight} lbs</Text>
 			</TouchableOpacity>
-			<TouchableOpacity onPress={resetStorage}>
+			{/* <TouchableOpacity onPress={resetStorage}>
 				<Text>Clear Async Storage</Text>
-			</TouchableOpacity>
+			</TouchableOpacity> */}
 			<TouchableOpacity onPress={toggleDatePicker}>
 				<Text>{moment(date).format("MM-DD-YYYY")}</Text>
 			</TouchableOpacity>
