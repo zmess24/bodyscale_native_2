@@ -1,19 +1,13 @@
 import React from "react";
 import { Dimensions } from "react-native";
-import { VictoryArea, VictoryChart, VictoryTheme, VictoryZoomContainer, VictoryScatter, VictoryLabel } from "victory-native";
+import { VictoryArea, VictoryChart, VictoryTheme, VictoryLabel } from "victory-native";
 
 function AreaChart({ chartData, yMin, yMax }) {
 	const windowWidth = Dimensions.get("window").width;
 	const windowHeight = Dimensions.get("window").height * 0.75;
 
 	return (
-		<VictoryChart
-			width={windowWidth}
-			height={windowHeight}
-			theme={VictoryTheme.material}
-			domain={{ y: [yMin - 5, yMax + 5] }}
-			containerComponent={<VictoryZoomContainer />}
-		>
+		<VictoryChart width={windowWidth} height={windowHeight} theme={VictoryTheme.material} domain={{ y: [yMin - 5, yMax + 5] }}>
 			<VictoryArea
 				data={chartData}
 				scale={{ x: "time", y: "linear" }}
@@ -21,17 +15,8 @@ function AreaChart({ chartData, yMin, yMax }) {
 				style={styles}
 				animate={{
 					duration: 0,
-					onLoad: { duration: 500 },
-				}}
-			/>
-			<VictoryScatter
-				data={chartData}
-				size={5}
-				scale={{ x: "time", y: "linear" }}
-				style={{ data: { fill: "#c43a31" } }}
-				animate={{
-					duration: 0,
-					onLoad: { duration: 500 },
+					onLoad: { duration: 400 },
+					easing: "sinIn",
 				}}
 			/>
 		</VictoryChart>
