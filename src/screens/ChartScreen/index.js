@@ -8,15 +8,15 @@ import CurrentMonthChart from "./components/charts/CurrentMonthChart";
 import CurrentWeekChart from "./components/charts/CurrentWeekChart";
 
 function ChartScreen({ userData }) {
-	const [activeTimeTab, setActiveTimeTab] = useState("all");
+	const [activeTab, setActiveTab] = useState("all");
 
 	return (
 		<View style={styles.containter}>
-			<Header setActiveTimeTab={setActiveTimeTab} activeTimeTab={activeTimeTab} />
-			{activeTimeTab === "all" && <AllTimeChart userData={userData} />}
-			{activeTimeTab === "year" && <CurrentYearChart userData={userData} />}
-			{activeTimeTab === "month" && <CurrentMonthChart userData={userData} />}
-			{activeTimeTab === "week" && <CurrentWeekChart userData={userData} />}
+			<Header setActiveTab={setActiveTab} activeTab={activeTab} />
+			{activeTab === "all" && <AllTimeChart userData={userData} />}
+			{activeTab === "year" && <CurrentYearChart userData={userData} />}
+			{activeTab === "month" && <CurrentMonthChart userData={userData} />}
+			{activeTab === "week" && <CurrentWeekChart userData={userData} />}
 		</View>
 	);
 }

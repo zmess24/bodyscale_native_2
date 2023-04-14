@@ -25,9 +25,9 @@ function AreaChart({ chartData, yMin, yMax }) {
 
 const styles = {
 	data: {
-		fill: "#c43a31",
-		fillOpacity: 0.7,
-		stroke: "#c43a31",
+		fill: "#4682B4",
+		fillOpacity: 0.65,
+		stroke: "#4682B4",
 		strokeWidth: 3,
 	},
 	labels: {
