@@ -16,8 +16,6 @@ function Header({ activeTab, setActiveTab }) {
 			buttonStyle = styles.buttonLeft;
 		} else if (i === tabsObject.length - 1) {
 			buttonStyle = styles.buttonRight;
-		} else {
-			buttonStyle = styles.buttonMiddle;
 		}
 		return (
 			<TouchableOpacity
