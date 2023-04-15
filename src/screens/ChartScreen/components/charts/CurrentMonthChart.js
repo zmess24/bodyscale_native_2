@@ -19,7 +19,7 @@ function CurrentMonthChart({ userData }) {
 		date = new Date(moment(date));
 		if (parseFloat(weight) < yMin) yMin = parseFloat(weight);
 		if (parseFloat(weight) > yMax) yMax = parseFloat(weight);
-		if (firstOfMonth <= date && date <= lastOfMonth) chartDataDays.push({ x: date, y: weight });
+		if (firstOfMonth <= date && date <= lastOfMonth) chartDataDays.push({ x: moment(date).format("MM/DD"), y: weight });
 	}
 
 	let chartDataWeeks = userData.entries.filter(findWeekRange).map((w, i) => {

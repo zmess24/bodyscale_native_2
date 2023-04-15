@@ -1,6 +1,6 @@
 import React from "react";
 import { Dimensions } from "react-native";
-import { VictoryArea, VictoryChart, VictoryTheme, VictoryLabel } from "victory-native";
+import { VictoryArea, VictoryChart, VictoryTheme, VictoryAxis } from "victory-native";
 
 function AreaChart({ chartData, yMin, yMax }) {
 	const windowWidth = Dimensions.get("window").width;
@@ -8,6 +8,8 @@ function AreaChart({ chartData, yMin, yMax }) {
 
 	return (
 		<VictoryChart width={windowWidth} height={windowHeight} theme={VictoryTheme.material} domain={{ y: [yMin - 5, yMax + 5] }}>
+			{/* <VictoryAxis tickCount={5} dependentAxis={true} />
+			<VictoryAxis tickCount={5} /> */}
 			<VictoryArea
 				data={chartData}
 				scale={{ x: "time", y: "linear" }}
