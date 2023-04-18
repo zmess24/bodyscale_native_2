@@ -1,19 +1,23 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
+import moment from "moment";
 import constantStyles from "../../constants/styles";
 
 function HistoryScreen({ userData }) {
-	const Item = ({ item: { average, startDate, endDate } }) => (
+	const Item = ({ item: { average, startDate } }) => (
 		<View style={styles.item}>
-			<Text>
-				{average} : {startDate} : {endDate}
-			</Text>
+			<Text>Week : {moment(startDate).format("MM-DD-YYYY")}</Text>
+			<Text>{average} lbs</Text>
 		</View>
 	);
 
 	return (
 		<View style={styles.container}>
-			<FlatList data={userData.entries.reverse()} renderItem={({ item }) => <Item item={item} />} keyExtractor={(item) => item.index} />
+			<FlatList
+				data={userData.entries}
+				renderItem={({ item }) => <Item item={item} key={item.index} />}
+				keyExtractor={(item) => item.startDate}
+			/>
 		</View>
 	);
 }
@@ -26,7 +30,9 @@ const styles = StyleSheet.create({
 		display: "flex",
 		flex: 1,
 		flexDirection: "row",
-		backgroundColor: "#f9c2ff",
+		backgroundColor: "#eee",
+		justifyContent: "space-between",
+		padding: 10,
 	},
 });
 
