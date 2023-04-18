@@ -37,12 +37,13 @@ export default function App() {
 				</Tab.Screen>
 				<Tab.Screen
 					name="History"
-					component={HistoryScreen}
 					options={{
 						tabBarLabel: "History",
 						tabBarIcon: ({ focused }) => <AntDesign name="calendar" size={24} color={focused ? "black" : "silver"} />,
 					}}
-				/>
+				>
+					{(props) => <HistoryScreen {...props} userData={user} />}
+				</Tab.Screen>
 				<Tab.Screen
 					name="Settings"
 					component={SettingsScreen}

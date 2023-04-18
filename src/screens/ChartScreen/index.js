@@ -11,7 +11,7 @@ function ChartScreen({ userData }) {
 	const [activeTab, setActiveTab] = useState("all");
 
 	return (
-		<View style={styles.containter}>
+		<View style={styles.container}>
 			<Header setActiveTab={setActiveTab} activeTab={activeTab} />
 			{activeTab === "all" && <AllTimeChart userData={userData} />}
 			{activeTab === "year" && <CurrentYearChart userData={userData} />}
@@ -22,10 +22,8 @@ function ChartScreen({ userData }) {
 }
 
 const styles = StyleSheet.create({
-	containter: {
+	container: {
 		...constantStyles.screenStyles,
-		alignItems: "center",
-		justifyContent: "center",
 	},
 });
 
