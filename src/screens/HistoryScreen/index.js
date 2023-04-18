@@ -3,16 +3,17 @@ import { StyleSheet, Text, View, FlatList } from "react-native";
 import constantStyles from "../../constants/styles";
 
 function HistoryScreen({ userData }) {
-	const Item = ({ average, startDate, endDate }) => {
-		<View>
+	const Item = ({ item: { average, startDate, endDate } }) => (
+		<View style={styles.item}>
 			<Text>
 				{average} : {startDate} : {endDate}
 			</Text>
-		</View>;
-	};
+		</View>
+	);
+
 	return (
 		<View style={styles.container}>
-			<Text>HistoryScreen</Text>
+			<FlatList data={userData.entries} renderItem={({ item }) => <Item item={item} />} keyExtractor={(item) => item.index} />
 		</View>
 	);
 }
@@ -20,13 +21,12 @@ function HistoryScreen({ userData }) {
 const styles = StyleSheet.create({
 	container: {
 		...constantStyles.screenStyles,
-		alignItems: "center",
-		justifyContent: "center",
-		flex: 1,
 	},
 	item: {
 		display: "flex",
-		flexDirection: "fow",
+		flex: 1,
+		flexDirection: "row",
+		backgroundColor: "#f9c2ff",
 	},
 });
 
