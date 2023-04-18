@@ -24,6 +24,7 @@ function ChartScreen({ userData }) {
 const styles = StyleSheet.create({
 	container: {
 		...constantStyles.screenStyles,
+		alignItems: "center",
 	},
 });
 
