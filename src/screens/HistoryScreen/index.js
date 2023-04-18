@@ -13,7 +13,7 @@ function HistoryScreen({ userData }) {
 
 	return (
 		<View style={styles.container}>
-			<FlatList data={userData.entries} renderItem={({ item }) => <Item item={item} />} keyExtractor={(item) => item.index} />
+			<FlatList data={userData.entries.reverse()} renderItem={({ item }) => <Item item={item} />} keyExtractor={(item) => item.index} />
 		</View>
 	);
 }
