@@ -23,7 +23,7 @@ function CurrentMonthChart({ userData }) {
 	}
 
 	let chartDataWeeks = userData.entries.filter(findWeekRange).map((w, i) => {
-		w.days.forEach(findAndPushDays);
+		w.data.forEach(findAndPushDays);
 		return { x: new Date(moment(w.startDate)), y: parseFloat(w.average), key: i };
 	});
 

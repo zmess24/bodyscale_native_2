@@ -1,22 +1,44 @@
 import React from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, View, FlatList, SectionList } from "react-native";
 import moment from "moment";
 import constantStyles from "../../constants/styles";
 
 function HistoryScreen({ userData }) {
-	const Item = ({ item: { average, startDate } }) => (
+	const DayItem = ({ item: { weight, date } }) => (
 		<View style={styles.item}>
-			<Text>Week : {moment(startDate).format("MM-DD-YYYY")}</Text>
-			<Text>{average} lbs</Text>
+			<Text>{date}</Text>
+			<Text>{weight}</Text>
+		</View>
+	);
+	const WeekItem = ({ item: { average, startDate, days } }) => (
+		<View>
+			<View style={styles.item}>
+				<Text>Week : {moment(startDate).format("MM-DD-YYYY")}</Text>
+				<Text>{average} lbs</Text>
+			</View>
+			<View style={styles.item}>
+				<FlatList data={days} renderItem={({ item }) => <DayItem item={item} key={item.date} />} />
+			</View>
 		</View>
 	);
 
+	const renderSectionHeader = ({ section }) => {
+		console.log(section);
+		return <Text>Hello</Text>;
+	};
+
+	const renderItems = ({ item }) => {
+		console.log(item);
+		return <Text>Hi</Text>;
+	};
+
 	return (
 		<View style={styles.container}>
-			<FlatList
-				data={userData.entries}
-				renderItem={({ item }) => <Item item={item} key={item.index} />}
-				keyExtractor={(item) => item.startDate}
+			<SectionList
+				sections={userData.entries}
+				renderSectionHeader={renderSectionHeader}
+				renderItem={renderItems}
+				keyExtractor={(item, index) => item + index}
 			/>
 		</View>
 	);

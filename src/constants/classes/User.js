@@ -19,10 +19,12 @@ class User {
 			this.entries.push(newWeek);
 			this.entries.sort((a, b) => new Date(a.endDate) - new Date(b.startDate));
 		} else {
-			let dayIndex = week.days.findIndex(({ date }) => date === entry.date);
-			dayIndex > -1 ? (week.days[dayIndex].weight = entry.weight) : week.days.push(entry);
-			week.days.sort((a, b) => new Date(a.date) - new Date(b.date));
-			week.average = (week.days.reduce((a, c) => a + c.weight, 0) / week.days.length).toFixed(2);
+			console.log("Find index");
+			let dayIndex = week.data.findIndex(({ date }) => date === entry.date);
+			console.log(dayIndex);
+			dayIndex > -1 ? (week.data[dayIndex].weight = entry.weight) : week.data.push(entry);
+			week.data.sort((a, b) => new Date(a.date) - new Date(b.date));
+			week.average = (week.data.reduce((a, c) => a + c.weight, 0) / week.data.length).toFixed(2);
 		}
 	}
 
@@ -31,7 +33,7 @@ class User {
 		if (this.entries.length === 0 || !week) {
 			return undefined;
 		} else {
-			let entry = week.days.find((e) => e.date === date);
+			let entry = week.data.find((e) => e.date === date);
 			return entry;
 		}
 	}
@@ -46,7 +48,7 @@ class User {
 		return {
 			startDate,
 			endDate,
-			days: [{ ...entry }],
+			data: [{ ...entry }],
 			average: entry.weight.toFixed(2),
 		};
 	}

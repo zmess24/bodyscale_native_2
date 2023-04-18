@@ -2,6 +2,7 @@ import { User, Entry } from "../classes";
 import moment from "moment";
 
 function generateFakeDate() {
+	console.log("Generating fake data...");
 	try {
 		let user = new User();
 		let startOfYear = moment().startOf("year");
@@ -17,7 +18,7 @@ function generateFakeDate() {
 			let entry = new Entry(weight, date);
 			user.createEntry(entry);
 		}
-
+		console.log("Fake user data...", user);
 		return user;
 	} catch (err) {
 		console.log(err);

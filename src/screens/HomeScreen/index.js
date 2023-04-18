@@ -48,20 +48,21 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 	const resetStorage = async () => {
 		clearAsyncStorage();
 		let user = generateFakeDate();
-		await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
+		console.log("RESET STORAGE", user);
+		// await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
 		setUser(user);
 		setWeight(0);
 	};
 
 	return (
 		<View style={styles}>
-			{/* <Header /> */}
+			<Header />
 			<TouchableOpacity onPress={toggleWeightPicker}>
 				<Text>{weight} lbs</Text>
 			</TouchableOpacity>
-			{/* <TouchableOpacity onPress={resetStorage}>
+			<TouchableOpacity onPress={resetStorage}>
 				<Text>Clear Async Storage</Text>
-			</TouchableOpacity> */}
+			</TouchableOpacity>
 			<TouchableOpacity onPress={toggleDatePicker}>
 				<Text>{moment(date).format("MM-DD-YYYY")}</Text>
 			</TouchableOpacity>
