@@ -68,7 +68,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 			</TouchableOpacity>
 			{showDatePicker && <DatePicker date={date} handleDateChange={handleDateChange} />}
 			{showWeightPicker && (
-				<WeightPicker handleWeightChange={handleWeightChange} weight={weight !== 0 ? weight : user.entries.at(-1).days.at(-1).weight} />
+				<WeightPicker handleWeightChange={handleWeightChange} weight={weight !== 0 ? weight : user.entries.at(-1).data.at(-1).weight} />
 			)}
 		</View>
 	);
