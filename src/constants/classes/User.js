@@ -18,11 +18,12 @@ class User {
 			let newWeek = this.#createWeek(entry, startOfWeek, endOfWeek);
 			this.entries.push(newWeek);
 			this.entries.sort((a, b) => new Date(a.endDate) - new Date(b.startDate));
+			this.#calculateDeltas();
 		} else {
 			let dayIndex = week.data.findIndex(({ date }) => date === entry.date);
 			dayIndex > -1 ? (week.data[dayIndex].weight = entry.weight) : week.data.push(entry);
 			week.data.sort((a, b) => new Date(a.date) - new Date(b.date));
-			week.average = (week.data.reduce((a, c) => a + c.weight, 0) / week.data.length).toFixed(2);
+			this.#calculateDeltas();
 		}
 	}
 
@@ -48,6 +49,7 @@ class User {
 			endDate,
 			data: [{ ...entry }],
 			average: entry.weight.toFixed(2),
+			delta: null,
 		};
 	}
 
@@ -56,6 +58,13 @@ class User {
 			startOfWeek: week ? week.endDate : moment(entry.date).startOf("week").format("YYYY-MM-DD"),
 			endOfWeek: week ? week.startDate : moment(entry.date).endOf("week").format("YYYY-MM-DD"),
 		};
+	}
+
+	#calculateDeltas() {
+		this.entries.forEach((week, i) => {
+			let prevWeek = this.entries[i - 1];
+			if (prevWeek) week.delta = (week.average - prevWeek.average).toFixed(2);
+		});
 	}
 }
 
