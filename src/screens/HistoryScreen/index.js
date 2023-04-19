@@ -19,22 +19,13 @@ function HistoryScreen({ userData }) {
 		</View>
 	);
 
-	const renderSectionHeader = ({ section }) => {
-		return <WeekItem data={section} />;
-	};
-
-	const renderItems = ({ item }) => {
-		console.log("ITEM", item);
-		return <DayItem data={item} />;
-	};
-
 	return (
 		<View style={styles.container}>
 			<SafeAreaView style={{ flex: 1 }}>
 				<SectionList
 					sections={userData.entries}
-					renderSectionHeader={renderSectionHeader}
-					renderItem={renderItems}
+					renderSectionHeader={({ section }) => <WeekItem data={section} />}
+					renderItem={({ item }) => <DayItem data={item} />}
 					keyExtractor={(item, index) => item + index}
 				/>
 			</SafeAreaView>
