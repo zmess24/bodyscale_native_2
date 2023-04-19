@@ -8,11 +8,6 @@ class Week {
 		this.average = entry.weight.toFixed(2);
 		this.delta = null;
 	}
-
-	calculateAverage() {
-		let sum = this.data.reduce((a, c) => a + c.weight, 0);
-		this.average = (sum / this.data.length).toFixed(2);
-	}
 }
 
 export default Week;

@@ -14,7 +14,7 @@ function generateFakeDate() {
 				.startOf("year")
 				.add(i + 1, "days")
 				.format("YYYY-MM-DD");
-			let weight = Math.floor(Math.random() * 21) + 200;
+			let weight = Math.floor(Math.random() * 11) + 200;
 			let entry = new Entry(weight, date);
 			user.createEntry(entry);
 		}

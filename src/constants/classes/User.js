@@ -12,8 +12,10 @@ class User {
 
 	createEntry(entry) {
 		let week = this.entries.find((w) => Date.parse(w.startDate) <= Date.parse(entry.date) && Date.parse(entry.date) <= Date.parse(w.endDate));
+		console.log("FINDING WEEK", week);
 
 		if (this.entries.length === 0 || !week) {
+			console.log("ENTERING 1");
 			let newWeek = new Week(entry);
 			this.entries.push(newWeek);
 			this.entries.sort((a, b) => new Date(a.endDate) - new Date(b.startDate));
@@ -21,7 +23,7 @@ class User {
 			let dayIndex = week.data.findIndex(({ date }) => date === entry.date);
 			dayIndex > -1 ? (week.data[dayIndex].weight = entry.weight) : week.data.push(entry);
 			week.data.sort((a, b) => new Date(a.date) - new Date(b.date));
-			week.calculateAverage();
+			week.average = week.data.reduce((a, c) => a + c.weight, 0) / week.data.length;
 		}
 
 		this.#calculateDeltas();
