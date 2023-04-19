@@ -21,7 +21,7 @@ function HistoryScreen({ userData }) {
 		</View>
 	);
 
-	let sortedData = userData.entries.reverse();
+	let sortedData = userData.entries;
 
 	return (
 		<View style={styles.container}>

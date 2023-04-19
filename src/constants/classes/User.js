@@ -23,7 +23,7 @@ class User {
 			let dayIndex = week.data.findIndex(({ date }) => date === entry.date);
 			dayIndex > -1 ? (week.data[dayIndex].weight = entry.weight) : week.data.push(entry);
 			week.data.sort((a, b) => new Date(a.date) - new Date(b.date));
-			week.average = week.data.reduce((a, c) => a + c.weight, 0) / week.data.length;
+			week.average = (week.data.reduce((a, c) => a + c.weight, 0) / week.data.length).toFixed(2);
 		}
 
 		this.#calculateDeltas();
