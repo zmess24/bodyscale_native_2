@@ -1,4 +1,5 @@
 import moment from "moment";
+import Week from "./Week";
 
 class User {
 	constructor(initProps = undefined) {
@@ -15,7 +16,7 @@ class User {
 
 		if (this.entries.length === 0 || !week) {
 			let { startOfWeek, endOfWeek } = this.#generateDates(entry, week);
-			let newWeek = this.#createWeek(entry, startOfWeek, endOfWeek);
+			let newWeek = new Week(entry, startOfWeek, endOfWeek);
 			this.entries.push(newWeek);
 			this.entries.sort((a, b) => new Date(a.endDate) - new Date(b.startDate));
 			this.#calculateDeltas();
@@ -23,6 +24,7 @@ class User {
 			let dayIndex = week.data.findIndex(({ date }) => date === entry.date);
 			dayIndex > -1 ? (week.data[dayIndex].weight = entry.weight) : week.data.push(entry);
 			week.data.sort((a, b) => new Date(a.date) - new Date(b.date));
+			week.calculateAverage();
 			this.#calculateDeltas();
 		}
 	}
@@ -42,16 +44,6 @@ class User {
     | Private Class Methods
     |--------------------------------------------------
     */
-
-	#createWeek(entry, startDate = moment().startOf("week").format("YYYY-MM-DD"), endDate = moment().endOf("week").format("YYYY-MM-DD")) {
-		return {
-			startDate,
-			endDate,
-			data: [{ ...entry }],
-			average: entry.weight.toFixed(2),
-			delta: null,
-		};
-	}
 
 	#generateDates(entry, week) {
 		return {
