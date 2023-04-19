@@ -10,11 +10,7 @@ class Week {
 	}
 
 	calculateAverage() {
-		let sum = 0;
-		this.data.forEach(({ weight }) => {
-			sum += weight;
-		});
-
+		let sum = this.data.reduce((a, c) => a + c.weight, 0);
 		this.average = (sum / this.data.length).toFixed(2);
 	}
 }
