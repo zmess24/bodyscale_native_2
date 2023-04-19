@@ -1,9 +1,9 @@
 import moment from "moment";
 
 class Week {
-	constructor(entry, startDate = moment().startOf("week").format("YYYY-MM-DD"), endDate = moment().endOf("week").format("YYYY-MM-DD")) {
-		this.startDate = startDate;
-		this.endDate = endDate;
+	constructor(entry) {
+		this.startDate = moment(entry.date).startOf("week").format("YYYY-MM-DD");
+		this.endDate = moment(entry.date).endOf("week").format("YYYY-MM-DD");
 		this.data = [{ ...entry }];
 		this.average = entry.weight.toFixed(2);
 		this.delta = null;

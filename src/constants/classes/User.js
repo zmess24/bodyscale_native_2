@@ -15,18 +15,17 @@ class User {
 		let week = this.entries.find((w) => Date.parse(w.startDate) <= Date.parse(entry.date) && Date.parse(entry.date) <= Date.parse(w.endDate));
 
 		if (this.entries.length === 0 || !week) {
-			let { startOfWeek, endOfWeek } = this.#generateDates(entry, week);
-			let newWeek = new Week(entry, startOfWeek, endOfWeek);
+			let newWeek = new Week(entry);
 			this.entries.push(newWeek);
 			this.entries.sort((a, b) => new Date(a.endDate) - new Date(b.startDate));
-			this.#calculateDeltas();
 		} else {
 			let dayIndex = week.data.findIndex(({ date }) => date === entry.date);
 			dayIndex > -1 ? (week.data[dayIndex].weight = entry.weight) : week.data.push(entry);
 			week.data.sort((a, b) => new Date(a.date) - new Date(b.date));
 			week.calculateAverage();
-			this.#calculateDeltas();
 		}
+
+		this.#calculateDeltas();
 	}
 
 	findEntry(date) {
@@ -44,13 +43,6 @@ class User {
     | Private Class Methods
     |--------------------------------------------------
     */
-
-	#generateDates(entry, week) {
-		return {
-			startOfWeek: week ? week.endDate : moment(entry.date).startOf("week").format("YYYY-MM-DD"),
-			endOfWeek: week ? week.startDate : moment(entry.date).endOf("week").format("YYYY-MM-DD"),
-		};
-	}
 
 	#calculateDeltas() {
 		this.entries.forEach((week, i) => {
