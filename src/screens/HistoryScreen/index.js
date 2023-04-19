@@ -1,15 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View, FlatList, SectionList, SafeAreaView } from "react-native";
+import { StyleSheet, Text, View, SectionList, SafeAreaView } from "react-native";
 import moment from "moment";
 import constantStyles from "../../constants/styles";
 
 function HistoryScreen({ userData }) {
 	const DayItem = ({ data: { weight, date } }) => (
 		<View style={styles.sectionItem}>
-			<Text>{date}</Text>
-			<Text>{weight}</Text>
+			<Text>{moment(date).format("MM-DD-YYYY")}</Text>
+			<Text>{weight} lbs</Text>
 		</View>
 	);
+
 	const WeekItem = ({ data: { average, startDate } }) => (
 		<View>
 			<View style={styles.sectionHeader}>
@@ -19,11 +20,13 @@ function HistoryScreen({ userData }) {
 		</View>
 	);
 
+	let sortedData = userData.entries.reverse();
+
 	return (
 		<View style={styles.container}>
 			<SafeAreaView style={{ flex: 1 }}>
 				<SectionList
-					sections={userData.entries}
+					sections={sortedData}
 					renderSectionHeader={({ section }) => <WeekItem data={section} />}
 					renderItem={({ item }) => <DayItem data={item} />}
 					keyExtractor={(item, index) => item + index}
