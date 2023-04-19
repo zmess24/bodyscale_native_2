@@ -20,7 +20,6 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 			let selectedDate = moment(date).format("YYYY-MM-DD");
 			let entry = new Entry(selectedWeight, selectedDate);
 			user.createEntry(entry);
-			console.log(user);
 			setUser(user);
 			setWeight(selectedWeight);
 			await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
@@ -58,6 +57,9 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 	return (
 		<View style={styles}>
 			<Header />
+			<TouchableOpacity onPress={toggleWeightPicker}>
+				<Text>{weight} lbs</Text>
+			</TouchableOpacity>
 			<TouchableOpacity onPress={toggleWeightPicker}>
 				<Text>{weight} lbs</Text>
 			</TouchableOpacity>

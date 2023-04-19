@@ -12,10 +12,8 @@ class User {
 
 	createEntry(entry) {
 		let week = this.entries.find((w) => Date.parse(w.startDate) <= Date.parse(entry.date) && Date.parse(entry.date) <= Date.parse(w.endDate));
-		console.log("FINDING WEEK", week);
 
 		if (this.entries.length === 0 || !week) {
-			console.log("ENTERING 1");
 			let newWeek = new Week(entry);
 			this.entries.push(newWeek);
 			this.entries.sort((a, b) => new Date(a.endDate) - new Date(b.startDate));
