@@ -60,9 +60,9 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 			<TouchableOpacity onPress={toggleWeightPicker}>
 				<Text>{weight} lbs</Text>
 			</TouchableOpacity>
-			<TouchableOpacity onPress={toggleWeightPicker}>
+			{/* <TouchableOpacity onPress={toggleWeightPicker}>
 				<Text>{weight} lbs</Text>
-			</TouchableOpacity>
+			</TouchableOpacity> */}
 			<TouchableOpacity onPress={resetStorage}>
 				<Text>Clear Async Storage</Text>
 			</TouchableOpacity>

@@ -11,17 +11,17 @@ function HistoryScreen({ userData }) {
 		</View>
 	);
 
-	const WeekItem = ({ data: { average, startDate, delta } }) => (
+	const WeekItem = ({ data: { average, endDate, delta } }) => (
 		<View>
 			<View style={styles.sectionHeader}>
-				<Text>{moment(startDate).format("MM-DD-YYYY")}</Text>
+				<Text>{moment(endDate).format("MM-DD-YYYY")}</Text>
 				<Text>{delta} lbs</Text>
 				<Text>{average} lbs</Text>
 			</View>
 		</View>
 	);
 
-	let sortedData = userData.entries;
+	let sortedData = userData.entries.sort((a, b) => new Date(b.endDate) - new Date(a.startDate));
 
 	return (
 		<View style={styles.container}>
