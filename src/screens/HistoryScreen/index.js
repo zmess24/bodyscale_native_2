@@ -1,26 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View, SectionList, SafeAreaView } from "react-native";
-import moment from "moment";
+import DayRow from "./components/DayRow";
+import WeekRow from "./components/WeekRow";
 import constantStyles from "../../constants/styles";
 
 function HistoryScreen({ userData }) {
-	const DayItem = ({ data: { weight, date } }) => (
-		<View style={styles.sectionItem}>
-			<Text>{moment(date).format("MM-DD-YYYY")}</Text>
-			<Text>{weight} lbs</Text>
-		</View>
-	);
-
-	const WeekItem = ({ data: { average, endDate, delta } }) => (
-		<View>
-			<View style={styles.sectionHeader}>
-				<Text>{moment(endDate).format("MM-DD-YYYY")}</Text>
-				<Text>{delta} lbs</Text>
-				<Text>{average} lbs</Text>
-			</View>
-		</View>
-	);
-
 	let sortedData = userData.entries.sort((a, b) => new Date(b.endDate) - new Date(a.startDate));
 
 	return (
@@ -28,8 +12,8 @@ function HistoryScreen({ userData }) {
 			<SafeAreaView style={{ flex: 1 }}>
 				<SectionList
 					sections={sortedData}
-					renderSectionHeader={({ section }) => <WeekItem data={section} />}
-					renderItem={({ item }) => <DayItem data={item} />}
+					renderSectionHeader={({ section }) => <WeekRow data={section} />}
+					renderItem={({ item }) => <DayRow data={item} />}
 					keyExtractor={(item, index) => item + index}
 				/>
 			</SafeAreaView>
@@ -40,21 +24,6 @@ function HistoryScreen({ userData }) {
 const styles = StyleSheet.create({
 	container: {
 		...constantStyles.screenStyles,
-	},
-	sectionHeader: {
-		display: "flex",
-		flex: 1,
-		flexDirection: "row",
-		backgroundColor: "#eee",
-		justifyContent: "space-between",
-		padding: 10,
-	},
-	sectionItem: {
-		display: "flex",
-		flex: 1,
-		flexDirection: "row",
-		justifyContent: "space-between",
-		padding: 10,
 	},
 });
 

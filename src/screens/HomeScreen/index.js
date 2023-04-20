@@ -49,7 +49,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 		clearAsyncStorage();
 		let user = generateFakeDate();
 		console.log("RESET STORAGE", user);
-		// await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
+		await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
 		setUser(user);
 		setWeight(0);
 	};
