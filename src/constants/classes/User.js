@@ -20,7 +20,7 @@ class User {
 		} else {
 			let dayIndex = week.data.findIndex(({ date }) => date === entry.date);
 			dayIndex > -1 ? (week.data[dayIndex].weight = entry.weight) : week.data.push(entry);
-			week.data.sort((a, b) => new Date(a.date) - new Date(b.date));
+			week.data.sort((a, b) => new Date(b.date) - new Date(a.date));
 			week.average = (week.data.reduce((a, c) => a + c.weight, 0) / week.data.length).toFixed(2);
 		}
 
