@@ -2,10 +2,10 @@ import React, { memo } from "react";
 import { StyleSheet, Text, View, SectionList, SafeAreaView } from "react-native";
 import moment from "moment";
 
-const DayRow = ({ data: { weight, date } }) => (
+const DayRow = ({ data }) => (
 	<View style={styles.sectionItem}>
-		<Text>{moment(date).format("MM-DD-YYYY")}</Text>
-		<Text>{weight} lbs</Text>
+		<Text>{moment(data.date).format("MM-DD-YYYY")}</Text>
+		<Text>{data.weight} lbs</Text>
 	</View>
 );
 

@@ -2,12 +2,12 @@ import React, { memo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import moment from "moment";
 
-const WeekRow = ({ data: { average, endDate, delta } }) => (
+const WeekRow = ({ data }) => (
 	<View>
 		<View style={styles.sectionHeader}>
-			<Text>{moment(endDate).format("MM-DD-YYYY")}</Text>
-			<Text>{delta} lbs</Text>
-			<Text>{average} lbs</Text>
+			<Text>{moment(data.endDate).format("MM-DD-YYYY")}</Text>
+			<Text>{data.delta} lbs</Text>
+			<Text>{data.average} lbs</Text>
 		</View>
 	</View>
 );

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo, ref } from "react";
 import { StyleSheet, View, SectionList, SafeAreaView } from "react-native";
 import DayRow from "./components/DayRow";
 import WeekRow from "./components/WeekRow";
@@ -8,12 +8,18 @@ function HistoryScreen({ userData: { entries } }) {
 	let sortedData = useMemo(() => entries.sort((a, b) => new Date(b.endDate) - new Date(a.startDate)), [entries]);
 	const renderItem = ({ item }) => <DayRow data={item} />;
 	const renderSectionHeader = ({ section }) => <WeekRow data={section} />;
-	const keyExtractor = (item, index) => item + index;
+	const keyExtractor = (item, index) => index;
 
 	return (
 		<View style={styles.container}>
 			<SafeAreaView style={{ flex: 1 }}>
-				<SectionList sections={sortedData} renderSectionHeader={renderSectionHeader} renderItem={renderItem} keyExtractor={keyExtractor} />
+				<SectionList
+					initialNumToRender={20}
+					sections={sortedData}
+					renderSectionHeader={renderSectionHeader}
+					renderItem={renderItem}
+					keyExtractor={keyExtractor}
+				/>
 			</SafeAreaView>
 		</View>
 	);
