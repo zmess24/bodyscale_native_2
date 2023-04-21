@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
 		borderBottomRightRadius: 10,
 	},
 	activeButton: {
-		backgroundColor: "black",
+		backgroundColor: "#19355f",
 	},
 	inactiveButton: {
 		backgroundColor: "white",
