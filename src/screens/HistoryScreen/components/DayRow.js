@@ -1,13 +1,16 @@
 import React, { memo } from "react";
-import { StyleSheet, Text, View, SectionList, SafeAreaView } from "react-native";
+import { StyleSheet, Text, Pressable, SectionList, SafeAreaView } from "react-native";
 import moment from "moment";
 
-const DayRow = ({ data }) => (
-	<View style={styles.sectionItem}>
-		<Text>{moment(data.date).format("MM-DD-YYYY")}</Text>
-		<Text>{data.weight} lbs</Text>
-	</View>
-);
+function DayRow({ data: { date, weight }, navigation }) {
+	const handlePress = () => navigation.navigate("Home", date);
+	return (
+		<Pressable style={styles.sectionItem} onPress={handlePress}>
+			<Text>{moment(date).format("MM-DD-YYYY")}</Text>
+			<Text>{weight} lbs</Text>
+		</Pressable>
+	);
+}
 
 const styles = StyleSheet.create({
 	sectionItem: {
