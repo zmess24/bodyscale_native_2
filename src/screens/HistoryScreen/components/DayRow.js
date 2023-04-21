@@ -1,9 +1,9 @@
 import React, { memo } from "react";
-import { StyleSheet, Text, Pressable, SectionList, SafeAreaView } from "react-native";
+import { StyleSheet, Text, Pressable } from "react-native";
 import moment from "moment";
 
 function DayRow({ data: { date, weight }, navigation }) {
-	const handlePress = () => navigation.navigate("Home", date);
+	const handlePress = () => navigation.navigate("Home", { date });
 	return (
 		<Pressable style={styles.sectionItem} onPress={handlePress}>
 			<Text>{moment(date).format("MM-DD-YYYY")}</Text>
