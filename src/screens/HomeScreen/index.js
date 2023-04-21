@@ -30,11 +30,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 	};
 
 	useEffect(() => {
-		if (route.params && route.params.date) {
-			let date = new Date(route.params.date);
-			let parsed = date.setDate(date.getDate() + 1);
-			handleDateChange(null, parsed);
-		}
+		if (route.params && route.params.date) handleDateChange(null, route.params.date);
 	}, [route.params]);
 
 	const toggleWeightPicker = () => {
@@ -48,7 +44,6 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 	};
 
 	const handleDateChange = (e, selectedDate) => {
-		console.log(selectedDate);
 		let entry = user.findEntry(moment(selectedDate).format("YYYY-MM-DD"));
 		entry ? setWeight(entry.weight) : setWeight(0);
 		setDate(selectedDate);

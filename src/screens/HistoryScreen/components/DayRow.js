@@ -3,7 +3,12 @@ import { StyleSheet, Text, Pressable } from "react-native";
 import moment from "moment";
 
 function DayRow({ data: { date, weight }, navigation }) {
-	const handlePress = () => navigation.navigate("Home", { date });
+	const handlePress = () => {
+		let dateObj = new Date(date);
+		let parsed = dateObj.setDate(dateObj.getDate() + 1);
+		navigation.navigate("Home", { date: parsed });
+	};
+
 	return (
 		<Pressable style={styles.sectionItem} onPress={handlePress}>
 			<Text>{moment(date).format("MM-DD-YYYY")}</Text>
