@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import constantStyles from "../../constants/styles";
+import { constantStyles } from "../../constants/styles";
 import Header from "./components/Header";
 import AllTimeChart from "./components/charts/AllTimeChart";
 import CurrentYearChart from "./components/charts/CurrentYearChart";

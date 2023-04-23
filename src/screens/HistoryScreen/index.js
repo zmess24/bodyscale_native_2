@@ -2,7 +2,7 @@ import React, { useMemo, ref } from "react";
 import { StyleSheet, View, SectionList, SafeAreaView, Button } from "react-native";
 import DayRow from "./components/DayRow";
 import WeekRow from "./components/WeekRow";
-import constantStyles from "../../constants/styles";
+import { constantStyles } from "../../constants/styles";
 
 function HistoryScreen({ userData: { entries }, navigation }) {
 	let sortedData = useMemo(() => entries.sort((a, b) => new Date(b.endDate) - new Date(a.startDate)), [entries]);

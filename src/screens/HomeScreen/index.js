@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment";
 import { Entry } from "../../constants/classes";
-import constantStyles from "../../constants/styles";
+import { constantStyles } from "../../constants/styles";
 import clearAsyncStorage from "../../constants/functions/clearAsyncStorage";
 import WeightPicker from "./components/WeightPicker";
 import DatePicker from "./components/DatePicker";

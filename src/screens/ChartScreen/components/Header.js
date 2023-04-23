@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
-import constantStyles from "../../../constants/styles";
+import { constantStyles } from "../../../constants/styles";
 
 function Header({ activeTab, setActiveTab }) {
 	const tabsObject = [
