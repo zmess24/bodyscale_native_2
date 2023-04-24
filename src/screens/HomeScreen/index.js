@@ -30,14 +30,11 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 		if (route.params && route.params.date) handleDateChange(null, route.params.date);
 	}, [route.params]);
 
-	const toggleWeightPicker = () => {
-		setShowDatePicker(false);
-		setShowWeightPicker(true);
-	};
-
-	const toggleDatePicker = () => {
-		setShowWeightPicker(false);
-		setShowDatePicker(true);
+	const togglePicker = (name) => {
+		let datePickerStatus = name === "date" ? true : false;
+		let weightPickerStatus = name === "date" ? false : true;
+		setShowDatePicker(datePickerStatus);
+		setShowWeightPicker(weightPickerStatus);
 	};
 
 	const handleDateChange = (e, selectedDate) => {
@@ -50,13 +47,10 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 	return (
 		<View style={styles}>
 			<Header />
-			<TouchableOpacity onPress={toggleWeightPicker}>
+			<TouchableOpacity onPress={() => togglePicker("weight")}>
 				<Text>{weight} lbs</Text>
 			</TouchableOpacity>
-			{/* <TouchableOpacity onPress={toggleWeightPicker}>
-				<Text>{weight} lbs</Text>
-			</TouchableOpacity> */}
-			<TouchableOpacity onPress={toggleDatePicker}>
+			<TouchableOpacity onPress={() => togglePicker("date")}>
 				<Text>{moment(date).format("MM-DD-YYYY")}</Text>
 			</TouchableOpacity>
 			{showDatePicker && <DatePicker date={date} handleDateChange={handleDateChange} />}

@@ -13,7 +13,6 @@ function SettingsScreen({ userData: { setUser, setWeight } }) {
 	const resetStorage = async () => {
 		clearAsyncStorage();
 		let user = generateFakeDate();
-		console.log("RESET STORAGE", user);
 		await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
 		setUser(user);
 		setWeight(0);
