@@ -46,12 +46,13 @@ export default function App() {
 				</Tab.Screen>
 				<Tab.Screen
 					name="Settings"
-					component={SettingsScreen}
 					options={{
 						tabBarLabel: "Settings",
 						tabBarIcon: ({ focused }) => <AntDesign name="setting" size={24} color={focused ? "black" : "silver"} />,
 					}}
-				/>
+				>
+					{(props) => <SettingsScreen {...props} userData={{ setUser, setWeight }} />}
+				</Tab.Screen>
 			</Tab.Navigator>
 		</NavigationContainer>
 	);

@@ -4,11 +4,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment";
 import { Entry } from "../../constants/classes";
 import { constantStyles } from "../../constants/styles";
-import clearAsyncStorage from "../../constants/functions/clearAsyncStorage";
 import WeightPicker from "./components/WeightPicker";
 import DatePicker from "./components/DatePicker";
 import Header from "./components/Header";
-import generateFakeDate from "../../constants/functions/generateFakeDate";
 
 function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDate }, route }) {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
@@ -49,15 +47,6 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 		setShowDatePicker(false);
 	};
 
-	const resetStorage = async () => {
-		clearAsyncStorage();
-		let user = generateFakeDate();
-		console.log("RESET STORAGE", user);
-		await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
-		setUser(user);
-		setWeight(0);
-	};
-
 	return (
 		<View style={styles}>
 			<Header />
@@ -67,9 +56,6 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 			{/* <TouchableOpacity onPress={toggleWeightPicker}>
 				<Text>{weight} lbs</Text>
 			</TouchableOpacity> */}
-			<TouchableOpacity onPress={resetStorage}>
-				<Text>Clear Async Storage</Text>
-			</TouchableOpacity>
 			<TouchableOpacity onPress={toggleDatePicker}>
 				<Text>{moment(date).format("MM-DD-YYYY")}</Text>
 			</TouchableOpacity>
