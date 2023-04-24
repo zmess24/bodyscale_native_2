@@ -1,9 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View, FlatList } from "react-native";
-import clearAsyncStorage from "../../constants/functions/clearAsyncStorage";
+import { clearStorageData, setStorageData } from "../../db";
 import { constantStyles } from "../../constants/styles";
 import generateFakeDate from "../../constants/functions/generateFakeDate";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function SettingsScreen({ userData: { setUser, setWeight } }) {
 	const data = [{ title: "Delete Data" }];
@@ -11,9 +10,9 @@ function SettingsScreen({ userData: { setUser, setWeight } }) {
 	const renderItem = ({ item }) => <Item title={item.title} />;
 
 	const resetStorage = async () => {
-		clearAsyncStorage();
+		await clearStorageData();
 		let user = generateFakeDate();
-		await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
+		await setStorageData(user);
 		setUser(user);
 		setWeight(0);
 	};

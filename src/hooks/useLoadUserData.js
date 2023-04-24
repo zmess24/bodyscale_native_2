@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useState } from "react";
+import { loadStorageData } from "../db";
 import { User } from "../constants/classes";
 import moment from "moment";
 
@@ -11,11 +11,12 @@ const useLoadUserData = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const data = await AsyncStorage.getItem("bodyScale_user");
+				const data = await loadStorageData();
 				if (data !== null) {
 					let userData = JSON.parse(data);
 					let newUser = new User({ ...userData });
-					let entry = newUser.findEntry(moment(date).format("MM-DD-YYYY"));
+					let entry = newUser.findEntry(moment(date).format("YYYY-MM-DD"));
+					console.log(entry);
 					if (entry) setWeight(entry.weight);
 					setUser(newUser);
 				}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { setStorage } from "../../db";
 import moment from "moment";
 import { Entry } from "../../constants/classes";
 import { constantStyles } from "../../constants/styles";
@@ -11,6 +11,11 @@ import Header from "./components/Header";
 function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDate }, route }) {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
 	const [showDatePicker, setShowDatePicker] = useState(false);
+	console.log(weight);
+
+	useEffect(() => {
+		if (route.params && route.params.date) handleDateChange(null, route.params.date);
+	}, [route.params]);
 
 	const handleWeightChange = async (selectedWeight) => {
 		try {
@@ -20,21 +25,10 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 			user.createEntry(entry);
 			setUser(user);
 			setWeight(selectedWeight);
-			await AsyncStorage.setItem("bodyScale_user", JSON.stringify(user));
+			await setStorage(user);
 		} catch (err) {
 			console.log(err.message);
 		}
-	};
-
-	useEffect(() => {
-		if (route.params && route.params.date) handleDateChange(null, route.params.date);
-	}, [route.params]);
-
-	const togglePicker = (name) => {
-		let datePickerStatus = name === "date" ? true : false;
-		let weightPickerStatus = name === "date" ? false : true;
-		setShowDatePicker(datePickerStatus);
-		setShowWeightPicker(weightPickerStatus);
 	};
 
 	const handleDateChange = (e, selectedDate) => {
@@ -42,6 +36,13 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 		entry ? setWeight(entry.weight) : setWeight(0);
 		setDate(selectedDate);
 		setShowDatePicker(false);
+	};
+
+	const togglePicker = (name) => {
+		let datePickerStatus = name === "date" ? true : false;
+		let weightPickerStatus = name === "date" ? false : true;
+		setShowDatePicker(datePickerStatus);
+		setShowWeightPicker(weightPickerStatus);
 	};
 
 	return (
