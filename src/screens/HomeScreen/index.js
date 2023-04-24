@@ -11,7 +11,6 @@ import Header from "./components/Header";
 import generateFakeDate from "../../constants/functions/generateFakeDate";
 
 function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDate }, route }) {
-	console.log(route);
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
 	const [showDatePicker, setShowDatePicker] = useState(false);
 
