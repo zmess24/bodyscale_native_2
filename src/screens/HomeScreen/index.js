@@ -11,7 +11,9 @@ import Header from "./components/Header";
 function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDate }, route }) {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
 	const [showDatePicker, setShowDatePicker] = useState(false);
-	console.log(weight);
+	const [week, setWeek] = useState(user.findWeek(date));
+
+	console.log("WEEK", week);
 
 	useEffect(() => {
 		if (route.params && route.params.date) handleDateChange(null, route.params.date);
@@ -32,7 +34,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 	};
 
 	const handleDateChange = (e, selectedDate) => {
-		let entry = user.findEntry(moment(selectedDate).format("YYYY-MM-DD"));
+		let entry = user.findEntry(selectedDate);
 		entry ? setWeight(entry.weight) : setWeight(0);
 		setDate(selectedDate);
 		setShowDatePicker(false);

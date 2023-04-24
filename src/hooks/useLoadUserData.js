@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { loadStorageData } from "../db";
 import { User } from "../constants/classes";
-import moment from "moment";
 
 const useLoadUserData = () => {
 	const [weight, setWeight] = useState(0);
@@ -15,7 +14,7 @@ const useLoadUserData = () => {
 				if (data !== null) {
 					let userData = JSON.parse(data);
 					let newUser = new User({ ...userData });
-					let entry = newUser.findEntry(moment(date).format("YYYY-MM-DD"));
+					let entry = newUser.findEntry(date);
 					console.log(entry);
 					if (entry) setWeight(entry.weight);
 					setUser(newUser);

@@ -1,4 +1,5 @@
 import Week from "./Week";
+import moment from "moment";
 
 class User {
 	constructor(initProps = undefined) {
@@ -27,14 +28,20 @@ class User {
 		this.#calculateDeltas();
 	}
 
+	findWeek(date) {
+		let formattedDate = moment(date).format("YYYY-MM-DD");
+		let week = this.entries.find(
+			(w) => Date.parse(w.startDate) <= Date.parse(formattedDate) && Date.parse(formattedDate) <= Date.parse(w.endDate)
+		);
+		return week ? week : undefined;
+	}
+
 	findEntry(date) {
-		let week = this.entries.find((w) => Date.parse(w.startDate) <= Date.parse(date) && Date.parse(date) <= Date.parse(w.endDate));
-		if (this.entries.length === 0 || !week) {
-			return undefined;
-		} else {
-			let entry = week.data.find((e) => e.date === date);
-			return entry;
-		}
+		let formattedDate = moment(date).format("YYYY-MM-DD");
+		let week = this.entries.find(
+			(w) => Date.parse(w.startDate) <= Date.parse(formattedDate) && Date.parse(formattedDate) <= Date.parse(w.endDate)
+		);
+		return this.entries.length === 0 || !week ? undefined : week.data.find((e) => e.date === formattedDate);
 	}
 
 	/**
