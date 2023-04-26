@@ -5,9 +5,20 @@ import { constantStyles } from "../../constants/styles";
 import generateFakeDate from "../../constants/functions/generateFakeDate";
 
 function SettingsScreen({ userData: { setUser, setWeight } }) {
-	const data = [{ title: "Delete Data" }];
+	const data = [
+		{ title: "Delete Data", action: resetStorage },
+		{ title: "Delete & Regen Data", action: deleteData },
+	];
 	const keyExtractor = (item, index) => index;
-	const renderItem = ({ item }) => <Item title={item.title} />;
+	const renderItem = ({ item, action }) => <Item title={item.title} action={item.action} />;
+
+	const deleteData = async () => {
+		await clearStorageData();
+		let user = new User();
+		await setStorageData(user);
+		setUser(user);
+		setWeight(0);
+	};
 
 	const resetStorage = async () => {
 		await clearStorageData();
@@ -17,8 +28,8 @@ function SettingsScreen({ userData: { setUser, setWeight } }) {
 		setWeight(0);
 	};
 
-	const Item = ({ title }) => (
-		<TouchableOpacity style={styles.item} onPress={resetStorage}>
+	const Item = ({ title, action }) => (
+		<TouchableOpacity style={styles.item} onPress={action}>
 			<Text style={styles.title}>{title}</Text>
 		</TouchableOpacity>
 	);
