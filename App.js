@@ -11,7 +11,7 @@ import useLoadUserData from "./src/hooks/useLoadUserData";
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-	const { user, setUser, weight, setWeight, date, setDate } = useLoadUserData();
+	const { user, setUser, weight, setWeight, date, setDate, week, setWeek } = useLoadUserData();
 	return (
 		<NavigationContainer>
 			<Tab.Navigator screenOptions={{ tabBarShowLabel: false }}>
@@ -24,7 +24,7 @@ export default function App() {
 						tabBarIcon: ({ focused }) => <AntDesign name="home" size={24} color={focused ? "black" : "silver"} />,
 					}}
 				>
-					{(props) => <HomeScreen {...props} userData={{ user, setUser, weight, setWeight, date, setDate }} />}
+					{(props) => <HomeScreen {...props} userData={{ user, setUser, weight, setWeight, date, setDate, week, setWeek }} />}
 				</Tab.Screen>
 				<Tab.Screen
 					name="Charts"

@@ -8,12 +8,9 @@ import WeightPicker from "./components/WeightPicker";
 import DatePicker from "./components/DatePicker";
 import Header from "./components/Header";
 
-function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDate }, route }) {
+function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDate, week, setWeek }, route }) {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
 	const [showDatePicker, setShowDatePicker] = useState(false);
-	const [week, setWeek] = useState(user.findWeek(date));
-
-	console.log("WEEK", week);
 
 	useEffect(() => {
 		if (route.params && route.params.date) handleDateChange(null, route.params.date);
@@ -35,8 +32,10 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 
 	const handleDateChange = (e, selectedDate) => {
 		let entry = user.findEntry(selectedDate);
+		let week = user.findWeek(selectedDate);
 		entry ? setWeight(entry.weight) : setWeight(0);
 		setDate(selectedDate);
+		setWeek(week);
 		setShowDatePicker(false);
 	};
 
@@ -56,6 +55,16 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 			<TouchableOpacity onPress={() => togglePicker("date")}>
 				<Text>{moment(date).format("MM-DD-YYYY")}</Text>
 			</TouchableOpacity>
+			{week && (
+				<TouchableOpacity onPress={() => togglePicker("date")}>
+					<Text>Average: {week.average} lbs</Text>
+				</TouchableOpacity>
+			)}
+			{week && (
+				<TouchableOpacity onPress={() => togglePicker("date")}>
+					<Text>Change: {week.delta} lbs</Text>
+				</TouchableOpacity>
+			)}
 			{showDatePicker && <DatePicker date={date} handleDateChange={handleDateChange} />}
 			{showWeightPicker && (
 				<WeightPicker handleWeightChange={handleWeightChange} weight={weight !== 0 ? weight : user.entries.at(-1).data.at(-1).weight} />
