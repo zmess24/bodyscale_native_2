@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { setStorage } from "../../db";
+import { setStorageData } from "../../db";
 import moment from "moment";
 import { Entry } from "../../constants/classes";
 import { constantStyles } from "../../constants/styles";
@@ -22,7 +22,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 			let selectedDate = moment(date).format("YYYY-MM-DD");
 			let entry = new Entry(selectedWeight, selectedDate);
 			user.createEntry(entry);
-			await setStorage(user);
+			await setStorageData(user);
 			setUser(user);
 			setWeight(selectedWeight);
 			await setStorage(user);
