@@ -16,7 +16,8 @@ const clearStorageData = async () => {
 };
 
 const setStorageData = async (data) => {
-	await AsyncStorage.setItem(ASYNC_STORAGE_KEY, JSON.stringify(data));
+	let string = JSON.stringify(data);
+	await AsyncStorage.setItem(ASYNC_STORAGE_KEY, string);
 };
 
 const loadStorageData = async () => {

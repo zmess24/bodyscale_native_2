@@ -22,6 +22,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 			let selectedDate = moment(date).format("YYYY-MM-DD");
 			let entry = new Entry(selectedWeight, selectedDate);
 			user.createEntry(entry);
+			await setStorage(user);
 			setUser(user);
 			setWeight(selectedWeight);
 			await setStorage(user);
