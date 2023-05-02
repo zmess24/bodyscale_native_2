@@ -8,6 +8,8 @@ import WeightPicker from "./components/WeightPicker";
 import DatePicker from "./components/DatePicker";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import tw from "twrnc";
+import { MaterialIcons } from "@expo/vector-icons";
 
 function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDate, week, setWeek }, route }) {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
@@ -50,13 +52,17 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 	return (
 		<View style={styles.container}>
 			<Header />
-			<View style={styles.center}>
-				<TouchableOpacity onPress={() => togglePicker("weight")}>
-					<Text>{weight} lbs</Text>
-				</TouchableOpacity>
-				<TouchableOpacity onPress={() => togglePicker("date")}>
-					<Text>{moment(date).format("MM-DD-YYYY")}</Text>
-				</TouchableOpacity>
+			<View style={tw.style("w-90 flex flex-row justify-between")}>
+				<MaterialIcons name="keyboard-arrow-left" size={30} color="black" />
+				<View style={tw.style("flex flex-col items-center")}>
+					<TouchableOpacity onPress={() => togglePicker("weight")}>
+						<Text style={tw.style("text-4xl font-bold tracking-tight")}>{weight} lbs</Text>
+					</TouchableOpacity>
+					<TouchableOpacity onPress={() => togglePicker("date")}>
+						<Text style={tw.style("text-base text-gray-600")}>{moment(date).format("MMMM Do, YYYY")}</Text>
+					</TouchableOpacity>
+				</View>
+				<MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
 			</View>
 			{week && <Footer week={week} />}
 			{showDatePicker && <DatePicker date={date} handleDateChange={handleDateChange} />}
@@ -78,6 +84,9 @@ const styles = StyleSheet.create({
 	center: {
 		display: "flex",
 		alignItems: "center",
+		borderWidth: 1,
+		borderColor: "black",
+		borderRadius: 10,
 	},
 });
 
