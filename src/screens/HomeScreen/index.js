@@ -7,6 +7,7 @@ import { constantStyles } from "../../constants/styles";
 import WeightPicker from "./components/WeightPicker";
 import DatePicker from "./components/DatePicker";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDate, week, setWeek }, route }) {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
@@ -25,7 +26,6 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 			await setStorageData(user);
 			setUser(user);
 			setWeight(selectedWeight);
-			await setStorage(user);
 		} catch (err) {
 			console.log(err.message);
 		}
@@ -48,24 +48,17 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 	};
 
 	return (
-		<View style={styles}>
+		<View style={styles.container}>
 			<Header />
-			<TouchableOpacity onPress={() => togglePicker("weight")}>
-				<Text>{weight} lbs</Text>
-			</TouchableOpacity>
-			<TouchableOpacity onPress={() => togglePicker("date")}>
-				<Text>{moment(date).format("MM-DD-YYYY")}</Text>
-			</TouchableOpacity>
-			{week && (
-				<TouchableOpacity onPress={() => togglePicker("date")}>
-					<Text>Average: {week.average} lbs</Text>
+			<View style={styles.center}>
+				<TouchableOpacity onPress={() => togglePicker("weight")}>
+					<Text>{weight} lbs</Text>
 				</TouchableOpacity>
-			)}
-			{week && (
 				<TouchableOpacity onPress={() => togglePicker("date")}>
-					<Text>Change: {week.delta} lbs</Text>
+					<Text>{moment(date).format("MM-DD-YYYY")}</Text>
 				</TouchableOpacity>
-			)}
+			</View>
+			{week && <Footer week={week} />}
 			{showDatePicker && <DatePicker date={date} handleDateChange={handleDateChange} />}
 			{showWeightPicker && (
 				<WeightPicker handleWeightChange={handleWeightChange} weight={weight !== 0 ? weight : user.entries.at(-1).data.at(-1).weight} />
@@ -75,10 +68,17 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 }
 
 const styles = StyleSheet.create({
-	...constantStyles.screenStyles,
-	alignItems: "center",
-	justifyContent: "center",
-	padding: 20,
+	container: {
+		...constantStyles.screenStyles,
+		alignItems: "center",
+		flexDirection: "column",
+		justifyContent: "space-between",
+		padding: 20,
+	},
+	center: {
+		display: "flex",
+		alignItems: "center",
+	},
 });
 
 export default HomeScreen;
