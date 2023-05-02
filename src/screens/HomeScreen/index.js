@@ -34,6 +34,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 	};
 
 	const handleDateChange = (e, selectedDate) => {
+		console.log(selectedDate);
 		let entry = user.findEntry(selectedDate);
 		let week = user.findWeek(selectedDate);
 		entry ? setWeight(entry.weight) : setWeight(0);
@@ -53,7 +54,9 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 		<View style={styles.container}>
 			<Header />
 			<View style={tw.style("w-90 flex flex-row justify-between")}>
-				<MaterialIcons name="keyboard-arrow-left" size={30} color="black" />
+				<TouchableOpacity onPress={() => handleDateChange(null, moment(date).subtract(1, "d"))}>
+					<MaterialIcons name="keyboard-arrow-left" size={30} color="black" />
+				</TouchableOpacity>
 				<View style={tw.style("flex flex-col items-center")}>
 					<TouchableOpacity onPress={() => togglePicker("weight")}>
 						<Text style={tw.style("text-4xl font-bold tracking-tight")}>{weight} lbs</Text>
@@ -62,7 +65,9 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 						<Text style={tw.style("text-base text-gray-600")}>{moment(date).format("MMMM Do, YYYY")}</Text>
 					</TouchableOpacity>
 				</View>
-				<MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
+				<TouchableOpacity onPress={() => handleDateChange(null, moment(date).add(1, "d"))}>
+					<MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
+				</TouchableOpacity>
 			</View>
 			{week && <Footer week={week} />}
 			{showDatePicker && <DatePicker date={date} handleDateChange={handleDateChange} />}
