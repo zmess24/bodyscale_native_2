@@ -34,7 +34,6 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 	};
 
 	const handleDateChange = (e, selectedDate) => {
-		console.log(selectedDate);
 		let entry = user.findEntry(selectedDate);
 		let week = user.findWeek(selectedDate);
 		entry ? setWeight(entry.weight) : setWeight(0);
@@ -65,7 +64,10 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 						<Text style={tw.style("text-base text-gray-600")}>{moment(date).format("MMMM Do, YYYY")}</Text>
 					</TouchableOpacity>
 				</View>
-				<TouchableOpacity onPress={() => handleDateChange(null, moment(date).add(1, "d"))}>
+				<TouchableOpacity
+					disabled={moment(date).format("YYYY-MM-DD") === moment().format("YYYY-MM-DD") ? true : false}
+					onPress={() => handleDateChange(null, moment(date).add(1, "d"))}
+				>
 					<MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
 				</TouchableOpacity>
 			</View>
