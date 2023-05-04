@@ -20,7 +20,7 @@ function Footer({ week: { average, delta, startDate, endDate } }) {
 				<View style={tw.style("flex flex-col justify-center")}>
 					<Text style={tw.style("text-base text-gray-600")}>Week Change</Text>
 					<Text style={tw.style("text-2xl font-semibold tracking-tight text-green-700", negative && "text-rose-700")}>
-						{/* {!negative && "+"} */}
+						{!negative && "+"}
 						{delta ? delta : "--"} lbs
 					</Text>
 				</View>
