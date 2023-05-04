@@ -6,19 +6,13 @@ import generateFakeDate from "../../constants/functions/generateFakeDate";
 import { User } from "../../constants/classes";
 
 function SettingsScreen({ userData: { setUser, setWeight } }) {
-	const data = [
-		{ title: "Delete Data", action: resetStorage },
-		{ title: "Delete & Regen Data", action: deleteData },
-	];
-	const keyExtractor = (item, index) => index;
-	const renderItem = ({ item, action }) => <Item title={item.title} action={item.action} />;
-
 	const deleteData = async () => {
 		await clearStorageData();
 		let user = new User();
 		await setStorageData(user);
 		setUser(user);
 		setWeight(0);
+		setWee;
 	};
 
 	const resetStorage = async () => {
@@ -28,12 +22,6 @@ function SettingsScreen({ userData: { setUser, setWeight } }) {
 		setUser(user);
 		setWeight(0);
 	};
-
-	const Item = ({ title, action }) => (
-		<TouchableOpacity style={styles.item} onPress={action}>
-			<Text style={styles.title}>{title}</Text>
-		</TouchableOpacity>
-	);
 
 	return (
 		<View style={styles.container}>
