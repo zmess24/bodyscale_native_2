@@ -7,6 +7,7 @@ const useLoadUserData = () => {
 	const [date, setDate] = useState(new Date());
 	const [user, setUser] = useState(new User());
 	const [week, setWeek] = useState(new Week({ date: new Date(), weight: 0 }));
+	const [appIsReady, setAppIsReady] = useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -22,6 +23,7 @@ const useLoadUserData = () => {
 					if (week) setWeek(week);
 					setUser(newUser);
 				}
+				setAppIsReady(true);
 			} catch (err) {
 				console.log(err.message);
 			}
@@ -30,7 +32,7 @@ const useLoadUserData = () => {
 		fetchData();
 	}, []);
 
-	return { user, setUser, weight, setWeight, date, setDate, week, setWeek };
+	return { user, setUser, weight, setWeight, date, setDate, week, setWeek, appIsReady };
 };
 
 export default useLoadUserData;

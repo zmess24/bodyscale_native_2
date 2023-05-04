@@ -1,4 +1,3 @@
-import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./src/screens/HomeScreen";
@@ -7,11 +6,27 @@ import SettingsScreen from "./src/screens/SettingsScreen";
 import ChartScreen from "./src/screens/ChartScreen";
 import { AntDesign } from "@expo/vector-icons";
 import useLoadUserData from "./src/hooks/useLoadUserData";
-
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
 const Tab = createBottomTabNavigator();
 
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
-	const { user, setUser, weight, setWeight, date, setDate, week, setWeek } = useLoadUserData();
+	const { user, setUser, weight, setWeight, date, setDate, week, setWeek, appIsReady } = useLoadUserData();
+
+	useEffect(() => {
+		const checkDataLoaded = () => {
+			if (appIsReady) {
+				setTimeout(async () => {
+					await SplashScreen.hideAsync();
+				}, 1000);
+			}
+		};
+
+		checkDataLoaded();
+	}, [appIsReady]);
+
 	return (
 		<NavigationContainer>
 			<Tab.Navigator screenOptions={{ tabBarShowLabel: false }}>
