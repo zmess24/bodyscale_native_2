@@ -51,7 +51,7 @@ export default function App() {
 						tabBarIcon: ({ focused }) => <AntDesign name="setting" size={24} color={focused ? "black" : "silver"} />,
 					}}
 				>
-					{(props) => <SettingsScreen {...props} userData={{ setUser, setWeight }} />}
+					{(props) => <SettingsScreen {...props} userData={{ setUser, setWeight, setWeek }} />}
 				</Tab.Screen>
 			</Tab.Navigator>
 		</NavigationContainer>
