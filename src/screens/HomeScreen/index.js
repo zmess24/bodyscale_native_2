@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { setStorageData } from "../../db";
 import moment from "moment";
@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import tw from "twrnc";
 import { MaterialIcons } from "@expo/vector-icons";
+import Week from "../../constants/classes";
 
 function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDate, week, setWeek }, route }) {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
@@ -21,25 +22,32 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 
 	const handleWeightChange = async (selectedWeight) => {
 		try {
-			setShowWeightPicker(false);
 			let selectedDate = moment(date).format("YYYY-MM-DD");
 			let entry = new Entry(selectedWeight, selectedDate);
 			user.createEntry(entry);
 			await setStorageData(user);
+			let week = user.findWeek(date);
+			setWeek(week);
 			setUser(user);
 			setWeight(selectedWeight);
+			setShowWeightPicker(false);
 		} catch (err) {
 			console.log(err.message);
 		}
 	};
 
 	const handleDateChange = (e, selectedDate) => {
-		let entry = user.findEntry(selectedDate);
-		let week = user.findWeek(selectedDate);
-		entry ? setWeight(entry.weight) : setWeight(0);
-		setDate(selectedDate);
-		setWeek(week);
-		setShowDatePicker(false);
+		try {
+			let entry = user.findEntry(selectedDate);
+			let week = user.findWeek(selectedDate);
+			console.log("week", week);
+			entry ? setWeight(entry.weight) : setWeight(0);
+			setDate(selectedDate);
+			setWeek(week);
+			setShowDatePicker(false);
+		} catch (err) {
+			console.log(err.message);
+		}
 	};
 
 	const togglePicker = (name) => {
@@ -48,6 +56,8 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 		setShowDatePicker(datePickerStatus);
 		setShowWeightPicker(weightPickerStatus);
 	};
+
+	let formattedWeight = weight !== 0 ? weight : user.entries.at(-1) ? user.entries.at(-1).data.at(-1).weight : 50;
 
 	return (
 		<View style={styles.container}>
@@ -71,11 +81,9 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 					<MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
 				</TouchableOpacity>
 			</View>
-			{week && <Footer week={week} />}
+			<Footer week={week} />
 			{showDatePicker && <DatePicker date={date} handleDateChange={handleDateChange} />}
-			{showWeightPicker && (
-				<WeightPicker handleWeightChange={handleWeightChange} weight={weight !== 0 ? weight : user.entries.at(-1).data.at(-1).weight} />
-			)}
+			{showWeightPicker && <WeightPicker handleWeightChange={handleWeightChange} weight={formattedWeight} />}
 		</View>
 	);
 }

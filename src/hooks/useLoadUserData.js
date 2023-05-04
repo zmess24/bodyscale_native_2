@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { loadStorageData } from "../db";
-import { User } from "../constants/classes";
+import { User, Week } from "../constants/classes";
 
 const useLoadUserData = () => {
 	const [weight, setWeight] = useState(0);
 	const [date, setDate] = useState(new Date());
 	const [user, setUser] = useState(new User());
-	const [week, setWeek] = useState(null);
+	const [week, setWeek] = useState(new Week({ date: new Date(), weight: 0 }));
 
 	useEffect(() => {
 		const fetchData = async () => {

@@ -34,7 +34,7 @@ class User {
 		let week = this.entries.find(
 			(w) => Date.parse(w.startDate) <= Date.parse(formattedDate) && Date.parse(formattedDate) <= Date.parse(w.endDate)
 		);
-		return week ? week : undefined;
+		return week ? week : new Week({ date, weight: 0 });
 	}
 
 	findEntry(date) {
