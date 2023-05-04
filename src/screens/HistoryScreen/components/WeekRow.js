@@ -1,13 +1,14 @@
 import React, { memo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import moment from "moment";
+import tw from "twrnc";
 
 const WeekRow = ({ data }) => (
 	<View>
 		<View style={styles.sectionHeader}>
-			<Text>{moment(data.endDate).format("MM-DD-YYYY")}</Text>
-			<Text>{data.delta} lbs</Text>
-			<Text>{data.average} lbs</Text>
+			<Text style={tw.style("text-base")}>{moment(data.endDate).format("MMMM Do, YYYY")}</Text>
+			<Text style={tw.style("text-base")}>{data.delta} lbs</Text>
+			<Text style={tw.style("text-base")}>{data.average} lbs</Text>
 		</View>
 	</View>
 );

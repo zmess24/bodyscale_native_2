@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import { StyleSheet, Text, Pressable } from "react-native";
 import moment from "moment";
+import tw from "twrnc";
 
 function DayRow({ data: { date, weight }, navigation }) {
 	const handlePress = () => {
@@ -11,8 +12,8 @@ function DayRow({ data: { date, weight }, navigation }) {
 
 	return (
 		<Pressable style={styles.sectionItem} onPress={handlePress}>
-			<Text>{moment(date).format("MM-DD-YYYY")}</Text>
-			<Text>{weight} lbs</Text>
+			<Text style={tw.style("text-base")}>{moment(date).format("MM-DD-YYYY")}</Text>
+			<Text style={tw.style("text-base")}>{weight} lbs</Text>
 		</Pressable>
 	);
 }
