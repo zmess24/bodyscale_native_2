@@ -26,6 +26,7 @@ class User {
 		}
 
 		this.#calculateDeltas();
+		console.log(week);
 	}
 
 	findWeek(date) {
@@ -52,7 +53,8 @@ class User {
 
 	#calculateDeltas() {
 		this.entries.forEach((week, i) => {
-			let prevWeek = this.entries[i + 1];
+			let prevWeek = this.entries[i - 1];
+			console.log(i, week, prevWeek);
 			if (prevWeek) week.delta = (week.average - prevWeek.average).toFixed(2);
 		});
 	}
