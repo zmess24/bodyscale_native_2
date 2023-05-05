@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import moment from "moment";
 import tw from "twrnc";
+import { Octicons } from "@expo/vector-icons";
 
 function Footer({ week: { average, delta, startDate, endDate } }) {
 	let negative = delta && delta.indexOf("-") > -1 ? true : false;
@@ -19,7 +20,7 @@ function Footer({ week: { average, delta, startDate, endDate } }) {
 				</View>
 				<View style={tw.style("flex flex-col justify-center")}>
 					<Text style={tw.style("text-base text-gray-600")}>Week Change</Text>
-					<Text style={tw.style("text-2xl font-semibold tracking-tight text-green-700", negative && "text-rose-700")}>
+					<Text style={tw.style("text-2xl font-semibold tracking-tight")}>
 						{!negative && "+"}
 						{delta ? delta : "--"} lbs
 					</Text>

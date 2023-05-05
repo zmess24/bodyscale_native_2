@@ -10,6 +10,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 const Tab = createBottomTabNavigator();
 
+// Keep the splash screen visible while fetching resources from AsyncStorage
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {

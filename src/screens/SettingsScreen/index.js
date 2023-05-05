@@ -12,7 +12,6 @@ function SettingsScreen({ userData: { setUser, setWeight } }) {
 		await setStorageData(user);
 		setUser(user);
 		setWeight(0);
-		setWee;
 	};
 
 	const resetStorage = async () => {
