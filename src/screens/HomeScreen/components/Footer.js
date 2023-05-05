@@ -21,11 +21,11 @@ function Footer({ week: { average, delta, startDate, endDate }, hide }) {
 				</View>
 				<View style={tw.style("flex flex-col justify-center")}>
 					<Text style={tw.style("text-base text-gray-600")}>Week Change</Text>
-					<View style={tw.style("flex flex-row")}>
+					<View style={tw.style("flex flex-row items-center")}>
 						<Octicons
-							style={tw.style("mr-1")}
+							style={tw.style("mr-1 text-center")}
 							name={negative ? "triangle-down" : "triangle-up"}
-							size={28}
+							size={26}
 							color={negative ? "red" : "green"}
 						/>
 						<Text style={tw.style("text-2xl font-semibold tracking-tight")}>{formattedDelta ? formattedDelta : "--"} lbs</Text>
