@@ -31,17 +31,7 @@ function WeightPicker({ handleWeightChange, weight }) {
 	};
 
 	return (
-		<View
-			// style={{
-			// 	position: "absolute",
-			// 	bottom: 0,
-			// 	display: "flex",
-			// 	flexDirection: "row",
-			// 	height: 200,
-			// 	width: "100%",
-			// }}
-			style={tw.style("absolute bottom-0 flex flex-row w-100 h-48 justify-center")}
-		>
+		<View style={tw.style("absolute bottom-0 flex flex-row w-100 h-48 justify-center")}>
 			<Picker
 				style={{ width: "50%", display: "flex", flexDirection: "column", justifyContent: "center" }}
 				selectedValue={int}

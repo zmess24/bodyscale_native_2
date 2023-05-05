@@ -4,10 +4,10 @@ import moment from "moment";
 import tw from "twrnc";
 import { Octicons } from "@expo/vector-icons";
 
-function Footer({ week: { average, delta, startDate, endDate } }) {
+function Footer({ week: { average, delta, startDate, endDate }, hide }) {
 	let negative = delta && delta.indexOf("-") > -1 ? true : false;
 	return (
-		<View style={tw.style("w-4/5 flex flex-col")}>
+		<View style={tw.style("w-4/5 flex flex-col", hide && "opacity-0")}>
 			<View style={tw.style("flex flex-row justify-center mb-3")}>
 				<Text style={tw.style("text-sm text-gray-500")}>
 					{moment(startDate).format("MMMM Do")} - {moment(endDate).format("MMMM Do, YYYY")}
