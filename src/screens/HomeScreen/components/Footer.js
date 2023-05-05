@@ -6,6 +6,7 @@ import { Octicons } from "@expo/vector-icons";
 
 function Footer({ week: { average, delta, startDate, endDate }, hide }) {
 	let negative = delta && delta.indexOf("-") > -1 ? true : false;
+	let formattedDelta = delta.replace("-", "");
 	return (
 		<View style={tw.style("w-4/5 flex flex-col", hide && "opacity-0")}>
 			<View style={tw.style("flex flex-row justify-center mb-3")}>
@@ -20,10 +21,15 @@ function Footer({ week: { average, delta, startDate, endDate }, hide }) {
 				</View>
 				<View style={tw.style("flex flex-col justify-center")}>
 					<Text style={tw.style("text-base text-gray-600")}>Week Change</Text>
-					<Text style={tw.style("text-2xl font-semibold tracking-tight")}>
-						{!negative && "+"}
-						{delta ? delta : "--"} lbs
-					</Text>
+					<View style={tw.style("flex flex-row")}>
+						<Octicons
+							style={tw.style("mr-1")}
+							name={negative ? "triangle-down" : "triangle-up"}
+							size={28}
+							color={negative ? "red" : "green"}
+						/>
+						<Text style={tw.style("text-2xl font-semibold tracking-tight")}>{formattedDelta ? formattedDelta : "--"} lbs</Text>
+					</View>
 				</View>
 			</View>
 		</View>
