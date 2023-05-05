@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import { constantStyles } from "../../../constants/styles";
+import tw from "twrnc";
 
 function WeightPicker({ handleWeightChange, weight }) {
 	const [int, setInt] = useState(weight.toString().indexOf(".") > -1 ? parseInt(weight.toString().split(".")[0]) : weight);
@@ -32,15 +32,15 @@ function WeightPicker({ handleWeightChange, weight }) {
 
 	return (
 		<View
-			style={{
-				...constantStyles.borderHelper,
-				position: "absolute",
-				bottom: 0,
-				display: "flex",
-				flexDirection: "row",
-				height: 200,
-				width: "85%",
-			}}
+			// style={{
+			// 	position: "absolute",
+			// 	bottom: 0,
+			// 	display: "flex",
+			// 	flexDirection: "row",
+			// 	height: 200,
+			// 	width: "100%",
+			// }}
+			style={tw.style("absolute bottom-0 flex flex-row w-100 h-48 justify-center")}
 		>
 			<Picker
 				style={{ width: "50%", display: "flex", flexDirection: "column", justifyContent: "center" }}

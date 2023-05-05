@@ -16,6 +16,7 @@ import Week from "../../constants/classes";
 function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDate, week, setWeek }, route }) {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
 	const [showDatePicker, setShowDatePicker] = useState(false);
+	const [showFooter, setShowFooter] = useState(true);
 
 	useEffect(() => {
 		if (route.params && route.params.date) handleDateChange(null, route.params.date);
@@ -32,6 +33,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 			setUser(user);
 			setWeight(selectedWeight);
 			setShowWeightPicker(false);
+			setShowFooter(true);
 		} catch (err) {
 			console.log(err.message);
 		}
@@ -46,6 +48,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 			setDate(selectedDate);
 			setWeek(week);
 			setShowDatePicker(false);
+			setShowFooter(true);
 		} catch (err) {
 			console.log(err.message);
 		}
@@ -54,6 +57,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 	const togglePicker = (name) => {
 		let datePickerStatus = name === "date" ? true : false;
 		let weightPickerStatus = name === "date" ? false : true;
+		setShowFooter(false);
 		setShowDatePicker(datePickerStatus);
 		setShowWeightPicker(weightPickerStatus);
 	};
@@ -82,7 +86,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 					<MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
 				</TouchableOpacity>
 			</View>
-			<Footer week={week} />
+			{showFooter && <Footer week={week} />}
 			{showDatePicker && <DatePicker date={date} handleDateChange={handleDateChange} />}
 			{showWeightPicker && <WeightPicker handleWeightChange={handleWeightChange} weight={formattedWeight} />}
 		</View>
