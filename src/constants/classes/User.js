@@ -13,6 +13,7 @@ class User {
 
 	createEntry(entry) {
 		let week = this.entries.find((w) => Date.parse(w.startDate) <= Date.parse(entry.date) && Date.parse(entry.date) <= Date.parse(w.endDate));
+		console.log("EDITING", week);
 
 		if (this.entries.length === 0 || !week) {
 			let newWeek = new Week(entry);
@@ -52,7 +53,8 @@ class User {
 
 	#calculateDeltas() {
 		this.entries.forEach((week, i) => {
-			let prevWeek = this.entries[i - 1];
+			let prevWeek = this.entries[i + 1];
+			console.log("PREV WEEK", i, i + 1, prevWeek);
 			if (prevWeek) week.delta = (week.average - prevWeek.average).toFixed(2);
 		});
 	}

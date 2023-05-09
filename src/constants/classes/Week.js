@@ -6,7 +6,7 @@ class Week {
 		this.endDate = moment(entry.date).endOf("week").format("YYYY-MM-DD");
 		this.data = [{ ...entry }];
 		this.average = entry.weight.toFixed(2);
-		this.delta = null;
+		this.delta = "0";
 	}
 }
 

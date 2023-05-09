@@ -10,8 +10,6 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import tw from "twrnc";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Octicons } from "@expo/vector-icons";
-import Week from "../../constants/classes";
 
 function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDate, week, setWeek }, route }) {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
@@ -41,7 +39,6 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 
 	const handleDateChange = (e, selectedDate) => {
 		try {
-			console.log(selectedDate);
 			let entry = user.findEntry(selectedDate);
 			let week = user.findWeek(selectedDate);
 			entry ? setWeight(entry.weight) : setWeight(0);
@@ -86,7 +83,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 					<MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
 				</TouchableOpacity>
 			</View>
-			<Footer week={week} hide={hideFooter} />
+			{week && <Footer week={week} hide={hideFooter} />}
 			{showDatePicker && <DatePicker date={date} handleDateChange={handleDateChange} />}
 			{showWeightPicker && <WeightPicker handleWeightChange={handleWeightChange} weight={formattedWeight} />}
 		</View>

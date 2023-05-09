@@ -1,12 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import moment from "moment";
 import tw from "twrnc";
 import { Octicons } from "@expo/vector-icons";
 
 function Footer({ week: { average, delta, startDate, endDate }, hide }) {
-	let negative = delta && delta.indexOf("-") > -1 ? true : false;
+	let negative = delta.indexOf("-") > -1 ? true : false;
 	let formattedDelta = delta.replace("-", "");
+
 	return (
 		<View style={tw.style("w-4/5 flex flex-col", hide && "opacity-0")}>
 			<View style={tw.style("flex flex-row justify-center mb-3")}>
