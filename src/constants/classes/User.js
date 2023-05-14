@@ -13,12 +13,10 @@ class User {
 
 	createEntry(entry) {
 		let week = this.entries.find((w) => Date.parse(w.startDate) <= Date.parse(entry.date) && Date.parse(entry.date) <= Date.parse(w.endDate));
-		console.log("EDITING", week);
 
 		if (this.entries.length === 0 || !week) {
 			let newWeek = new Week(entry);
 			this.entries.push(newWeek);
-			this.entries.sort((a, b) => new Date(a.endDate) - new Date(b.startDate));
 		} else {
 			let dayIndex = week.data.findIndex(({ date }) => date === entry.date);
 			dayIndex > -1 ? (week.data[dayIndex].weight = entry.weight) : week.data.push(entry);
@@ -26,6 +24,7 @@ class User {
 			week.average = (week.data.reduce((a, c) => a + c.weight, 0) / week.data.length).toFixed(2);
 		}
 
+		this.entries.sort((a, b) => new Date(a.endDate) - new Date(b.startDate));
 		this.#calculateDeltas();
 	}
 
@@ -53,8 +52,7 @@ class User {
 
 	#calculateDeltas() {
 		this.entries.forEach((week, i) => {
-			let prevWeek = this.entries[i + 1];
-			console.log("PREV WEEK", i, i + 1, prevWeek);
+			let prevWeek = this.entries[i - 1];
 			if (prevWeek) week.delta = (week.average - prevWeek.average).toFixed(2);
 		});
 	}
