@@ -83,7 +83,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 					<MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
 				</TouchableOpacity>
 			</View>
-			{week && <Footer week={week} hide={hideFooter} />}
+			{week && <Footer week={week} hide={hideFooter} goal={user.goalWeight} />}
 			{showDatePicker && <DatePicker date={date} handleDateChange={handleDateChange} />}
 			{showWeightPicker && <WeightPicker handleWeightChange={handleWeightChange} weight={formattedWeight} />}
 		</View>

@@ -10,8 +10,9 @@ function Header() {
 				<FontAwesome5 name="running" size={24} color="black" />
 				{/* <Text style={{ fontSize: 16, verticalAlign: "middle" }}></Text> */}
 			</View>
-			<View>
-				<Text style={tw.style("text-base text-gray-600")}>Goal: 200lbs</Text>
+			<View style={styles.row}>
+				<FontAwesome5 name="running" size={18} color="black" />
+				<Text style={{ fontSize: 16, verticalAlign: "middle" }}>200 lbs</Text>
 			</View>
 		</View>
 	);

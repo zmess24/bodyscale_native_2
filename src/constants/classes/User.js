@@ -9,7 +9,12 @@ class User {
 		this.gender = null;
 		this.height = 0;
 		this.bodyFat = 0;
-		this.goalWeight = undefined;
+		this.goalWeight = initProps && initProps.goalWeight ? initProps.goalWeight : undefined;
+	}
+
+	setGoalWeight(weight) {
+		console.log("Creating Goal Weight");
+		this.goalWeight = weight;
 	}
 
 	createEntry(entry) {

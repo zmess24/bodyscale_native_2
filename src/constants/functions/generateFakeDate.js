@@ -5,7 +5,7 @@ function generateFakeDate() {
 	console.log("Generating fake data...");
 	try {
 		let user = new User();
-		user.goalWeight = 200;
+		user.setGoalWeight(200);
 		let startOfYear = moment().startOf("year");
 		let today = moment();
 		let daysDiff = today.diff(startOfYear, "days");
