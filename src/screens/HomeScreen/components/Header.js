@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import tw from "twrnc";
 
 function Header() {
 	return (
@@ -10,7 +11,7 @@ function Header() {
 				{/* <Text style={{ fontSize: 16, verticalAlign: "middle" }}></Text> */}
 			</View>
 			<View>
-				<Text style={{ fontSize: 16, verticalAlign: "middle" }}>Goal: 200</Text>
+				<Text style={tw.style("text-base text-gray-600")}>Goal: 200lbs</Text>
 			</View>
 		</View>
 	);

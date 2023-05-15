@@ -1,6 +1,7 @@
 import React from "react";
 import AreaChart from "./AreaChart";
 import moment from "moment";
+import { Text } from "react-native";
 
 function CurrentWeekChart({ userData }) {
 	let yMax = 0;
@@ -17,9 +18,12 @@ function CurrentWeekChart({ userData }) {
 			return { x: moment(d.date).format("MM/DD"), y: parseFloat(d.weight), key: i };
 		});
 
-	console.log("WEEK SCREEN", chartData);
-
-	return <AreaChart chartData={chartData} yMax={yMax} yMin={yMin} />;
+	console.log("RENDER CHART", chartData.length >= 2);
+	if (chartData.length >= 2) {
+		return <AreaChart chartData={chartData} yMax={yMax} yMin={yMin} />;
+	} else {
+		return <Text style={tw.style("text-4xl font-bold tracking-tight")}>Not Enough Data</Text>;
+	}
 }
 
 export default CurrentWeekChart;

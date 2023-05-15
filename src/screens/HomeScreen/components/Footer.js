@@ -9,7 +9,7 @@ function Footer({ week: { average, delta, startDate, endDate }, hide }) {
 	let formattedDelta = delta.replace("-", "");
 
 	return (
-		<View style={tw.style("w-100 h-1/6 flex-col", hide && "opacity-0")}>
+		<View style={tw.style("w-100 h-20 flex-col", hide && "opacity-0")}>
 			<View style={tw.style("flex flex-row justify-center mb-3")}>
 				<Text style={tw.style("text-sm text-gray-500")}>
 					{moment(startDate).format("MMMM Do")} - {moment(endDate).format("MMMM Do, YYYY")}
@@ -17,11 +17,11 @@ function Footer({ week: { average, delta, startDate, endDate }, hide }) {
 			</View>
 			<View style={tw.style("flex flex-row h-full justify-around border-solid border-2 border-gray-100")}>
 				<View style={tw.style("w-1/3 flex-col justify-center items-center")}>
-					<Text style={tw.style("text-xs text-gray-600")}>Average Weight</Text>
+					<Text style={tw.style("text-xs text-gray-600 items-start")}>Average Weight</Text>
 					<Text style={tw.style("text-xl font-semibold tracking-tight")}>{average} lbs</Text>
 				</View>
 				<View style={tw.style("w-1/3 flex-col justify-center items-center border-solid border-l-2 border-r-2 border-gray-100")}>
-					<Text style={tw.style("text-xs text-gray-600")}>Week Change</Text>
+					<Text style={tw.style("text-xs text-gray-600 items-start")}>Week Change</Text>
 					<View style={tw.style("flex flex-row items-center")}>
 						<Octicons
 							style={tw.style("mr-1 text-center")}
