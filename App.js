@@ -34,6 +34,7 @@ export default function App() {
 				<Tab.Screen
 					name="Home"
 					options={{
+						headerShown: false,
 						tabBarActiveTintColor: "black",
 						tabBarInactiveTintColor: "lightgrey",
 						tabBarLabel: "Home",

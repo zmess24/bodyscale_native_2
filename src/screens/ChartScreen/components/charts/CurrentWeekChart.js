@@ -19,6 +19,7 @@ function CurrentWeekChart({ userData }) {
 		});
 
 	console.log("RENDER CHART", chartData.length >= 2);
+
 	if (chartData.length >= 2) {
 		return <AreaChart chartData={chartData} yMax={yMax} yMin={yMin} />;
 	} else {

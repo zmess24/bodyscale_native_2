@@ -62,7 +62,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 	let formattedWeight = weight !== 0 ? weight : user.entries.at(-1) ? user.entries.at(-1).data.at(-1).weight : 50;
 
 	return (
-		<View style={styles.container}>
+		<View style={tw.style("flex flex-col justify-between items-center grow bg-white pl-5 pr-5 pt-15 pb-6")}>
 			<Header />
 			<View style={tw.style("w-90 flex flex-row justify-between")}>
 				<TouchableOpacity onPress={() => handleDateChange(null, new Date(moment(date).subtract(1, "d")))}>
