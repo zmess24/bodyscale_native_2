@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
-import tw from "twrnc";
 import { Octicons } from "@expo/vector-icons";
+import tw from "twrnc";
 
 function DataItem({ title, int, type = "change", styles = "" }) {
 	let negative = int.indexOf("-") > -1 ? true : false;
