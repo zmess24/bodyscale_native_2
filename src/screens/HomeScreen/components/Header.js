@@ -7,11 +7,11 @@ function Header() {
 	return (
 		<View style={styles.container}>
 			<View style={styles.row}>
-				<FontAwesome5 name="running" size={24} color="black" />
+				<FontAwesome5 name="running" size={26} color="black" />
 				{/* <Text style={{ fontSize: 16, verticalAlign: "middle" }}></Text> */}
 			</View>
 			<View style={styles.row}>
-				<FontAwesome5 name="running" size={18} color="black" />
+				<FontAwesome5 name="running" size={26} color="black" />
 				<Text style={{ fontSize: 16, verticalAlign: "middle" }}>200 lbs</Text>
 			</View>
 		</View>
