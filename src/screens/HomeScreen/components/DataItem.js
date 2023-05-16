@@ -4,8 +4,12 @@ import { Octicons } from "@expo/vector-icons";
 import tw from "twrnc";
 
 function DataItem({ title, int, type = "change", styles = "" }) {
-	let negative = int.indexOf("-") > -1 ? true : false;
-	let formatted = int.replace("-", "");
+	let negative, formatted;
+
+	if (int !== undefined) {
+		negative = int.indexOf("-") > -1 ? true : false;
+		formatted = int.replace("-", "");
+	}
 
 	return (
 		<View style={tw.style("w-1/3 flex-col justify-center items-center", styles)}>
@@ -19,7 +23,7 @@ function DataItem({ title, int, type = "change", styles = "" }) {
 						color={negative ? "red" : "green"}
 					/>
 				)}
-				<Text style={tw.style("text-xl font-semibold tracking-tight")}>{formatted ? formatted : "--"} lbs</Text>
+				<Text style={tw.style("text-xl font-semibold tracking-tight")}>{formatted ? `${formatted} lbs` : "---"}</Text>
 			</View>
 		</View>
 	);
