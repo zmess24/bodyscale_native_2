@@ -9,7 +9,7 @@ function DataItem({ title, int, type = "change", styles = "" }) {
 
 	return (
 		<View style={tw.style("w-1/3 flex-col justify-center items-center", styles)}>
-			<Text style={tw.style("text-xs text-gray-600 items-start")}>{title}</Text>
+			<Text style={tw.style("text-xs text-gray-600 items-start uppercase")}>{title}</Text>
 			<View style={tw.style("flex flex-row items-center")}>
 				{type === "change" && (
 					<Octicons

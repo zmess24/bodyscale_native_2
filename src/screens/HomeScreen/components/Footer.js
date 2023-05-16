@@ -13,9 +13,9 @@ function Footer({ week: { average, delta, startDate, endDate }, hide, goal }) {
 				</Text>
 			</View>
 			<View style={tw.style("flex flex-row h-full justify-around border-solid border-2 border-gray-100")}>
-				<DataItem title={"Average Weight"} int={average} type={"numeric"} />
-				<DataItem title={"Week Change"} int={delta} styles={"border-solid border-l-2 border-r-2 border-gray-100"} />
-				<DataItem title={"Remaining"} int={(goal - average).toFixed(2).toString()} />
+				<DataItem title={"AVERAGE WEIGHT"} int={average} type={"numeric"} />
+				<DataItem title={"WEEK CHANGE"} int={delta} styles={"border-solid border-l-2 border-r-2 border-gray-100"} />
+				<DataItem title={"REMAINING"} int={(goal - average).toFixed(2).toString()} />
 			</View>
 		</View>
 	);
