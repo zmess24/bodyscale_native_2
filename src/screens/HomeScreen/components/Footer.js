@@ -13,9 +13,9 @@ function Footer({ week: { average, delta, startDate, endDate }, hide, goal }) {
 					{moment(startDate).format("MMMM Do")} - {moment(endDate).format("MMMM Do, YYYY")}
 				</Text>
 			</View>
-			<View style={tw.style("flex flex-row h-full justify-around border-solid border-2 border-gray-100")}>
+			<View style={tw.style("flex flex-row h-full justify-around")}>
 				<DataItem title={"Average Weight"} int={average} type={"numeric"} />
-				<DataItem title={"Week Change"} int={delta} styles={"border-solid border-l-2 border-r-2 border-gray-100"} />
+				<DataItem title={"Week Change"} int={delta} />
 				<DataItem title={"Remaining"} int={remaining} type={remaining === undefined ? "numeric" : "change"} />
 			</View>
 		</View>

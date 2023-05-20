@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 import { Octicons } from "@expo/vector-icons";
 import tw from "twrnc";
 
-function DataItem({ title, int, type = "change", styles = "" }) {
+function DataItem({ title, int, type = "change" }) {
 	let negative, formatted;
 
 	if (int !== undefined) {
@@ -12,7 +12,7 @@ function DataItem({ title, int, type = "change", styles = "" }) {
 	}
 
 	return (
-		<View style={tw.style("w-1/3 flex-col justify-center items-center", styles)}>
+		<View style={tw.style("w-1/3 flex-col justify-center items-center")}>
 			<Text style={tw.style("text-xs text-gray-600 items-start uppercase")}>{title}</Text>
 			<View style={tw.style("flex flex-row items-center")}>
 				{type === "change" && (
@@ -23,7 +23,7 @@ function DataItem({ title, int, type = "change", styles = "" }) {
 						color={negative ? "red" : "green"}
 					/>
 				)}
-				<Text style={tw.style("text-xl font-semibold tracking-tight")}>{formatted ? `${formatted} lbs` : "---"}</Text>
+				<Text style={tw.style("text-lg font-semibold tracking-tight")}>{formatted ? `${formatted} lbs` : "---"}</Text>
 			</View>
 		</View>
 	);

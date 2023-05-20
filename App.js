@@ -30,7 +30,7 @@ export default function App() {
 
 	return (
 		<NavigationContainer>
-			<Tab.Navigator screenOptions={{ tabBarShowLabel: false }}>
+			<Tab.Navigator screenOptions={{ tabBarShowLabel: true }}>
 				<Tab.Screen
 					name="Home"
 					options={{
@@ -38,7 +38,7 @@ export default function App() {
 						tabBarActiveTintColor: "black",
 						tabBarInactiveTintColor: "lightgrey",
 						tabBarLabel: "Home",
-						tabBarIcon: ({ focused }) => <AntDesign name="home" size={24} color={focused ? "black" : "silver"} />,
+						tabBarIcon: ({ focused }) => <AntDesign name="home" size={21} color={focused ? "black" : "silver"} />,
 					}}
 				>
 					{(props) => <HomeScreen {...props} userData={{ user, setUser, weight, setWeight, date, setDate, week, setWeek }} />}
@@ -47,7 +47,7 @@ export default function App() {
 					name="Charts"
 					options={{
 						tabBarLabel: "Charts",
-						tabBarIcon: ({ focused }) => <AntDesign name="areachart" size={24} color={focused ? "black" : "silver"} />,
+						tabBarIcon: ({ focused }) => <AntDesign name="areachart" size={21} color={focused ? "black" : "silver"} />,
 					}}
 				>
 					{(props) => <ChartScreen {...props} userData={user} />}
@@ -56,20 +56,20 @@ export default function App() {
 					name="History"
 					options={{
 						tabBarLabel: "History",
-						tabBarIcon: ({ focused }) => <AntDesign name="calendar" size={24} color={focused ? "black" : "silver"} />,
+						tabBarIcon: ({ focused }) => <AntDesign name="calendar" size={21} color={focused ? "black" : "silver"} />,
 					}}
 				>
 					{(props) => <HistoryScreen {...props} userData={user} />}
 				</Tab.Screen>
-				<Tab.Screen
+				{/* <Tab.Screen
 					name="Settings"
 					options={{
 						tabBarLabel: "Settings",
-						tabBarIcon: ({ focused }) => <AntDesign name="setting" size={24} color={focused ? "black" : "silver"} />,
+						tabBarIcon: ({ focused }) => <AntDesign name="setting" size={20} color={focused ? "black" : "silver"} />,
 					}}
 				>
 					{(props) => <SettingsScreen {...props} userData={{ setUser, setWeight, setWeek }} />}
-				</Tab.Screen>
+				</Tab.Screen> */}
 			</Tab.Navigator>
 		</NavigationContainer>
 	);
