@@ -6,10 +6,10 @@ import tw from "twrnc";
 function Header() {
 	return (
 		<View style={styles.container}>
-			<View style={styles.row}>
+			<TouchableOpacity style={styles.row}>
 				<FontAwesome name="gear" size={24} color="black" />
 				{/* <Text style={{ fontSize: 16, verticalAlign: "middle" }}></Text> */}
-			</View>
+			</TouchableOpacity>
 			<View style={styles.row}>
 				<FontAwesome5 name="running" size={26} color="black" />
 				<Text style={{ fontSize: 16, verticalAlign: "middle" }}>200 lbs</Text>
