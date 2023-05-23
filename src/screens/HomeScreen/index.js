@@ -10,7 +10,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import tw from "twrnc";
 import { MaterialIcons } from "@expo/vector-icons";
-import BottomDrawer, { BottomDrawerMethods } from "react-native-animated-bottom-drawer";
+import SettingsDrawer from "./components/SetttingsDrawer";
+import { BottomDrawerMethods } from "react-native-animated-bottom-drawer";
 
 function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDate, week, setWeek }, route }) {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
@@ -87,12 +88,8 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 				>
 					<MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
 				</TouchableOpacity>
-				<BottomDrawer ref={bottomDrawerRef} openOnMount>
-					<View style={styles.contentContainer}>
-						<Text>Awesome 🎉</Text>
-					</View>
-				</BottomDrawer>
 			</View>
+			{/* <SettingsDrawer bottomDrawerRef={bottomDrawerRef} /> */}
 			{week && <Footer week={week} hide={hideFooter} goal={user.goalWeight} />}
 			{showDatePicker && <DatePicker date={date} handleDateChange={handleDateChange} />}
 			{showWeightPicker && <WeightPicker handleWeightChange={handleWeightChange} weight={formattedWeight} />}
