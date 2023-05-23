@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { setStorageData } from "../../db";
 import moment from "moment";
@@ -10,11 +10,13 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import tw from "twrnc";
 import { MaterialIcons } from "@expo/vector-icons";
+import BottomDrawer, { BottomDrawerMethods } from "react-native-animated-bottom-drawer";
 
 function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDate, week, setWeek }, route }) {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
 	const [showDatePicker, setShowDatePicker] = useState(false);
 	const [hideFooter, setHideFooter] = useState(false);
+	const bottomDrawerRef = useRef(BottomDrawerMethods);
 
 	useEffect(() => {
 		if (route.params && route.params.date) handleDateChange(null, route.params.date);
@@ -75,6 +77,9 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 					<TouchableOpacity onPress={() => togglePicker("date")}>
 						<Text style={tw.style("text-base text-gray-600")}>{moment(date).format("MMMM Do, YYYY")}</Text>
 					</TouchableOpacity>
+					<TouchableOpacity onPress={() => bottomDrawerRef.current.open()}>
+						<Text>Drawer</Text>
+					</TouchableOpacity>
 				</View>
 				<TouchableOpacity
 					disabled={moment(date).format("YYYY-MM-DD") === moment().format("YYYY-MM-DD") ? true : false}
@@ -82,6 +87,11 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 				>
 					<MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
 				</TouchableOpacity>
+				<BottomDrawer ref={bottomDrawerRef} openOnMount>
+					<View style={styles.contentContainer}>
+						<Text>Awesome 🎉</Text>
+					</View>
+				</BottomDrawer>
 			</View>
 			{week && <Footer week={week} hide={hideFooter} goal={user.goalWeight} />}
 			{showDatePicker && <DatePicker date={date} handleDateChange={handleDateChange} />}
@@ -92,18 +102,12 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 
 const styles = StyleSheet.create({
 	container: {
-		...constantStyles.screenStyles,
-		alignItems: "center",
-		flexDirection: "column",
-		justifyContent: "space-between",
-		padding: 20,
+		flex: 1,
+		padding: 24,
 	},
-	center: {
-		display: "flex",
+	contentContainer: {
+		flex: 1,
 		alignItems: "center",
-		borderWidth: 1,
-		borderColor: "black",
-		borderRadius: 10,
 	},
 });
 

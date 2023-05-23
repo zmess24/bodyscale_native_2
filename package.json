@@ -21,6 +21,7 @@
     "moment": "^2.29.4",
     "react": "18.2.0",
     "react-native": "0.71.6",
+    "react-native-animated-bottom-drawer": "^0.0.22",
     "react-native-svg": "13.4.0",
     "twrnc": "^3.6.0",
     "victory-native": "^36.6.8"
