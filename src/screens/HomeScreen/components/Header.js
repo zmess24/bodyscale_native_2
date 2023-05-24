@@ -3,12 +3,11 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 import tw from "twrnc";
 
-function Header() {
+function Header({ onPressSettings }) {
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity style={styles.row}>
+			<TouchableOpacity style={styles.row} onPress={onPressSettings}>
 				<FontAwesome name="gear" size={24} color="black" />
-				{/* <Text style={{ fontSize: 16, verticalAlign: "middle" }}></Text> */}
 			</TouchableOpacity>
 			<View style={styles.row}>
 				<FontAwesome5 name="running" size={26} color="black" />
