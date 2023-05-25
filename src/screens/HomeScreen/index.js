@@ -1,25 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import { setStorageData } from "../../db";
 import moment from "moment";
 import { Entry } from "../../constants/classes";
-import { constantStyles } from "../../constants/styles";
 import WeightPicker from "./components/WeightPicker";
 import DatePicker from "./components/DatePicker";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Settings from "./components/Settings";
 import tw from "twrnc";
 import { MaterialIcons } from "@expo/vector-icons";
-import BottomDrawer, { BottomDrawerMethods } from "react-native-animated-bottom-drawer";
+import { BottomDrawerMethods } from "react-native-animated-bottom-drawer";
 
 function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDate, week, setWeek }, route }) {
 	const [showWeightPicker, setShowWeightPicker] = useState(false);
 	const [showDatePicker, setShowDatePicker] = useState(false);
 	const [hideFooter, setHideFooter] = useState(false);
 	const bottomDrawerRef = useRef(BottomDrawerMethods);
-	const windowHeight = Dimensions.get("window").height * 0.9;
-
-	console.log(windowHeight);
 
 	useEffect(() => {
 		if (route.params && route.params.date) handleDateChange(null, route.params.date);
@@ -92,11 +89,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 					<MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
 				</TouchableOpacity>
 			</View>
-			<BottomDrawer ref={bottomDrawerRef} initialHeight={windowHeight}>
-				<View style={{ flex: 1, alignItems: "center" }}>
-					<Text>Awesome 🎉</Text>
-				</View>
-			</BottomDrawer>
+			<Settings bottomDrawerRef={bottomDrawerRef} />
 			{week && <Footer week={week} hide={hideFooter} goal={user.goalWeight} />}
 			{showDatePicker && <DatePicker date={date} handleDateChange={handleDateChange} />}
 			{showWeightPicker && <WeightPicker handleWeightChange={handleWeightChange} weight={formattedWeight} />}
