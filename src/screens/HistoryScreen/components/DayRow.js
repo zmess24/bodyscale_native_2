@@ -11,9 +11,9 @@ function DayRow({ data: { date, weight }, navigation }) {
 	};
 
 	return (
-		<Pressable style={styles.sectionItem} onPress={handlePress}>
-			<Text style={tw.style("text-base")}>{moment(date).format("MM-DD-YYYY")}</Text>
-			<Text style={tw.style("text-base")}>{weight} lbs</Text>
+		<Pressable style={tw.style("flex flex-row justify-between py-3 px-3")} onPress={handlePress}>
+			<Text style={tw.style("text-sm text-gray-800")}>{moment(date).format("MM-DD-YYYY")}</Text>
+			<Text style={tw.style("text-sm text-gray-800")}>{weight} lbs</Text>
 		</Pressable>
 	);
 }

@@ -1,8 +1,9 @@
 import React, { useMemo, ref } from "react";
-import { StyleSheet, View, SectionList, SafeAreaView, Button } from "react-native";
+import { StyleSheet, View, SectionList, SafeAreaView } from "react-native";
 import DayRow from "./components/DayRow";
 import WeekRow from "./components/WeekRow";
 import { constantStyles } from "../../constants/styles";
+import tw from "twrnc";
 
 function HistoryScreen({ userData: { entries }, navigation }) {
 	let sortedData = useMemo(() => entries.sort((a, b) => new Date(b.endDate) - new Date(a.startDate)), [entries]);
@@ -11,7 +12,7 @@ function HistoryScreen({ userData: { entries }, navigation }) {
 	const keyExtractor = (item, index) => index;
 
 	return (
-		<View style={styles.container}>
+		<View style={tw.style("flex flex-col grow bg-white pl-5 pr-5 pt-15")}>
 			<SafeAreaView style={{ flex: 1 }}>
 				<SectionList
 					initialNumToRender={20}

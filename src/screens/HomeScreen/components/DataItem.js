@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { Octicons } from "@expo/vector-icons";
 import tw from "twrnc";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 function DataItem({ title, int, type = "change" }) {
 	let negative, formatted;

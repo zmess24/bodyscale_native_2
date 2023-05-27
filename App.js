@@ -56,20 +56,14 @@ export default function App() {
 					name="History"
 					options={{
 						tabBarLabel: "History",
+						headerShown: false,
+						tabBarActiveTintColor: "black",
+						tabBarInactiveTintColor: "lightgrey",
 						tabBarIcon: ({ focused }) => <AntDesign name="calendar" size={21} color={focused ? "black" : "silver"} />,
 					}}
 				>
 					{(props) => <HistoryScreen {...props} userData={user} />}
 				</Tab.Screen>
-				{/* <Tab.Screen
-					name="Settings"
-					options={{
-						tabBarLabel: "Settings",
-						tabBarIcon: ({ focused }) => <AntDesign name="setting" size={20} color={focused ? "black" : "silver"} />,
-					}}
-				>
-					{(props) => <SettingsScreen {...props} userData={{ setUser, setWeight, setWeek }} />}
-				</Tab.Screen> */}
 			</Tab.Navigator>
 		</NavigationContainer>
 	);
