@@ -9,10 +9,10 @@ function Header({ onPressSettings }) {
 			<TouchableOpacity style={styles.row} onPress={onPressSettings}>
 				<FontAwesome name="gear" size={24} color="black" />
 			</TouchableOpacity>
-			<View style={styles.row}>
+			{/* <View style={styles.row}>
 				<FontAwesome5 name="running" size={26} color="black" />
 				<Text style={{ fontSize: 16, verticalAlign: "middle" }}>200 lbs</Text>
-			</View>
+			</View> */}
 		</View>
 	);
 }
