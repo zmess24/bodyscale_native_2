@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./src/screens/HomeScreen";
 import HistoryScreen from "./src/screens/HistoryScreen";
-import SettingsScreen from "./src/screens/SettingsScreen";
+// import SettingsScreen from "./src/screens/SettingsScreen";
 import ChartScreen from "./src/screens/ChartScreen";
 import { AntDesign } from "@expo/vector-icons";
 import useLoadUserData from "./src/hooks/useLoadUserData";
