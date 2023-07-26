@@ -12,7 +12,7 @@ function HistoryScreen({ userData: { entries }, navigation }) {
 	const keyExtractor = (item, index) => index;
 
 	return (
-		<View style={tw.style("flex flex-col grow bg-white pl-5 pr-5 pt-15")}>
+		<View style={tw.style("flex flex-col grow bg-white pl-3 pr-3 pt-15")}>
 			<SafeAreaView style={{ flex: 1 }}>
 				<SectionList
 					initialNumToRender={20}

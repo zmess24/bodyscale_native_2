@@ -28,40 +28,25 @@ export default function App() {
 		checkDataLoaded();
 	}, [appIsReady]);
 
+	const loadOptions = ({ tabBarLabel, iconName }) => {
+		return {
+			tabBarLabel,
+			headerShown: false,
+			tabBarActiveTintColor: "black",
+			tabBarInactiveTintColor: "lightgrey",
+			tabBarIcon: ({ focused }) => <AntDesign name={iconName} size={21} color={focused ? "black" : "silver"} />,
+		};
+	};
 	return (
 		<NavigationContainer>
 			<Tab.Navigator screenOptions={{ tabBarShowLabel: true }}>
-				<Tab.Screen
-					name="Home"
-					options={{
-						headerShown: false,
-						tabBarActiveTintColor: "black",
-						tabBarInactiveTintColor: "lightgrey",
-						tabBarLabel: "Home",
-						tabBarIcon: ({ focused }) => <AntDesign name="home" size={21} color={focused ? "black" : "silver"} />,
-					}}
-				>
+				<Tab.Screen name="Home" options={loadOptions({ tabBarLabel: "Home", iconName: "home" })}>
 					{(props) => <HomeScreen {...props} userData={{ user, setUser, weight, setWeight, date, setDate, week, setWeek }} />}
 				</Tab.Screen>
-				<Tab.Screen
-					name="Charts"
-					options={{
-						tabBarLabel: "Charts",
-						tabBarIcon: ({ focused }) => <AntDesign name="areachart" size={21} color={focused ? "black" : "silver"} />,
-					}}
-				>
+				<Tab.Screen name="Charts" options={loadOptions({ tabBarLabel: "Charts", iconName: "areachart" })}>
 					{(props) => <ChartScreen {...props} userData={user} />}
 				</Tab.Screen>
-				<Tab.Screen
-					name="History"
-					options={{
-						tabBarLabel: "History",
-						headerShown: false,
-						tabBarActiveTintColor: "black",
-						tabBarInactiveTintColor: "lightgrey",
-						tabBarIcon: ({ focused }) => <AntDesign name="calendar" size={21} color={focused ? "black" : "silver"} />,
-					}}
-				>
+				<Tab.Screen name="History" options={loadOptions({ tabBarLabel: "History", iconName: "calendar" })}>
 					{(props) => <HistoryScreen {...props} userData={user} />}
 				</Tab.Screen>
 			</Tab.Navigator>
