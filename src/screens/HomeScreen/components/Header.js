@@ -5,14 +5,15 @@ import tw from "twrnc";
 
 function Header({ onPressSettings }) {
 	return (
-		<View style={tw.style("flex flex-row justify-between border-2 border-red-900")}>
-			<TouchableOpacity style={styles.row} onPress={onPressSettings}>
+		<View style={tw.style("flex flex-row justify-between")}>
+			<TouchableOpacity style={tw.style("flex flex-col")} onPress={onPressSettings}>
 				<FontAwesome name="gear" size={24} color="black" />
 			</TouchableOpacity>
-			{/* <View style={styles.row}>
-				<FontAwesome5 name="running" size={26} color="black" />
-				<Text style={{ fontSize: 16, verticalAlign: "middle" }}>200 lbs</Text>
-			</View> */}
+			<View style={styles.row}>
+				<TouchableOpacity style={tw.style("flex flex-col")} onPress={onPressSettings}>
+					<FontAwesome name="gear" size={24} color="black" />
+				</TouchableOpacity>
+			</View>
 		</View>
 	);
 }

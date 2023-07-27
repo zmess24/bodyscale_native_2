@@ -6,16 +6,16 @@ import tw from "twrnc";
 
 function DateChangeTabs({ children, date, handleDateChange, dateUnit }) {
 	return (
-		<View style={tw.style("flex flex-row justify-between border-2 border-red-900")}>
+		<View style={tw.style("flex flex-row justify-between")}>
 			<TouchableOpacity onPress={() => handleDateChange(null, new Date(moment(date).subtract(1, dateUnit)))}>
-				<MaterialIcons name="keyboard-arrow-left" size={30} color="black" />
+				<MaterialIcons name="keyboard-arrow-left" size={24} color="black" />
 			</TouchableOpacity>
 			{children}
 			<TouchableOpacity
 				disabled={moment(date).format("YYYY-MM-DD") === moment().format("YYYY-MM-DD") ? true : false}
 				onPress={() => handleDateChange(null, new Date(moment(date).add(1, dateUnit)))}
 			>
-				<MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
+				<MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
 			</TouchableOpacity>
 		</View>
 	);

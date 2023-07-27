@@ -13,8 +13,8 @@ function DataItem({ icon, int, type = "change" }) {
 	}
 
 	return (
-		<View style={tw.style("w-1/3 flex-col justify-center items-center")}>
-			{icon === "target" ? <Feather name="target" size={16} color="black" /> : <MaterialCommunityIcons name={icon} size={16} color="black" />}
+		<View style={tw.style("w-1/3 flex-col items-center")}>
+			{icon === "target" ? <Feather name="target" size={18} color="black" /> : <MaterialCommunityIcons name={icon} size={18} color="black" />}
 			<View style={tw.style("flex flex-row items-center")}>
 				{type === "change" && (
 					<Octicons
