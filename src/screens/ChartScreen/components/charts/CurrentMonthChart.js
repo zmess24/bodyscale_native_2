@@ -27,7 +27,7 @@ function CurrentMonthChart({ userData }) {
 		return { x: new Date(moment(w.startDate)), y: parseFloat(w.average), key: i };
 	});
 
-	return <AreaChart chartData={chartDataDays} yMax={yMax} yMin={yMin} />;
+	return <AreaChart chartData={chartDataWeeks} yMax={yMax} yMin={yMin} />;
 }
 
 export default CurrentMonthChart;

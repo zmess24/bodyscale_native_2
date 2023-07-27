@@ -13,10 +13,13 @@ function ChartScreen({ userData }) {
 	return (
 		<View style={tw.style("flex flex-col justify-between grow bg-white pl-3 pr-3 pt-15")}>
 			<Header setActiveTab={setActiveTab} activeTab={activeTab} />
-			{activeTab === "all" && <AllTimeChart userData={userData} />}
-			{activeTab === "year" && <CurrentYearChart userData={userData} />}
-			{activeTab === "month" && <CurrentMonthChart userData={userData} />}
-			{activeTab === "week" && <CurrentWeekChart userData={userData} />}
+			<View style={tw.style("flex flex-row")}>
+				{activeTab === "all" && <AllTimeChart userData={userData} />}
+				{activeTab === "year" && <CurrentYearChart userData={userData} />}
+				{activeTab === "month" && <CurrentMonthChart userData={userData} />}
+				{activeTab === "week" && <CurrentWeekChart userData={userData} />}
+			</View>
+			<View style={tw.style("flex flex-row")}></View>
 		</View>
 	);
 }
