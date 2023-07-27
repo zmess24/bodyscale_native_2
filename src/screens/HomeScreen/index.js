@@ -9,7 +9,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Settings from "./components/Settings";
 import tw from "twrnc";
-import { MaterialIcons } from "@expo/vector-icons";
+import DateChangeTabs from "../../components/DateChangeTabs";
 import { BottomDrawerMethods } from "react-native-animated-bottom-drawer";
 
 function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDate, week, setWeek }, route }) {
@@ -70,10 +70,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 	return (
 		<View style={tw.style("flex flex-col justify-between items-center grow bg-white pl-5 pr-5 pt-15 pb-6")}>
 			<Header onPressSettings={onPressSettings} />
-			<View style={tw.style("w-90 flex flex-row justify-between")}>
-				<TouchableOpacity onPress={() => handleDateChange(null, new Date(moment(date).subtract(1, "d")))}>
-					<MaterialIcons name="keyboard-arrow-left" size={30} color="black" />
-				</TouchableOpacity>
+			<DateChangeTabs date={date} handleDateChange={handleDateChange} dateUnit={"d"}>
 				<View style={tw.style("flex flex-col items-center")}>
 					<TouchableOpacity onPress={() => togglePicker("weight")}>
 						<Text style={tw.style("text-4xl font-bold tracking-tight")}>{weight} lbs</Text>
@@ -82,13 +79,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 						<Text style={tw.style("text-base text-gray-600")}>{moment(date).format("MMMM Do, YYYY")}</Text>
 					</TouchableOpacity>
 				</View>
-				<TouchableOpacity
-					disabled={moment(date).format("YYYY-MM-DD") === moment().format("YYYY-MM-DD") ? true : false}
-					onPress={() => handleDateChange(null, new Date(moment(date).add(1, "d")))}
-				>
-					<MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
-				</TouchableOpacity>
-			</View>
+			</DateChangeTabs>
 			<Settings bottomDrawerRef={bottomDrawerRef} />
 			{week && <Footer week={week} hide={hideFooter} goal={user.goalWeight} />}
 			{showDatePicker && <DatePicker date={date} handleDateChange={handleDateChange} />}

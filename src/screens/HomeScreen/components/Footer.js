@@ -14,8 +14,8 @@ function Footer({ week: { average, delta, startDate, endDate }, hide, goal }) {
 				</Text>
 			</View>
 			<View style={tw.style("flex flex-row h-full justify-around")}>
-				<DataItem title={"Average Weight"} int={average} type={"numeric"} />
-				<DataItem title={"Week Change"} int={delta} />
+				<DataItem title={"Average"} int={average} type={"numeric"} />
+				<DataItem title={"Change"} int={delta} />
 				<DataItem title={"Remaining"} int={remaining} type={remaining === undefined ? "numeric" : "change"} />
 			</View>
 		</View>
