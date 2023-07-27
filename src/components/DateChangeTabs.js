@@ -6,7 +6,7 @@ import tw from "twrnc";
 
 function DateChangeTabs({ children, date, handleDateChange, dateUnit }) {
 	return (
-		<View style={tw.style("w-90 flex flex-row justify-between")}>
+		<View style={tw.style("flex flex-row justify-between border-2 border-red-900")}>
 			<TouchableOpacity onPress={() => handleDateChange(null, new Date(moment(date).subtract(1, dateUnit)))}>
 				<MaterialIcons name="keyboard-arrow-left" size={30} color="black" />
 			</TouchableOpacity>

@@ -2,9 +2,9 @@ import React from "react";
 import { Text, View } from "react-native";
 import { Octicons } from "@expo/vector-icons";
 import tw from "twrnc";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 
-function DataItem({ title, int, type = "change" }) {
+function DataItem({ icon, int, type = "change" }) {
 	let negative, formatted;
 
 	if (int !== undefined) {
@@ -14,7 +14,7 @@ function DataItem({ title, int, type = "change" }) {
 
 	return (
 		<View style={tw.style("w-1/3 flex-col justify-center items-center")}>
-			<Text style={tw.style("text-xs text-gray-600 items-start uppercase")}>{title}</Text>
+			{icon === "target" ? <Feather name="target" size={16} color="black" /> : <MaterialCommunityIcons name={icon} size={16} color="black" />}
 			<View style={tw.style("flex flex-row items-center")}>
 				{type === "change" && (
 					<Octicons

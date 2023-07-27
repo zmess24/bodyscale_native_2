@@ -5,7 +5,7 @@ import tw from "twrnc";
 
 function Header({ onPressSettings }) {
 	return (
-		<View style={styles.container}>
+		<View style={tw.style("flex flex-row justify-between border-2 border-red-900")}>
 			<TouchableOpacity style={styles.row} onPress={onPressSettings}>
 				<FontAwesome name="gear" size={24} color="black" />
 			</TouchableOpacity>
