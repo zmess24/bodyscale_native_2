@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import { constantStyles } from "../../constants/styles";
+import tw from "twrnc";
+import { View } from "react-native";
 import Header from "./components/Header";
 import AllTimeChart from "./components/charts/AllTimeChart";
 import CurrentYearChart from "./components/charts/CurrentYearChart";
@@ -11,7 +11,7 @@ function ChartScreen({ userData }) {
 	const [activeTab, setActiveTab] = useState("all");
 
 	return (
-		<View style={styles.container}>
+		<View style={tw.style("flex flex-col justify-between grow bg-white pl-3 pr-3 pt-15")}>
 			<Header setActiveTab={setActiveTab} activeTab={activeTab} />
 			{activeTab === "all" && <AllTimeChart userData={userData} />}
 			{activeTab === "year" && <CurrentYearChart userData={userData} />}
@@ -20,12 +20,5 @@ function ChartScreen({ userData }) {
 		</View>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		...constantStyles.screenStyles,
-		alignItems: "center",
-	},
-});
 
 export default ChartScreen;

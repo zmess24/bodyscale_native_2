@@ -68,7 +68,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 	let formattedWeight = weight !== 0 ? weight : user.entries.at(-1) ? user.entries.at(-1).data.at(-1).weight : 50;
 
 	return (
-		<View style={tw.style("flex flex-col justify-between h-screen grow bg-white pl-3 pr-3 pt-15")}>
+		<View style={tw.style("flex flex-col justify-between grow bg-white pl-3 pr-3 pt-15")}>
 			<Header onPressSettings={onPressSettings} />
 			<DateChangeTabs date={date} handleDateChange={handleDateChange} dateUnit={"d"}>
 				<View style={tw.style("flex flex-col items-center")}>
