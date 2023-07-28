@@ -16,8 +16,8 @@ function Footer({ week: { average, delta, startDate, endDate }, hide, goal }) {
 			</View>
 			<View style={tw.style("flex flex-row justify-between")}>
 				<DataItem icon="scale-bathroom" position={""} int={average} type={"numeric"} />
-				<DataItem icon="delta" int={delta} />
-				<DataItem icon="target" int={remaining} type={remaining === undefined ? "numeric" : "change"} />
+				<DataItem icon="exchange" int={delta} />
+				<DataItem icon="bullseye" int={remaining} type={remaining === undefined ? "numeric" : "change"} />
 			</View>
 		</View>
 	);
