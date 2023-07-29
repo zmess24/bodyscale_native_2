@@ -3,7 +3,7 @@ import { Text, View, Dimensions } from "react-native";
 import DataItem from "./DataItem";
 import moment from "moment";
 import tw from "twrnc";
-import { VictoryChart, VictoryLine, VictoryAxis, VictoryTheme } from "victory-native";
+import { VictoryChart, VictoryLine, VictoryScatter, VictoryAxis, VictoryTheme } from "victory-native";
 
 function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal }) {
 	let remaining = goal ? (goal - average).toFixed(2).toString() : "--";
@@ -51,8 +51,25 @@ function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal
 			</View>
 			<View style={tw.style("flex flex-row ")}>
 				<VictoryChart width={windowWidth} height={windowHeight} theme={VictoryTheme.material} domain={{ y: [yMin - 5, yMax + 5] }}>
-					{/* <VictoryAxis tickValues={["07/23", "07/24", "07/25", "07/26", "07/27", "07/28", "07/29"]} /> */}
-					<VictoryLine data={chartData} />
+					<VictoryAxis
+						dependentAxis
+						style={{
+							grid: { stroke: "white", strokeWidth: 0 },
+							ticks: { stroke: "white", strokeWidth: 0 },
+						}}
+					/>
+					<VictoryAxis
+						style={{
+							grid: { stroke: "lightgrey", strokeWidth: 1 },
+							ticks: { stroke: "white", strokeWidth: 0 },
+						}}
+					/>
+					<VictoryLine
+						data={chartData}
+						interpolation="monotoneX"
+						style={{ data: { stroke: "black", strokeWidth: 2, strokeLinecap: "round" } }}
+					/>
+					<VictoryScatter size={4} style={{ data: { fill: "white", stroke: "#C0C0C0", strokeWidth: 1 } }} data={chartData} />
 				</VictoryChart>
 			</View>
 		</View>
