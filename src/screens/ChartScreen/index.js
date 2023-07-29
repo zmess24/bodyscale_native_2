@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import AllTimeChart from "./components/charts/AllTimeChart";
 import CurrentYearChart from "./components/charts/CurrentYearChart";
 import CurrentMonthChart from "./components/charts/CurrentMonthChart";
-import CurrentWeekChart from "./components/charts/CurrentWeekChart";
+// import CurrentWeekChart from "./components/charts/CurrentWeekChart";
 
 function ChartScreen({ userData }) {
 	const [activeTab, setActiveTab] = useState("all");
@@ -18,7 +18,7 @@ function ChartScreen({ userData }) {
 				{activeTab === "all" && <AllTimeChart userData={userData} />}
 				{activeTab === "year" && <CurrentYearChart userData={userData} />}
 				{activeTab === "month" && <CurrentMonthChart userData={userData} />}
-				{activeTab === "week" && <CurrentWeekChart userData={userData} />}
+				{/* {activeTab === "week" && <CurrentWeekChart userData={userData} />} */}
 			</View>
 			{/* <View style={tw.style("flex flex-row")}>
 				<View style={tw.style("flex flex-col")}>
