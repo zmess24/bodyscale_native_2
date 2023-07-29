@@ -1,6 +1,6 @@
 import React from "react";
 import { Dimensions } from "react-native";
-import { VictoryArea, VictoryChart, VictoryTheme, VictoryAxis } from "victory-native";
+import { VictoryArea, VictoryChart, VictoryTheme, VictoryAxis, VictoryLine } from "victory-native";
 
 function AreaChart({ chartData, yMin, yMax }) {
 	const windowWidth = Dimensions.get("window").width;

@@ -3,7 +3,7 @@ import { Text, View, Dimensions } from "react-native";
 import DataItem from "./DataItem";
 import moment from "moment";
 import tw from "twrnc";
-import { VictoryChart, VictoryLine, VictoryScatter, VictoryAxis, VictoryTheme } from "victory-native";
+import { VictoryChart, VictoryLine, VictoryScatter, VictoryAxis, VictoryTheme, VictoryGroup } from "victory-native";
 
 function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal }) {
 	let remaining = goal ? (goal - average).toFixed(2).toString() : "--";
@@ -26,6 +26,8 @@ function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal
 
 	let currentWeek = enumerateDaysBetweenDates(startDate, endDate);
 
+	console.log(currentWeek);
+
 	let chartData = currentWeek.map((date, i) => {
 		let found = data.find((entry) => entry.date == date);
 		if (found) {
@@ -37,6 +39,17 @@ function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal
 		}
 	});
 
+	// let chartData = data
+	// 	.sort((a, b) => new Date(a.date) - new Date(b.date))
+	// 	.map((entry, i) => {
+	// 		if (parseFloat(entry.weight) < yMin) yMin = parseFloat(entry.weight);
+	// 		if (parseFloat(entry.weight) > yMax) yMax = parseFloat(entry.weight);
+	// 		return { x: moment(entry.date).format("MM/DD"), y: parseFloat(entry.weight), key: i };
+	// 	});
+
+	console.log(chartData);
+
+	console.log(chartData);
 	return (
 		<View style={tw.style("flex-col", hide && "opacity-0")}>
 			<View style={tw.style("flex flex-row justify-center mb-5")}>
@@ -49,8 +62,9 @@ function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal
 				<DataItem icon="exchange" int={delta} />
 				<DataItem icon="bullseye" int={remaining} type={remaining === undefined ? "numeric" : "change"} />
 			</View>
-			<View style={tw.style("flex flex-row ")}>
+			<View style={tw.style("flex flex-row")}>
 				<VictoryChart width={windowWidth} height={windowHeight} theme={VictoryTheme.material} domain={{ y: [yMin - 5, yMax + 5] }}>
+					{/* <VictoryGroup data={chartData} tickValues={currentWeek} tickFor> */}
 					<VictoryAxis
 						dependentAxis
 						style={{
@@ -63,13 +77,21 @@ function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal
 							grid: { stroke: "lightgrey", strokeWidth: 1 },
 							ticks: { stroke: "white", strokeWidth: 0 },
 						}}
+						// tickValues={currentWeek}
 					/>
 					<VictoryLine
-						data={chartData}
 						interpolation="monotoneX"
 						style={{ data: { stroke: "black", strokeWidth: 2, strokeLinecap: "round" } }}
+						scale={{ x: "time", y: "linear" }}
+						data={chartData}
 					/>
-					<VictoryScatter size={4} style={{ data: { fill: "white", stroke: "#C0C0C0", strokeWidth: 1 } }} data={chartData} />
+					<VictoryScatter
+						size={4}
+						labels={({ datum }) => datum.y}
+						style={{ data: { fill: "white", stroke: "#C0C0C0", strokeWidth: 1 } }}
+						data={chartData}
+					/>
+					{/* </VictoryGroup> */}
 				</VictoryChart>
 			</View>
 		</View>
