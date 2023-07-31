@@ -4,7 +4,7 @@ import DataItem from "./DataItem";
 import moment from "moment";
 import tw from "twrnc";
 import DateChangeTabs from "../../../components/DateChangeTabs";
-import { VictoryChart, VictoryBar, VictoryLine, VictoryScatter, VictoryAxis, VictoryTheme, VictoryGroup } from "victory-native";
+import { VictoryChart, VictoryArea, VictoryLine, VictoryScatter, VictoryAxis, VictoryTheme, VictoryGroup } from "victory-native";
 import { colorTheme } from "../../../constants/styles";
 
 function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal, handleDateChange }) {
@@ -28,30 +28,27 @@ function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal
 
 	let currentWeek = enumerateDaysBetweenDates(startDate, endDate);
 
-	console.log(currentWeek);
+	// let chartData = data.map((date, i) => {
+	// 	let found = data.find((entry) => entry.date == date);
+	// 	if (found) {
+	// 		if (parseFloat(found.weight) < yMin) yMin = parseFloat(found.weight);
+	// 		if (parseFloat(found.weight) > yMax) yMax = parseFloat(found.weight);
+	// 		return { x: moment(date).format("MM/DD"), y: parseFloat(found.weight), key: i };
+	// 	} else {
+	// 		return { x: moment(date).format("MM/DD"), y: null, key: i };
+	// 	}
+	// });
 
-	let chartData = currentWeek.map((date, i) => {
-		let found = data.find((entry) => entry.date == date);
-		if (found) {
-			if (parseFloat(found.weight) < yMin) yMin = parseFloat(found.weight);
-			if (parseFloat(found.weight) > yMax) yMax = parseFloat(found.weight);
-			return { x: moment(date).format("MM/DD"), y: parseFloat(found.weight), key: i };
-		} else {
-			return { x: moment(date).format("MM/DD"), y: null, key: i };
-		}
-	});
+	let chartData = data
+		.sort((a, b) => new Date(a.date) - new Date(b.date))
+		.map((entry, i) => {
+			if (parseFloat(entry.weight) < yMin) yMin = parseFloat(entry.weight);
+			if (parseFloat(entry.weight) > yMax) yMax = parseFloat(entry.weight);
+			return { x: moment(entry.date).format("YYYY-MM-DD"), y: parseFloat(entry.weight), key: i };
+		});
 
-	// let chartData = data
-	// 	.sort((a, b) => new Date(a.date) - new Date(b.date))
-	// 	.map((entry, i) => {
-	// 		if (parseFloat(entry.weight) < yMin) yMin = parseFloat(entry.weight);
-	// 		if (parseFloat(entry.weight) > yMax) yMax = parseFloat(entry.weight);
-	// 		return { x: moment(entry.date).format("MM/DD"), y: parseFloat(entry.weight), key: i };
-	// 	});
-
-	console.log(chartData);
-
-	console.log(chartData);
+	console.log("Current Week", currentWeek);
+	console.log("Data", chartData);
 	return (
 		<View style={tw.style("flex-col", hide && "opacity-0")}>
 			<DateChangeTabs date={startDate} handleDateChange={handleDateChange} dateUnit={"w"} size={18} padding={"mx-12"}>
@@ -72,7 +69,6 @@ function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal
 					domainPadding={{ x: 30 }}
 					domain={{ y: [yMin - 5, yMax + 5] }}
 				>
-					{/* <VictoryGroup data={chartData} tickValues={currentWeek} tickFor> */}
 					<VictoryAxis
 						dependentAxis
 						style={{
@@ -81,20 +77,21 @@ function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal
 						}}
 					/>
 					<VictoryAxis
+						tickValues={currentWeek}
+						maxDomain={{ x: 7 }}
+						scale={{ x: "time" }}
 						style={{
 							grid: { stroke: "lightgrey", strokeWidth: 1 },
 							ticks: { stroke: "white", strokeWidth: 0 },
 						}}
-						// tickValues={currentWeek}
 					/>
-					<VictoryBar
+					<VictoryArea
 						interpolation="monotoneX"
-						style={{ data: { stroke: colorTheme.accent, strokeWidth: 3, fill: colorTheme.accent } }}
+						style={{ data: { stroke: colorTheme.accent, strokeWidth: 2, fill: colorTheme.accent, fillOpacity: 0.25 } }}
 						scale={{ x: "time", y: "linear" }}
 						data={chartData}
 					/>
-					{/* <VictoryScatter size={4} style={{ data: { fill: "white", stroke: "lightgray", strokeWidth: 1 } }} data={chartData} /> */}
-					{/* </VictoryGroup> */}
+					<VictoryScatter size={4} style={{ data: { fill: "white", stroke: "lightgray", strokeWidth: 1 } }} data={chartData} />
 				</VictoryChart>
 			</View>
 		</View>
