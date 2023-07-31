@@ -15,11 +15,11 @@ function DataItem({ icon, int, type = "change" }) {
 	return (
 		<View style={tw.style("w-1/3 flex-col items-center")}>
 			{icon === "scale-bathroom" ? (
-				<MaterialCommunityIcons name="scale-bathroom" size={20} color="gray" />
+				<MaterialCommunityIcons name="scale-bathroom" size={20} color="#1e90ff" />
 			) : (
-				<FontAwesome name={icon} size={20} color="gray" />
+				<FontAwesome name={icon} size={20} color="#1e90ff" />
 			)}
-			<View style={tw.style("flex flex-row items-center mt-2")}>
+			<View style={tw.style("flex flex-row items-center mt-1")}>
 				{type === "change" && (
 					<Octicons
 						style={tw.style("mr-1 text-center")}

@@ -70,7 +70,7 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 	return (
 		<View style={tw.style("flex flex-col justify-between grow bg-white pl-3 pr-3 pt-15")}>
 			<Header onPressSettings={onPressSettings} />
-			<DateChangeTabs date={date} handleDateChange={handleDateChange} dateUnit={"d"}>
+			<DateChangeTabs date={date} handleDateChange={handleDateChange} dateUnit={"d"} size={24}>
 				<View style={tw.style("flex flex-col items-center")}>
 					<TouchableOpacity onPress={() => togglePicker("weight")}>
 						<Text style={tw.style("text-4xl font-bold tracking-tight")}>{weight} lbs</Text>
@@ -80,8 +80,9 @@ function HomeScreen({ userData: { user, setUser, weight, setWeight, date, setDat
 					</TouchableOpacity>
 				</View>
 			</DateChangeTabs>
+
 			<Settings bottomDrawerRef={bottomDrawerRef} />
-			{week && <Footer week={week} hide={hideFooter} goal={user.goalWeight} />}
+			{week && <Footer week={week} hide={hideFooter} goal={user.goalWeight} handleDateChange={handleDateChange} />}
 			{showDatePicker && <DatePicker date={date} handleDateChange={handleDateChange} />}
 			{showWeightPicker && <WeightPicker handleWeightChange={handleWeightChange} weight={formattedWeight} />}
 		</View>

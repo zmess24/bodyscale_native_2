@@ -3,9 +3,10 @@ import { Text, View, Dimensions } from "react-native";
 import DataItem from "./DataItem";
 import moment from "moment";
 import tw from "twrnc";
+import DateChangeTabs from "../../../components/DateChangeTabs";
 import { VictoryChart, VictoryLine, VictoryScatter, VictoryAxis, VictoryTheme, VictoryGroup } from "victory-native";
 
-function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal }) {
+function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal, handleDateChange }) {
 	let remaining = goal ? (goal - average).toFixed(2).toString() : "--";
 	const windowWidth = Dimensions.get("window").width;
 	const windowHeight = Dimensions.get("window").height * 0.25;
@@ -52,12 +53,12 @@ function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal
 	console.log(chartData);
 	return (
 		<View style={tw.style("flex-col", hide && "opacity-0")}>
-			<View style={tw.style("flex flex-row justify-center mb-5")}>
-				<Text style={tw.style("text-sm text-gray-500")}>
+			<DateChangeTabs date={startDate} handleDateChange={handleDateChange} dateUnit={"w"} size={18} padding={"mx-12"}>
+				<Text style={tw.style("text-sm text-gray-500 ")}>
 					{moment(startDate).format("MMMM Do")} - {moment(endDate).format("MMMM Do, YYYY")}
 				</Text>
-			</View>
-			<View style={tw.style("flex flex-row justify-between")}>
+			</DateChangeTabs>
+			<View style={tw.style("flex flex-row justify-between mt-5")}>
 				<DataItem icon="scale-bathroom" position={""} int={average} type={"numeric"} />
 				<DataItem icon="exchange" int={delta} />
 				<DataItem icon="bullseye" int={remaining} type={remaining === undefined ? "numeric" : "change"} />
@@ -87,16 +88,11 @@ function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal
 					/>
 					<VictoryLine
 						interpolation="monotoneX"
-						style={{ data: { stroke: "black", strokeWidth: 2, strokeLinecap: "round" } }}
+						style={{ data: { stroke: "#1e90ff", strokeWidth: 3, strokeLinecap: "round" } }}
 						scale={{ x: "time", y: "linear" }}
 						data={chartData}
 					/>
-					<VictoryScatter
-						size={4}
-						labels={({ datum }) => datum.y}
-						style={{ data: { fill: "white", stroke: "#C0C0C0", strokeWidth: 1 } }}
-						data={chartData}
-					/>
+					<VictoryScatter size={4} style={{ data: { fill: "white", stroke: "lightgray", strokeWidth: 1 } }} data={chartData} />
 					{/* </VictoryGroup> */}
 				</VictoryChart>
 			</View>
