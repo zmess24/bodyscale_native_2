@@ -85,7 +85,7 @@ function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal
 						scale={{ x: "time", y: "linear" }}
 						data={chartData}
 					/>
-					<VictoryScatter size={4} style={{ data: { fill: "white", stroke: "lightgray", strokeWidth: 1 } }} data={chartData} />
+					<VictoryScatter size={4} style={{ data: { fill: "white", stroke: colorTheme.accent, strokeWidth: 1 } }} data={chartData} />
 				</VictoryChart>
 			</View>
 		</View>
