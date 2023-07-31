@@ -6,10 +6,7 @@
 
 const colorTheme = {
 	white: "#ffffff",
-	light: "#9da5bd",
-	medium: "#3a4c7a",
-	dark: "#0a205a",
-	darkest: "#040c24",
+	accent: "#1e90ff",
 };
 
 /**

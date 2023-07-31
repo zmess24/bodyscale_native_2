@@ -3,6 +3,7 @@ import { Text, View } from "react-native";
 import { Octicons } from "@expo/vector-icons";
 import tw from "twrnc";
 import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
+import { colorTheme } from "../../../constants/styles";
 
 function DataItem({ icon, int, type = "change" }) {
 	let negative, formatted;
@@ -15,9 +16,9 @@ function DataItem({ icon, int, type = "change" }) {
 	return (
 		<View style={tw.style("w-1/3 flex-col items-center")}>
 			{icon === "scale-bathroom" ? (
-				<MaterialCommunityIcons name="scale-bathroom" size={20} color="#1e90ff" />
+				<MaterialCommunityIcons name="scale-bathroom" size={20} color={colorTheme.accent} />
 			) : (
-				<FontAwesome name={icon} size={20} color="#1e90ff" />
+				<FontAwesome name={icon} size={20} color={colorTheme.accent} />
 			)}
 			<View style={tw.style("flex flex-row items-center mt-1")}>
 				{type === "change" && (
