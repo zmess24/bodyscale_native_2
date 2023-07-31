@@ -4,7 +4,8 @@ import DataItem from "./DataItem";
 import moment from "moment";
 import tw from "twrnc";
 import DateChangeTabs from "../../../components/DateChangeTabs";
-import { VictoryChart, VictoryLine, VictoryScatter, VictoryAxis, VictoryTheme, VictoryGroup } from "victory-native";
+import { VictoryChart, VictoryBar, VictoryLine, VictoryScatter, VictoryAxis, VictoryTheme, VictoryGroup } from "victory-native";
+import { colorTheme } from "../../../constants/styles";
 
 function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal, handleDateChange }) {
 	let remaining = goal ? (goal - average).toFixed(2).toString() : "--";
@@ -86,13 +87,13 @@ function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal
 						}}
 						// tickValues={currentWeek}
 					/>
-					<VictoryLine
+					<VictoryBar
 						interpolation="monotoneX"
-						style={{ data: { stroke: "#1e90ff", strokeWidth: 3, strokeLinecap: "round" } }}
+						style={{ data: { stroke: colorTheme.accent, strokeWidth: 3, fill: colorTheme.accent } }}
 						scale={{ x: "time", y: "linear" }}
 						data={chartData}
 					/>
-					<VictoryScatter size={4} style={{ data: { fill: "white", stroke: "lightgray", strokeWidth: 1 } }} data={chartData} />
+					{/* <VictoryScatter size={4} style={{ data: { fill: "white", stroke: "lightgray", strokeWidth: 1 } }} data={chartData} /> */}
 					{/* </VictoryGroup> */}
 				</VictoryChart>
 			</View>
