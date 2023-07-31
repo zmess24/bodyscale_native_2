@@ -62,13 +62,7 @@ function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal
 				<DataItem icon="bullseye" int={remaining} type={remaining === undefined ? "numeric" : "change"} />
 			</View>
 			<View style={tw.style("flex flex-row")}>
-				<VictoryChart
-					width={windowWidth}
-					height={windowHeight}
-					theme={VictoryTheme.material}
-					domainPadding={{ x: 30 }}
-					domain={{ y: [yMin - 5, yMax + 5] }}
-				>
+				<VictoryChart width={windowWidth} height={windowHeight} theme={VictoryTheme.material} domain={{ y: [yMin - 5, yMax + 5] }}>
 					<VictoryAxis
 						dependentAxis
 						style={{
