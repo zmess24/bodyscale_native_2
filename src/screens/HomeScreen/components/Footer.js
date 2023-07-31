@@ -53,7 +53,7 @@ function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal
 		<View style={tw.style("flex-col", hide && "opacity-0")}>
 			<DateChangeTabs date={startDate} handleDateChange={handleDateChange} dateUnit={"w"} size={18} padding={"mx-12"}>
 				<Text style={tw.style("text-sm text-gray-500 ")}>
-					{moment(startDate).format("MMMM Do")} - {moment(endDate).format("MMMM Do, YYYY")}
+					{moment(startDate).format("MMM Do")} - {moment(endDate).format("MMM Do, YYYY")}
 				</Text>
 			</DateChangeTabs>
 			<View style={tw.style("flex flex-row justify-between mt-5")}>
