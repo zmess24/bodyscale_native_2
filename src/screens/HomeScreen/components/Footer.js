@@ -4,14 +4,13 @@ import DataItem from "./DataItem";
 import moment from "moment";
 import tw from "twrnc";
 import DateChangeTabs from "../../../components/DateChangeTabs";
-import { VictoryChart, VictoryArea, VictoryLine, VictoryScatter, VictoryAxis, VictoryTheme, VictoryGroup } from "victory-native";
+import { VictoryChart, VictoryArea, VictoryScatter, VictoryAxis, VictoryTheme } from "victory-native";
 import { colorTheme } from "../../../constants/styles";
 
 function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal, handleDateChange }) {
 	let remaining = goal ? (goal - average).toFixed(2).toString() : "--";
 	const windowWidth = Dimensions.get("window").width;
 	const windowHeight = Dimensions.get("window").height * 0.25;
-
 	let yMax = 215;
 	let yMin = 200;
 
@@ -27,17 +26,6 @@ function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal
 	};
 
 	let currentWeek = enumerateDaysBetweenDates(startDate, endDate);
-
-	// let chartData = data.map((date, i) => {
-	// 	let found = data.find((entry) => entry.date == date);
-	// 	if (found) {
-	// 		if (parseFloat(found.weight) < yMin) yMin = parseFloat(found.weight);
-	// 		if (parseFloat(found.weight) > yMax) yMax = parseFloat(found.weight);
-	// 		return { x: moment(date).format("MM/DD"), y: parseFloat(found.weight), key: i };
-	// 	} else {
-	// 		return { x: moment(date).format("MM/DD"), y: null, key: i };
-	// 	}
-	// });
 
 	let chartData = data
 		.sort((a, b) => new Date(a.date) - new Date(b.date))
@@ -65,6 +53,7 @@ function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal
 				<VictoryChart width={windowWidth} height={windowHeight} theme={VictoryTheme.material} domain={{ y: [yMin - 5, yMax + 5] }}>
 					<VictoryAxis
 						dependentAxis
+						maxDomain={{ y: 5 }}
 						style={{
 							grid: { stroke: "white", strokeWidth: 0 },
 							ticks: { stroke: "white", strokeWidth: 0 },
@@ -73,11 +62,11 @@ function Footer({ week: { average, delta, data, startDate, endDate }, hide, goal
 					<VictoryAxis
 						tickValues={currentWeek}
 						maxDomain={{ x: 7 }}
-						scale={{ x: "time" }}
 						style={{
 							grid: { stroke: "lightgrey", strokeWidth: 1 },
 							ticks: { stroke: "white", strokeWidth: 0 },
 						}}
+						tickFormat={(t) => `${moment(t).format("ddd")}\n${moment(t).format("D")}`}
 					/>
 					<VictoryArea
 						interpolation="monotoneX"
