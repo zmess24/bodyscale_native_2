@@ -7,6 +7,7 @@ import { AntDesign } from "@expo/vector-icons";
 import useLoadUserData from "./src/hooks/useLoadUserData";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+
 const Tab = createBottomTabNavigator();
 
 // Keep the splash screen visible while fetching resources from AsyncStorage
@@ -36,6 +37,7 @@ export default function App() {
 			tabBarIcon: ({ focused }) => <AntDesign name={iconName} size={21} color={focused ? "black" : "silver"} />,
 		};
 	};
+
 	return (
 		<NavigationContainer>
 			<Tab.Navigator screenOptions={{ tabBarShowLabel: true }}>
